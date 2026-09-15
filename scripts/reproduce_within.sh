@@ -3,6 +3,10 @@
 # ~8 h on 12 H100s packed 4-per-GPU. Set READER_DATA first (see docs/DATA.md).
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# SLURM cannot create its own log directory; make it before submitting.
+mkdir -p runs/manifests runs/slurm
+: "${READER_DATA:?set READER_DATA to the prepared-data directory (see docs/DATA.md)}"
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
 python scripts/make_manifest.py \
   --arm reader:reader --arm compact:compact --arm bite:bite \
   --study cohort --cells all --seeds 2025,2026,2027 \

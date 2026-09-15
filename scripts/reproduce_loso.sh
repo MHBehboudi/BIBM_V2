@@ -3,6 +3,10 @@
 # The bite arm on 2a precomputes an 8.1 GB STFT over the pooled training role: give it its own GPU.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# SLURM cannot create its own log directory; make it before submitting.
+mkdir -p runs/manifests runs/slurm
+: "${READER_DATA:?set READER_DATA to the prepared-data directory (see docs/DATA.md)}"
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
 python scripts/make_manifest.py \
   --arm reader:reader:--protocol,loso --arm compact:compact:--protocol,loso \
   --arm bite:bite:--protocol,loso \
