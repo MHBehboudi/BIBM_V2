@@ -1,0 +1,8 @@
+# Versions this work was run with (Python 3.10.20, CUDA 12.4).
+torch==2.5.1
+numpy>=1.24,<2
+scipy>=1.10
+scikit-learn>=1.3
+mne>=1.5          # standard_1005 electrode geometry only
+einops>=0.7       # required by the BiTE baseline
+pytest>=7.4

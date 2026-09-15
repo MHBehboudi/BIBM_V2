@@ -1,0 +1,174 @@
+{
+ "2a": {
+  "root": "data/bci_iv_2a/raw/2a_pre",
+  "n_files": 18,
+  "anchors": {
+   "A01E.npz": {
+    "sha256": "b3a78f1d358e01bdbeab8f0d9a15bf9f085fe4fa66333880545bc072b3821173",
+    "data_shape": [
+     288,
+     22,
+     1000
+    ],
+    "label_shape": [
+     288
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "A01T.npz": {
+    "sha256": "88a6c6f9982a48e5d2c2f0f0e74ab11903f5a56af58f6ece10e9e2fcfe550bdb",
+    "data_shape": [
+     288,
+     22,
+     1000
+    ],
+    "label_shape": [
+     288
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  }
+ },
+ "2b": {
+  "root": "data/bci_iv_2b/raw/2b_pre",
+  "n_files": 45,
+  "anchors": {
+   "B0101T.npz": {
+    "sha256": "19abd7da0001a6bb4fc16011efdbff9ab09c71fef23f31b2f80105bb7b3cb45b",
+    "data_shape": [
+     120,
+     3,
+     1000
+    ],
+    "label_shape": [
+     120
+    ],
+    "labels": [
+     0,
+     1
+    ]
+   },
+   "B0102T.npz": {
+    "sha256": "fa7cb3a6488f3220f96f64e692adc01147b37a20c307e9d59fa1d07d70913db6",
+    "data_shape": [
+     120,
+     3,
+     1000
+    ],
+    "label_shape": [
+     120
+    ],
+    "labels": [
+     0,
+     1
+    ]
+   }
+  }
+ },
+ "hgd": {
+  "root": "data/hgd/processed_bite_repo_exact",
+  "n_files": 28,
+  "anchors": {
+   "S01_test.npz": {
+    "sha256": "8754780c39e14955c75914dd348b75f338c778a928243d3ba7235948de81e7f9",
+    "data_shape": [
+     64,
+     44,
+     1001
+    ],
+    "label_shape": [
+     64
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "S01_train.npz": {
+    "sha256": "361330fbc1ecf29d21173001bac2a58c74a1e2bc5d7e6a11c7c089cc735e4a37",
+    "data_shape": [
+     256,
+     44,
+     1001
+    ],
+    "label_shape": [
+     256
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  }
+ },
+ "sdssvep": {
+  "root": "data/sd_ssvep/processed_kaggle_exact",
+  "n_files": 20,
+  "anchors": {
+   "S01_test.npz": {
+    "sha256": "235dd8f58b39f0e8cf31628c9eca07d8eba9dffaa1d02cfb4f4d6648e2ccc522",
+    "data_shape": [
+     60,
+     8,
+     256
+    ],
+    "label_shape": [
+     60
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   "S01_train.npz": {
+    "sha256": "637af6d7f3838bff24abbff00f6b1ca574e6f93cfe76bfecbf9cb20b76b65349",
+    "data_shape": [
+     120,
+     8,
+     256
+    ],
+    "label_shape": [
+     120
+    ],
+    "labels": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   }
+  }
+ }
+}

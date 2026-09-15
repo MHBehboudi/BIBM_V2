@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/
+third_party/
+runs/
+*.pt
+*.npz
+*.jsonl.gz
+.DS_Store
