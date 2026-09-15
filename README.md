@@ -95,6 +95,40 @@ Full reproductions (SLURM; edit the partition in `scripts/slurm/pack.sbatch`):
 python scripts/score.py --runs runs/cohort --name within_subject --reference bite
 ```
 
+## Reproducing from scratch
+
+What ships here is **code**, not cached results. `results/` holds our scored outputs so the numbers
+can be checked without a GPU; re-running `scripts/score.py` **overwrites them** from your own runs,
+so a regenerated table is your table, not ours.
+
+Verified on a clean clone: `pytest` (36 gates), a single `reader/train.py` run, the
+manifest -> `sbatch` -> `scripts/score.py` pipeline, and the BiTE baseline after
+`scripts/fetch_baseline.py`.
+
+Requirements that are easy to miss:
+
+- **`READER_DATA` must point at a prepared corpus tree.** This is the one genuine gap: the EEG is
+  not shipped (~2.7 GB, and each corpus has its own terms), and **the raw-download -> `.npz`
+  conversion is not included**. `docs/DATA.md` gives the layout, the per-corpus preprocessing, and
+  anchor checksums, but a reproducer starting from raw GDF/MAT files must re-derive that step.
+  Starting from an already-prepared tree, everything below runs unchanged.
+- **The clone must live on a filesystem the compute nodes can see.** A clone under node-local
+  `/tmp` fails immediately with no log, because SLURM cannot reach the working directory.
+- `scripts/fetch_baseline.py` needs network access, and is required for the `bite` arm and for the
+  LOSO alignment gate (which skips without it).
+
+Measured cost of the full within-subject cohort (378 runs, 600 epochs each, H100/H200):
+
+| arm | 2a | 2b | HGD | SD-SSVEP |
+|---|---:|---:|---:|---:|
+| BiTE | 9.3 h | 5.4 h | 22.0 h | 2.2 h |
+| compact | 5.9 h | 3.6 h | 25.1 h | 1.9 h |
+| READER | 9.1 h | 6.1 h | 42.9 h | 3.3 h |
+
+**~137 GPU-hours total**, about 12 wall-clock hours on 12 GPUs packed 4 runs per GPU. READER's HGD
+cost is the quadratic prefix recomputation: the anytime curve is O(T^2) in the token count. Add
+~20 GPU-hours for the cross-subject cohort and ~35 for the 2a specialist bank.
+
 ## Layout
 
 ```
