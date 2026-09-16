@@ -1,0 +1,35 @@
+{
+ "dataset": "2b",
+ "reader_arm": "reader_anytime",
+ "pool_ms": 128.0,
+ "deadlines": {
+  "1.0": {
+   "reader_mean": 75.920965274175,
+   "reader_n": 27,
+   "paired_delta_vs": {
+    "bite": -1.4963626861572266
+   }
+  },
+  "2.0": {
+   "reader_mean": 83.6226847436693,
+   "reader_n": 27,
+   "paired_delta_vs": {
+    "bite": -1.6220242888839156
+   }
+  },
+  "3.0": {
+   "reader_mean": 85.4183194813905,
+   "reader_n": 27,
+   "paired_delta_vs": {
+    "bite": -1.4417990490242287
+   }
+  },
+  "4.0": {
+   "reader_mean": 85.7407408731955,
+   "reader_n": 27,
+   "paired_delta_vs": {
+    "bite": -1.5922619236840143
+   }
+  }
+ }
+}

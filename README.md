@@ -1,7 +1,8 @@
 # Prefix-bidirectional reading for anytime EEG decoding
 
-One model that emits a legal decision every 128 ms, and matches or beats a bank of separately
-retrained per-deadline specialists from 2 s on.
+One model that emits a legal decision every 128 ms and, trained with prefix supervision, beats a
+bank of separately retrained per-deadline specialists at every deadline on 2a — by +2.57 at 1 s,
+where a bank is most expensive to maintain and hardest to beat.
 
 Bidirectional context in EEG decoders is bought at the cost of deployability. BiTE's BiTCN obtains
 backward context by reversing the **complete trial** — its backward branch's last step corresponds
@@ -47,16 +48,33 @@ published 2b/SD bars but 3.45 under on 2a, so the 2a shortfall is in the reprodu
 **One seed** — the 2a/2b signs are not established.
 
 Anytime on 2a: **one** READER read at each deadline vs a **bank of separately retrained**
-specialists (`results/anytime_2a.md`). With prefix supervision the single model beats the bank at
-every deadline: 1 s **+2.57**, 2 s **+1.88**, 3 s **+1.17**.
+specialists, paired by subject and seed, 9 subjects × 3 seeds (`results/anytime_2a.md`):
+
+| deadline | READER (1 model) | bite bank | compact bank | paired vs bite |
+|---|---:|---:|---:|---:|
+| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.57** |
+| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.88** |
+| 3.0 s | 84.10 | 82.93 | 83.35 | **+1.17** |
+| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 |
 
 ### Scope of the anytime claim
 
-It is a 2a claim. On 2b the same comparison is roughly **−1.5 at every deadline** — a flat offset
-equal to BiTE's standing 2b endpoint advantage, not an anytime effect. No specialist bank exists on
-HGD or SD-SSVEP, so no comparison is available there. Prefix supervision is a *loss* change
-(deep supervision of the architecture); it is free on 2a (+0.13 endpoint) and costs −1.83 on
-SD-SSVEP, so it is not a global default.
+Three limits, all of them load-bearing:
+
+1. **It requires prefix supervision, which is a different arm.** The table above is the reader
+   trained with `--prefix-weight 0.3` (deep supervision over deadlines) — a *loss* change, not the
+   architecture. The endpoint-supervised reader from the within-subject table above *loses* **−3.99
+   at 1 s** against the same bank and is then within ±1 point of it (+0.67 / −0.81 / +0.63 at
+   2/3/4 s) — it does not carry the anytime claim on its own
+   (`results/anytime_2a_endpoint_supervised.md`). Prefix supervision is free on 2a
+   (+0.13 endpoint) and costs −1.83 on SD-SSVEP, so it is not a global default and the
+   within-subject table is not built on it. Which arm produced an anytime number is therefore part
+   of that number; `reader/anytime.py --reader` selects it and the generated tables name it.
+2. **It is a 2a claim.** On 2b the same comparison is **−1.50 / −1.62 / −1.44 / −1.59** at
+   1/2/3/4 s (`results/anytime_2b.md`) — a flat offset, statistically indistinguishable across
+   deadlines and equal to BiTE's standing 2b *endpoint* advantage. That is an endpoint deficit
+   showing up at every deadline, not an anytime effect in either direction.
+3. **No bank exists on HGD or SD-SSVEP**, so no comparison is available there.
 
 ## Is it actually causal?
 
@@ -136,7 +154,9 @@ Measured cost of the full within-subject cohort (378 runs, 600 epochs each, H100
 
 **~137 GPU-hours total**, about 12 wall-clock hours on 12 GPUs packed 4 runs per GPU. READER's HGD
 cost is the quadratic prefix recomputation: the anytime curve is O(T^2) in the token count. Add
-~20 GPU-hours for the cross-subject cohort and ~35 for the 2a specialist bank.
+~20 GPU-hours for the cross-subject cohort, and **42.9** measured for everything
+`reproduce_anytime.sh` launches: the specialist banks (2a 24.2 h over 162 runs, 2b 4.5 h over 81)
+plus the prefix-supervised reader (2a 10.8 h, 2b 3.4 h).
 
 ## Layout
 

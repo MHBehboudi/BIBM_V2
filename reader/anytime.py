@@ -36,6 +36,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cohort", type=Path, default=ROOT / "runs/cohort_20260915")
     ap.add_argument("--bank", type=Path, default=ROOT / "runs/bank_20260915")
+    ap.add_argument("--reader", type=Path, default=None,
+                    help="Reader arm directory. Default <cohort>/reader, which is the "
+                         "ENDPOINT-supervised arm. The headline comparison uses the "
+                         "PREFIX-SUPERVISED arm (--prefix-weight 0.3), which trains as its own arm; "
+                         "point this at it. --cohort still supplies the bank's 4 s row.")
     ap.add_argument("--dataset", default="2a")
     ap.add_argument("--pool-ms", type=float, default=128.0)
     ap.add_argument("--deadlines", default="1.0,2.0,3.0,4.0")
@@ -43,8 +48,9 @@ def main():
     args = ap.parse_args()
     deadlines = [float(d) for d in args.deadlines.split(",")]
 
+    reader_dir = args.reader or (args.cohort / "reader")
     reader = defaultdict(dict)       # (subject, seed) -> {deadline: acc}
-    for run in sorted((args.cohort / "reader").glob(f"{args.dataset}_S*")):
+    for run in sorted(reader_dir.glob(f"{args.dataset}_S*")):
         if not (run / "summary.json").exists():
             continue
         s = json.loads((run / "summary.json").read_text())
@@ -78,6 +84,8 @@ def main():
     lines = [f"# Anytime: one reader vs per-deadline specialist banks ({args.dataset})", "",
              "Each baseline column at deadline d is a **separately trained model**; the reader column is",
              "**one model** read at d. Paired by subject and seed.", "",
+             f"Reader arm: `{reader_dir.name}`. Prefix supervision moves the early deadlines by "
+             "several points, so which arm this is forms part of the result, not metadata.", "",
              "| deadline | reader (1 model) | " + " | ".join(f"{f} bank" for f in families) + " | best paired delta |",
              "|---|---|" + "---|" * (len(families) + 1)]
     detail = {}
@@ -96,7 +104,9 @@ def main():
         detail[d] = {"reader_mean": float(np.mean(list(r.values()))) if r else None,
                      "reader_n": len(r), "paired_delta_vs": deltas}
     args.out.write_text("\n".join(lines) + "\n")
-    args.out.with_suffix(".json").write_text(json.dumps(detail, indent=1))
+    args.out.with_suffix(".json").write_text(json.dumps(
+        {"dataset": args.dataset, "reader_arm": reader_dir.name, "pool_ms": args.pool_ms,
+         "deadlines": detail}, indent=1))
     print("\n".join(lines))
 
 
