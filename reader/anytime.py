@@ -86,23 +86,31 @@ def main():
              "**one model** read at d. Paired by subject and seed.", "",
              f"Reader arm: `{reader_dir.name}`. Prefix supervision moves the early deadlines by "
              "several points, so which arm this is forms part of the result, not metadata.", "",
-             "| deadline | reader (1 model) | " + " | ".join(f"{f} bank" for f in families) + " | best paired delta |",
-             "|---|---|" + "---|" * (len(families) + 1)]
+             "The comparison of record is against the STRONGEST bank at each deadline (the most accurate",
+             "retrained specialist), not the weakest; every family's paired delta is also listed.", "",
+             "| deadline | reader (1 model) | " + " | ".join(f"{f} bank" for f in families) +
+             " | paired delta vs STRONGEST bank | " + " | ".join(f"vs {f}" for f in families) + " |",
+             "|---|---|" + "---|" * (2 * len(families) + 1)]
     detail = {}
     for d in deadlines:
         r = {k: v[d] for k, v in reader.items() if d in v}
-        cells, deltas = [], {}
+        cells, deltas, bank_means = [], {}, {}
         for f in families:
             b = {(s, sd): v[d] for (fam, s, sd), v in bank.items() if fam == f and d in v}
             shared = sorted(set(r) & set(b))
             cells.append(f"{np.mean([b[k] for k in shared]):.2f} ({len(shared)})" if shared else "-")
             if shared:
                 deltas[f] = float(np.mean([r[k] - b[k] for k in shared]))
-        best = max(deltas.items(), key=lambda kv: kv[1]) if deltas else None
+                bank_means[f] = float(np.mean([b[k] for k in shared]))
+        # strongest = the most accurate specialist family at this deadline (smallest READER advantage).
+        # An earlier version reported max(delta), i.e. the WEAKEST bank; that overstated the anytime gain.
+        strongest = max(bank_means, key=bank_means.get) if bank_means else None
         lines.append(f"| {d:.1f} s | {np.mean(list(r.values())):.2f} ({len(r)}) | " + " | ".join(cells) +
-                     f" | {('%+.2f vs %s' % (best[1], best[0])) if best else '-'} |")
+                     f" | {('%+.2f vs %s' % (deltas[strongest], strongest)) if strongest else '-'} | " +
+                     " | ".join(f"{deltas[f]:+.2f}" if f in deltas else "-" for f in families) + " |")
         detail[d] = {"reader_mean": float(np.mean(list(r.values()))) if r else None,
-                     "reader_n": len(r), "paired_delta_vs": deltas}
+                     "reader_n": len(r), "paired_delta_vs": deltas, "strongest_bank": strongest,
+                     "paired_delta_vs_strongest": deltas.get(strongest) if strongest else None}
     args.out.write_text("\n".join(lines) + "\n")
     args.out.with_suffix(".json").write_text(json.dumps(
         {"dataset": args.dataset, "reader_arm": reader_dir.name, "pool_ms": args.pool_ms,

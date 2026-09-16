@@ -21,6 +21,10 @@ O(T^2) in the token count. For a single fixed deadline it is O(T) like any causa
 Ablations reported in the paper are reached through this same class:
   reader="bidir"    the full model
   reader="forward"  the forward-only parent (the mechanism removed)
+  reader="ff"       FF-Control: a second branch with READER's constructor, seed, gate and objective that
+                    reads the prefix in ORIGINAL order (capacity-matched; end-anchored like the parent)
+  reader="mean"     Compact-Mean: the parent's classifier on the causal running mean of the forward TCN
+                    outputs, (1/t) sum_{i<=t} f_i, trained with that readout (a readout control)
 and, on trained weights, the inference-time route interventions in ``diagnostic_report``.
 """
 from __future__ import annotations
@@ -39,14 +43,19 @@ class ReaderDecoder(CompactDecoder):
         super().__init__(spec["channels"], spec["classes"], pool=spec["pool"], **kw)
         self.dataset, self.input_mode, self.reader_mode = dataset, input_mode, reader
         embedding = self.proj.out_features
-        if reader == "bidir":
+        if reader in ("bidir", "ff"):
             # Construction consumes RNG; isolate it so the parameters shared with the forward-only
-            # parent are bit-identical at the same seed and the two arms are exactly paired.
+            # parent are bit-identical at the same seed and the arms are exactly paired. FF-Control's
+            # second branch is built by the SAME call, so its init equals READER's reverse branch.
             with torch.random.fork_rng(devices=[]):
                 torch.manual_seed(918273)
-                self.backward_tcn = CausalTCN(embedding, depth=len(self.tcn.blocks), dropout=self.drop.p)
+                branch = CausalTCN(embedding, depth=len(self.tcn.blocks), dropout=self.drop.p)
+            if reader == "bidir":
+                self.backward_tcn = branch
+            else:
+                self.second_tcn = branch
             self.backward_gate = nn.Parameter(torch.zeros(embedding))
-        elif reader != "forward":
+        elif reader not in ("forward", "mean"):
             raise ValueError(reader)
         self._intervention: dict = {}
 
@@ -62,10 +71,21 @@ class ReaderDecoder(CompactDecoder):
             g = torch.full_like(g, self._intervention["gate"])
         return g
 
+    @staticmethod
+    def running_mean(seq):
+        """Causal running mean over tokens: entry t is (1/(t+1)) sum_{i<=t} seq_i.  [B,N,D] -> [B,N,D]."""
+        counts = torch.arange(1, seq.shape[1] + 1, device=seq.device, dtype=seq.dtype).view(1, -1, 1)
+        return seq.cumsum(1) / counts
+
     def prefix_states(self, positioned, forward_seq):
         """State at every deadline. Deadline t reads tokens 0..t-1 ONLY -- the trial end is never
         visible, which is the whole point of the mechanism."""
         g = self._gate()
+        if self.reader_mode == "ff":
+            # causal, original order: its output at t-1 IS its last output after reading tokens 0..t-1
+            second = self.second_tcn(positioned)
+            self._last_backward = second[:, -1]
+            return (1 - g) * forward_seq + g * second
         rows = []
         for t in range(1, positioned.shape[1] + 1):
             b = self.backward_tcn(positioned[:, :t].flip(1))[:, -1]
@@ -79,6 +99,9 @@ class ReaderDecoder(CompactDecoder):
         forward_seq = self.tcn(positioned)
         if self.reader_mode == "forward":
             sequence = self.classify(forward_seq)
+            return {"logits": sequence[:, -1], "sequence": sequence, "route_logits": None}
+        if self.reader_mode == "mean":
+            sequence = self.classify(self.running_mean(forward_seq))
             return {"logits": sequence[:, -1], "sequence": sequence, "route_logits": None}
         states = self.prefix_states(positioned, forward_seq)
         sequence = self.classify(states)
@@ -96,15 +119,19 @@ class ReaderDecoder(CompactDecoder):
         tokens = self.tokens(self.spatial_features(self.carriers(x)))
         positioned = tokens + self.pos[:, :tokens.shape[1]]
         forward_seq = self.tcn(positioned)
-        seq = (self.classify(forward_seq) if self.reader_mode == "forward"
-               else self.classify(self.prefix_states(positioned, forward_seq)))
+        if self.reader_mode == "forward":
+            seq = self.classify(forward_seq)
+        elif self.reader_mode == "mean":
+            seq = self.classify(self.running_mean(forward_seq))
+        else:
+            seq = self.classify(self.prefix_states(positioned, forward_seq))
         self.train(was)
         return seq
 
     # ------------------------------------------------------------------ telemetry
     @torch.no_grad()
     def epoch_telemetry(self):
-        if self.reader_mode != "bidir":
+        if self.reader_mode not in ("bidir", "ff"):
             return {}
         g = torch.sigmoid(self.backward_gate)
         return {"gate": {"mean": g.mean().item(), "std": g.std().item(),
@@ -134,7 +161,7 @@ class ReaderDecoder(CompactDecoder):
 
         report = {"test": acc(te_tensors, yte), "train": acc(tr_tensors, ytr)}
         interventions = {}
-        if self.reader_mode == "bidir":
+        if self.reader_mode in ("bidir", "ff"):
             for label, value in (("gate_forward_only", 0.0), ("gate_backward_only", 1.0), ("gate_half", 0.5)):
                 self._intervention = {"gate": value}
                 interventions[label] = {"test": acc(te_tensors, yte)["acc"],
@@ -151,6 +178,8 @@ class ReaderDecoder(CompactDecoder):
 ARMS = {
     "reader":  dict(reader="bidir",   input_mode="bite"),   # the proposed model
     "compact": dict(reader="forward", input_mode="bite"),   # its forward-only parent (ablation)
+    "ff_control":   dict(reader="ff",   input_mode="bite"), # capacity-matched second FORWARD branch
+    "compact_mean": dict(reader="mean", input_mode="bite"), # running-mean readout control
 }
 
 
@@ -161,5 +190,5 @@ def build(name, dataset, **options):
     model = ReaderDecoder(dataset, **settings)
     keys = {"carriers": ("tbn", "channels_time"), "spatial": ("act", "channels_time"),
             "tokens": ("proj", "tokens"),
-            "reader": ("head", "vector" if settings["reader"] == "bidir" else "tokens", "input")}
+            "reader": ("head", "vector" if settings["reader"] in ("bidir", "ff") else "tokens", "input")}
     return model, keys, {"spatial.weight": 1.0, "head.weight": .25}, False

@@ -9,7 +9,9 @@
    "paired_delta_vs": {
     "bite": 2.572017025064539,
     "compact": 2.0061731338500977
-   }
+   },
+   "strongest_bank": "compact",
+   "paired_delta_vs_strongest": 2.0061731338500977
   },
   "2.0": {
    "reader_mean": 83.37191365383289,
@@ -17,7 +19,9 @@
    "paired_delta_vs": {
     "bite": 1.8775721391042073,
     "compact": 1.8004110565891973
-   }
+   },
+   "strongest_bank": "compact",
+   "paired_delta_vs_strongest": 1.8004110565891973
   },
   "3.0": {
    "reader_mean": 84.10493819801896,
@@ -25,7 +29,9 @@
    "paired_delta_vs": {
     "bite": 1.1702672198966697,
     "compact": 0.7587448314384178
-   }
+   },
+   "strongest_bank": "compact",
+   "paired_delta_vs_strongest": 0.7587448314384178
   },
   "4.0": {
    "reader_mean": 84.83796296296296,
@@ -33,7 +39,9 @@
    "paired_delta_vs": {
     "bite": 0.7587448314384178,
     "compact": 2.507715755038791
-   }
+   },
+   "strongest_bank": "bite",
+   "paired_delta_vs_strongest": 0.7587448314384178
   }
  }
 }

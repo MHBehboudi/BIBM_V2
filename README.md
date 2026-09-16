@@ -1,8 +1,9 @@
 # Prefix-bidirectional reading for anytime EEG decoding
 
-One model that emits a legal decision every 128 ms and, trained with prefix supervision, beats a
-bank of separately retrained per-deadline specialists at every deadline on 2a — by +2.57 at 1 s,
-where a bank is most expensive to maintain and hardest to beat.
+One model that emits a legal decision every 128 ms. Endpoint-trained, it holds 70-82% of its accuracy on
+2a at 1-3 s where the same forward-only parent checkpoint collapses to 31-50% (same checkpoints, exact
+truncated input). Trained with prefix supervision, it beats the strongest bank of separately retrained
+per-deadline specialists at every deadline on 2a (+2.01 at 1 s, +1.80 at 2 s, +0.76 at 3 s).
 
 Bidirectional context in EEG decoders is bought at the cost of deployability. BiTE's BiTCN obtains
 backward context by reversing the **complete trial** — its backward branch's last step corresponds
@@ -50,12 +51,15 @@ published 2b/SD bars but 3.45 under on 2a, so the 2a shortfall is in the reprodu
 Anytime on 2a: **one** READER read at each deadline vs a **bank of separately retrained**
 specialists, paired by subject and seed, 9 subjects × 3 seeds (`results/anytime_2a.md`):
 
-| deadline | READER (1 model) | bite bank | compact bank | paired vs bite |
+| deadline | READER (1 model) | bite bank | compact bank | paired vs STRONGEST bank |
 |---|---:|---:|---:|---:|
-| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.57** |
-| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.88** |
-| 3.0 s | 84.10 | 82.93 | 83.35 | **+1.17** |
-| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 |
+| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.01** (vs compact) |
+| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.80** (vs compact) |
+| 3.0 s | 84.10 | 82.93 | 83.35 | **+0.76** (vs compact) |
+| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 (vs bite) |
+
+An earlier version of this table headlined the delta against the *weaker* bank (+2.57 / +1.88 / +1.17);
+`reader/anytime.py` now reports every family and names the strongest one as the comparison of record.
 
 ### Scope of the anytime claim
 
@@ -63,9 +67,9 @@ Three limits, all of them load-bearing:
 
 1. **It requires prefix supervision, which is a different arm.** The table above is the reader
    trained with `--prefix-weight 0.3` (deep supervision over deadlines) — a *loss* change, not the
-   architecture. The endpoint-supervised reader from the within-subject table above *loses* **−3.99
-   at 1 s** against the same bank and is then within ±1 point of it (+0.67 / −0.81 / +0.63 at
-   2/3/4 s) — it does not carry the anytime claim on its own
+   architecture. The endpoint-supervised reader from the within-subject table above *loses* **−4.55
+   at 1 s** against the strongest bank and is then within ±1.3 points of it (+0.59 / −1.22 / +0.63 at
+   2/3/4 s) — it does not carry the anytime-vs-bank claim on its own
    (`results/anytime_2a_endpoint_supervised.md`). Prefix supervision is free on 2a
    (+0.13 endpoint) and costs −1.83 on SD-SSVEP, so it is not a global default and the
    within-subject table is not built on it. Which arm produced an anytime number is therefore part
@@ -127,9 +131,86 @@ inside noise). We therefore describe the fusion as a **fixed equal-weight convex
 a learned adaptive gate; `gamma` is kept only because it costs 64 parameters and leaves the door
 open on corpora we have not tried.
 
+## Does reverse reading improve the SAME checkpoint's intermediate predictions? (`results/subject_stats/`)
+
+The question that matters for the mechanism is not whether READER beats separately retrained models, but
+whether, with **no retraining**, it predicts better from partial input than its own forward-only parent.
+Each endpoint-trained checkpoint is given **only the first n samples** of every test trial: the last pooling
+window is partial and rescaled exactly as at deployment, and the prediction is that truncated input's
+endpoint — never a value read off the full-trial curve (`reader/exact_duration.py`, 420 checkpoints; every
+one reproduces its logged full-length accuracy exactly). Subject-level means (seeds averaged per subject):
+
+| corpus | observed | READER | Compact | FF-Control | Compact-Mean | BiTE (same ckpt) |
+|---|---|---:|---:|---:|---:|---:|
+| 2a | 1 s / 2 s / 3 s / 4 s | **70.1 / 82.1 / 82.0 / 84.7** | 30.9 / 45.1 / 50.4 / 82.3 | 30.2 / 50.8 / 58.4 / 83.1 | 40.4 / 65.2 / 71.1 / 72.4 | 59.9 / 76.9 / 70.4 / 84.1 |
+| 2b | 1 s / 2 s / 3 s / 4 s | **70.9 / 83.0 / 85.4 / 86.4** | 54.3 / 71.6 / 73.8 / 85.3 | 54.6 / 70.1 / 75.7 / 85.2 | 62.7 / 81.7 / 84.2 / 85.1 | 68.1 / 83.2 / 82.3 / 87.3 |
+| SD-SSVEP | .25 / .5 / .75 / 1 s | **34.6 / 62.0 / 69.9 / 96.2** | 9.9 / 13.8 / 14.1 / 94.1 | 10.9 / 16.7 / 16.1 / 94.2 | 28.3 / 48.6 / 60.9 / 66.4 | 18.8 / 29.4 / 32.9 / 94.2 |
+
+READER minus Compact on the same checkpoints, subject-level mean, 95% bootstrap CI, subjects W/T/L; exact
+sign-flip Wilcoxon, Holm-adjusted over the 12 pre-declared prefix tests:
+
+| corpus | 1/4 of the trial | 1/2 | 3/4 | full |
+|---|---|---|---|---|
+| 2a | +39.2 [+34.6, +44.4] 9/0/0, Holm p .043 | +37.0 9/0/0, .043 | +31.6 9/0/0, .043 | +2.4 [+0.2, +4.7] 6/0/3, .125 |
+| 2b | +16.5 [+9.5, +23.3] 8/0/1, .043 | +11.5 8/0/1, .047 | +11.6 9/0/0, .043 | +1.1 [+0.4, +1.8] 7/0/2, .094 |
+| SD-SSVEP | +24.7 [+14.6, +34.6] 9/0/1, .043 | +48.2 9/0/1, .043 | +55.8 10/0/0, .023 | +2.1 [+0.3, +4.4] 5/5/0, .125 |
+
+With 9 subjects the smallest attainable exact p is 0.0039, which bounds how small these can get after Holm.
+
+**Read this with its main caveat.** Compact classifies its *last* token, whose position moves with the
+deadline and whose classifier was only ever trained at the final position; READER's reversed branch ends at
+the trial's *first* token at every deadline. Part of the gap is therefore **anchoring**, not reversal as
+such. The gate interventions agree: reversed-only (g = 1) is *better* than the learned gate early (2a +1.4 at
+1 s, SD-SSVEP up to +11.7) and worse at the endpoint, and forward-only (g = 0) collapses like Compact.
+
+## Beyond a second branch, or a better readout? (FF-Control, Compact-Mean)
+
+Two controls, each trained from scratch with the identical recipe on all 28 subjects x 3 seeds:
+
+- **FF-Control** (`--model ff_control`): READER's second branch with the *same* constructor, forked seed,
+  gate, initialisation and objective, reading the prefix in **original** order. Parameter count and initial
+  weights are identical to READER's (tested).
+- **Compact-Mean** (`--model compact_mean`): the parent with its classifier on the causal running mean of the
+  forward TCN outputs, (1/t) sum f_i, **trained** with that readout. Parameters identical to Compact (tested).
+
+Endpoint, READER minus comparator, subject-level (95% bootstrap CI, W/T/L, Holm over 12 endpoint tests):
+
+| corpus | vs Compact | vs FF-Control | vs Compact-Mean | vs BiTE (this harness) |
+|---|---|---|---|---|
+| 2a | +2.38 [+0.23, +4.63] 6/0/3 | +1.63 [+0.27, +3.07] 6/0/3 | **+12.35** [+6.94, +18.58] 9/0/0, Holm .043 | +0.63 [−0.82, +1.98] |
+| 2b | +1.09 [+0.39, +1.79] 7/0/2 | +1.26 [+0.34, +2.19] 8/0/1 | +1.36 [−0.79, +3.57] 6/0/3 | −0.92 [−1.91, +0.06] |
+| SD-SSVEP | +2.06 [+0.33, +4.39] 5/5/0 | +2.00 [+0.50, +4.17] 6/4/0 | **+29.72** [+19.00, +41.06] 10/0/0, Holm .023 | +1.94 [+0.78, +3.44] |
+
+- **A second forward branch adds nothing measurable**: FF-Control minus Compact is +0.75 [−0.18, +1.79] (2a),
+  −0.16 [−0.82, +0.51] (2b), +0.06 [−0.72, +1.00] (SD-SSVEP). READER's endpoint gain over Compact is therefore
+  not explained by capacity or by ensembling two branches; READER minus FF-Control is about as large as READER
+  minus Compact on every corpus, with every interval above zero. None survives Holm at 12 comparisons.
+- **Compact-Mean is not a READER substitute at the endpoint** (72.4 / 85.1 / 66.4): uniform averaging gives
+  early, not-yet-informative tokens the same weight as late ones and generalises poorly (it still fits the
+  training set to 100%). Its position-free readout does recover much of Compact's prefix collapse (2a at 2 s
+  45.1 -> 65.2), which confirms that anchoring matters; READER still leads it at every duration on 2a and
+  SD-SSVEP, while on 2b beyond 1.5 s the lead (+1.2 to +2.2) has intervals that include zero.
+- FF-Control is end-anchored like Compact, so it does not separate *direction* from *start-anchoring*.
+
+Full tables, per-subject differences and the exact tests: `results/subject_stats/SUBJECT_STATS.md`.
+
 ## Is it actually causal?
 
-Yes, and it is tested rather than asserted (`tests/test_deployment_causality.py`):
+Yes, and it is tested rather than asserted, on random **and trained** weights.
+
+**On trained checkpoints** (`reader/exact_duration.py`, `results/exact_duration.json`): for every READER,
+FF-Control and Compact-Mean checkpoint on 2a / 2b / SD-SSVEP (252 checkpoints, 10,782 pooling-boundary checks in
+total, all test trials), the maximum |logit| difference between the truncated input and the full-trial curve
+is **0.0**, and replacing every sample after a boundary with N(0, 1e3^2) noise changes the earlier decisions
+by **0.0**. All BatchNorm layers track running statistics, and eval-mode outputs do not depend on batch
+composition.
+
+**Why random-init tests are not enough** (`tests/test_controls_and_causality.py`). Every residual TCN block
+zero-initialises its second convolution, so at initialisation each TCN is exactly the identity and the
+reverse branch's last output is token 0 whatever it reads. A deliberately wrong implementation that reverses
+the **complete** trial at every deadline is therefore indistinguishable from READER at init — a test pins
+this. The causality tests run on an **activated** configuration instead (second convolutions, BatchNorm
+statistics and gate randomised), where that mutant is detected and all four causal arms pass:
 
 - **truncation equivalence** — feeding only the first *t* tokens reproduces entry *t* of the anytime
   curve to <1e-4. This is the property deployment needs.
@@ -149,7 +230,7 @@ pip install -r requirements.txt
 export READER_DATA=/path/to/prepared/data      # see docs/DATA.md
 export PYTHONPATH=$PWD
 python scripts/fetch_baseline.py               # BiTE, for the baseline arms and the LOSO gate
-pytest tests/ -q                               # 36 gates
+pytest tests/ -q                               # 77 gates
 
 python reader/train.py --model reader --dataset 2b --subject 4 --seed 2025 --epochs 600 \
        --out runs/demo/reader/2b_S4_seed2025
@@ -161,7 +242,9 @@ Full reproductions (SLURM; edit the partition in `scripts/slurm/pack.sbatch`):
 ./scripts/reproduce_within.sh     # 378 runs: 3 arms x 42 subjects x 3 seeds
 ./scripts/reproduce_loso.sh       #  84 runs: cross-subject, no HGD row
 ./scripts/reproduce_anytime.sh    # the per-deadline specialist bank on 2a
+./scripts/reproduce_controls.sh   # 168 runs: FF-Control + Compact-Mean x 28 subjects x 3 seeds
 python scripts/score.py --runs runs/cohort --name within_subject --reference bite
+python reader/subject_stats.py    # needs reader/exact_duration.py outputs, see reproduce_controls.sh
 ```
 
 ## Reproducing from scratch
@@ -170,7 +253,7 @@ What ships here is **code**, not cached results. `results/` holds our scored out
 can be checked without a GPU; re-running `scripts/score.py` **overwrites them** from your own runs,
 so a regenerated table is your table, not ours.
 
-Verified on a clean clone: `pytest` (36 gates), a single `reader/train.py` run, the
+Verified on a clean clone: `pytest` (77 gates), a single `reader/train.py` run, the
 manifest -> `sbatch` -> `scripts/score.py` pipeline, and the BiTE baseline after
 `scripts/fetch_baseline.py`.
 
@@ -207,7 +290,12 @@ Measured cost of the full within-subject cohort (378 runs, 600 epochs each, H100
 cost is the quadratic prefix recomputation: the anytime curve is O(T^2) in the token count. Add
 ~20 GPU-hours for the cross-subject cohort, and **42.9** measured for everything
 `reproduce_anytime.sh` launches: the specialist banks (2a 24.2 h over 162 runs, 2b 4.5 h over 81)
-plus the prefix-supervised reader (2a 10.8 h, 2b 3.4 h).
+plus the prefix-supervised reader (2a 10.8 h, 2b 3.4 h). The two controls took 20.3 summed run-hours
+(FF-Control 2a 6.7 / 2b 3.0 / SD 1.0; Compact-Mean 6.4 / 2.4 / 0.7) with 8 runs sharing each H200.
+
+**Hardware reproducibility.** A run repeated on an H100 80GB and on an H200 NVL is bit-identical (45/45
+READER runs). MIG-partitioned slices (H100 NVL MIG 3g.47gb) are not: 11/12 READER reruns differed from the
+full-GPU run, by up to 5.56 pp on one 2a run. Keep paired arms off MIG partitions.
 
 ## Layout
 
@@ -221,12 +309,14 @@ reader/          data roles, model, trainer, diagnostics, anytime scoring
   train.py       one run: Adam 2e-3/2e-3, cosine, LS .1, batch 64, clip 5, 600 epochs, final epoch
   diagnostics.py per-layer/per-epoch instrument: weight & gradient norms, activation
                  distributions, effective rank, train->test probes, calibration
-  anytime.py     one model vs the per-deadline specialist bank
+  anytime.py     one model vs the per-deadline specialist bank (strongest bank is the comparison of record)
+  exact_duration.py  same checkpoint on truncated input + gate interventions + causality on trained weights
+  subject_stats.py   subject-level paired CIs, exact sign-flip Wilcoxon, Holm over declared families
   ablation.py    prefix supervision vs endpoint-only loss, with a matched-arms guard
   gate_intervention.py  pin the fusion gate at 0 / 1 / 0.5 on trained weights
 analysis/        model-free input probes behind the paper's negative results
 results/         scored tables + probe outputs, checkable without a GPU
-tests/           causality, compact parity, LOSO role gates
+tests/           causality (activated + leaky mutant), controls, compact parity, LOSO role gates
 ```
 
 ## Model-free probes (the paper's negative results)
@@ -247,6 +337,12 @@ training, each with the same ridge protocol (fit on the training role, score the
 - 2a (−0.63) and 2b (−1.96) remain below the published bars; only HGD and SD-SSVEP clear them.
 - Cross-subject is one seed, and is parity rather than a win outside SD-SSVEP.
 - READER is 1.3–2.2× BiTE's parameter count, so no efficiency claim is made.
+- **Development was test-informed.** Architecture screens scored the official test session, and READER was
+  chosen among eight arms that way. What bounds the bias: on the 34 subjects the screen never used, READER
+  minus Compact is +1.43 corpus-balanced, against +1.92 on the screen subjects. No claim is made that design
+  choices were independent of test data.
+- The prefix gain over Compact is partly start-anchoring (see above); FF-Control does not separate direction
+  from anchoring.
 - Every arm, ours and BiTE's, loses 1.5–3.2 pp from its own test-curve peak to the reported final
   epoch. This is a property of BiTE's recipe (600 epochs, no validation set, final-epoch reporting)
   which we match deliberately; it is **not** differential between arms (reader−BiTE decay is
