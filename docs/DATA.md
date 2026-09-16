@@ -43,10 +43,23 @@ baseline is compared on its own terms. Per-corpus settings come from their `conf
   role. HGD is the one exception, where the inherited artifact above already standardised it.
 
 `reader/data.py` performs the scaling and role construction; it expects the `.npz` tree above as
-its input. The `.npz` files themselves were produced by replicating the BiTE loaders against the
-raw downloads; **that conversion step is not included in this repository**, so a third party
-reproducing from raw sources must re-derive it from the settings above and verify against the
-anchor checksums below.
+its input. The `.npz` files themselves are produced by `scripts/prepare_data.py`, which does not
+re-implement any of the above: it imports `preprocess_2a` / `preprocess_2b` / `preprocess_hgd` /
+`preprocess_sdssvep` from the fetched BiTE repository, calls them with the `config.yaml` settings
+reproduced in its `CONFIG` table, and arranges the output into the layout above.
+
+```bash
+python scripts/fetch_baseline.py                 # required first
+pip install -r requirements-prepare.txt          # mne, scipy; braindecode for HGD only
+python scripts/prepare_data.py --raw /path/to/downloads --out data --corpus 2a 2b sdssvep hgd
+python scripts/prepare_data.py --verify --out data
+```
+
+`--raw` holds one subdirectory per corpus (`2a/`, `2b/`, `hgd/`, `sdssvep/`) containing that
+corpus's download as listed under **Sources**. BiTE's `get_data.py` imports braindecode at module
+level although only `preprocess_hgd` uses it, so for the other three corpora the driver executes
+their module source with that single import removed; nothing else about their code is altered, and
+HGD is refused rather than faked if braindecode is missing.
 
 ## Verifying a prepared tree
 

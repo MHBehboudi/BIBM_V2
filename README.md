@@ -80,7 +80,7 @@ pip install -r requirements.txt
 export READER_DATA=/path/to/prepared/data      # see docs/DATA.md
 export PYTHONPATH=$PWD
 python scripts/fetch_baseline.py               # BiTE, for the baseline arms and the LOSO gate
-pytest tests/ -q                               # 16 gates
+pytest tests/ -q                               # 36 gates
 
 python reader/train.py --model reader --dataset 2b --subject 4 --seed 2025 --epochs 600 \
        --out runs/demo/reader/2b_S4_seed2025
@@ -107,11 +107,20 @@ manifest -> `sbatch` -> `scripts/score.py` pipeline, and the BiTE baseline after
 
 Requirements that are easy to miss:
 
-- **`READER_DATA` must point at a prepared corpus tree.** This is the one genuine gap: the EEG is
-  not shipped (~2.7 GB, and each corpus has its own terms), and **the raw-download -> `.npz`
-  conversion is not included**. `docs/DATA.md` gives the layout, the per-corpus preprocessing, and
-  anchor checksums, but a reproducer starting from raw GDF/MAT files must re-derive that step.
-  Starting from an already-prepared tree, everything below runs unchanged.
+- **`READER_DATA` must point at a prepared corpus tree.** The EEG is not shipped (~2.7 GB, and
+  each corpus has its own terms), but the raw-download -> `.npz` conversion now is:
+  `scripts/prepare_data.py` drives **BiTE's own** `preprocess_*` functions with the settings from
+  their `config.yaml`, so both models see the authors' preprocessing rather than our reading of
+  their paper. It needs `scripts/fetch_baseline.py` first and `pip install -r
+  requirements-prepare.txt` (mne, scipy; braindecode for HGD only).
+
+  ```bash
+  python scripts/prepare_data.py --raw /path/to/downloads --out data --corpus 2a 2b sdssvep hgd
+  python scripts/prepare_data.py --verify --out data     # against results/data_checksums.json
+  ```
+
+  `docs/DATA.md` gives the layout, the per-corpus preprocessing and where each raw download comes
+  from. Starting from an already-prepared tree, everything below runs unchanged.
 - **The clone must live on a filesystem the compute nodes can see.** A clone under node-local
   `/tmp` fails immediately with no log, because SLURM cannot reach the working directory.
 - `scripts/fetch_baseline.py` needs network access, and is required for the `bite` arm and for the
