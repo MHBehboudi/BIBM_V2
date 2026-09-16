@@ -12,3 +12,10 @@ python scripts/make_manifest.py \
   --study cohort --cells all --seeds 2025,2026,2027 \
   --output runs/manifests/cohort.txt
 sbatch --array=0-11 scripts/slurm/pack.sbatch runs/manifests/cohort.txt 32 4
+
+cat <<'MSG'
+when complete:
+  python scripts/score.py --runs runs/cohort --name within_subject --reference bite
+  python reader/gate_intervention.py --arm runs/cohort/reader
+the gate interventions are recorded during training, so scoring them needs no GPU.
+MSG

@@ -18,12 +18,16 @@ mkdir -p runs/manifests runs/slurm
 : "${READER_DATA:?set READER_DATA to the prepared-data directory (see docs/DATA.md)}"
 export PYTHONPATH="$PWD:${PYTHONPATH:-}"
 
-# --- the prefix-supervised reader: 2a and 2b, 9 subjects x 3 seeds each -----------------------
-python scripts/make_manifest.py --arm 'reader_anytime:reader:--prefix-weight,0.3' \
-  --study anytime --cells '2a' --seeds 2025,2026,2027 --output runs/manifests/anytime.txt
-python scripts/make_manifest.py --arm 'reader_anytime:reader:--prefix-weight,0.3' \
-  --study anytime --cells '2b' --seeds 2025,2026,2027 --output runs/manifests/_part.txt
-cat runs/manifests/_part.txt >> runs/manifests/anytime.txt
+# --- the prefix-supervised reader ---------------------------------------------------------------
+# 2a and 2b for the bank comparison; SD-SSVEP because it is the SECOND PARADIGM and carries the
+# largest early-decoding effect, even though no specialist bank exists there. Its endpoint-only
+# counterpart is the within-subject cohort arm, so together these give the loss ablation.
+: > runs/manifests/anytime.txt
+for c in 2a 2b sdssvep; do
+  python scripts/make_manifest.py --arm 'reader_anytime:reader:--prefix-weight,0.3' \
+    --study anytime --cells "$c" --seeds 2025,2026,2027 --output runs/manifests/_part.txt
+  cat runs/manifests/_part.txt >> runs/manifests/anytime.txt
+done
 
 # --- the specialist bank ----------------------------------------------------------------------
 # compact is banked on 2a only; on 2b the published BiTE endpoint is the reference that matters.
@@ -51,5 +55,7 @@ when complete, regenerate both shipped tables:
          --reader runs/anytime/reader_anytime --out results/anytime_2a.md
   python reader/anytime.py --dataset 2b --cohort runs/cohort --bank runs/bank \
          --reader runs/anytime/reader_anytime --out results/anytime_2b.md
+and the prefix-supervision loss ablation (endpoint-only arm is the within-subject cohort):
+  python reader/ablation.py --endpoint runs/cohort/reader --prefix runs/anytime/reader_anytime
 the 4 s row is read from runs/cohort, so scripts/reproduce_within.sh must have finished first.
 EOF

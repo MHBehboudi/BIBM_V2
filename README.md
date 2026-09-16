@@ -76,6 +76,57 @@ Three limits, all of them load-bearing:
    showing up at every deadline, not an anytime effect in either direction.
 3. **No bank exists on HGD or SD-SSVEP**, so no comparison is available there.
 
+### Ablation: does supervising the intermediate decisions help? (`results/ablation_prefix_supervision.md`)
+
+READER produces a decision at every deadline whether or not anything supervises it. This is the
+one focused ablation of that: endpoint-only loss vs **one predeclared** prefix weight of 0.3. No
+sweep — 0.3 is the only weight ever trained on this model, so nothing is selected on the test set.
+Same model, subjects, seeds, epochs and protocol; the loss is the only difference, and
+`reader/ablation.py` aborts if the two arms differ in anything else. Paired per (subject, seed).
+
+| corpus | early deadline | endpoint-only → prefix | paired Δ (se, W/L) | endpoint Δ (se, W/L) |
+|---|---|---:|---:|---:|
+| 2a | 1 s | 70.28 → 76.84 | **+6.56** (0.95, 24/3) | +0.13 (0.54, 9/15) |
+| 2b | 1 s | 70.79 → 75.92 | **+5.14** (1.81, 18/8) | −0.67 (0.42, 7/18) |
+| SD-SSVEP | 0.25 s | 34.61 → 65.33 | **+30.72** (2.00, 29/1) | −1.83 (0.48, 1/14) |
+| SD-SSVEP | 0.5 s | 62.00 → 84.28 | **+22.28** (2.43, 30/0) | — |
+
+**Deep supervision of the intermediate decisions buys early accuracy on every corpus tested, and
+the endpoint is preserved only on 2a.** On 2b it costs −0.67 and on SD-SSVEP −1.83, so it is a
+trade, not a free improvement, and the within-subject table above is deliberately *not* built on
+it. The effect is largest where the endpoint-only model is worst early: an SSVEP decoder trained
+only on the trial end is barely above chance at 250 ms (34.61 against a 12-class chance of 8.33)
+because nothing ever asked it for an early answer.
+
+SD-SSVEP matters here for a second reason: it is a **different paradigm** from the motor imagery of
+2a/2b, and its 1 s trial on a 15.625 ms grid is a different deadline regime. It carries no
+specialist bank, so it cannot enter the comparison above, but it can enter this one.
+
+## Is the prefix-reversed branch doing anything? (`results/gate_intervention.md`)
+
+The forward and prefix-reversed readings are fused by a convex per-feature gate
+`g = sigmoid(gamma)`, `gamma` initialised at 0 so both routes start live at 0.5. Pinning `g` at
+inference on already-trained weights separates two questions that are easy to conflate. Paired per
+cell against that cell's own learned-gate accuracy (se, cells made worse):
+
+| corpus | n | learned | g=0 forward only | g=1 reversed only | g=0.5 (init, unlearned) | learned gate |
+|---|---:|---:|---:|---:|---:|---:|
+| 2a | 27 | 84.71 | −0.60 (0.35, 19/27) | −2.12 (0.49, 21/27) | −0.06 (0.05, 8/27) | 0.4943 ± 0.0179 |
+| 2b | 27 | 86.41 | −0.70 (0.23, 16/27) | −0.77 (0.29, 15/27) | +0.02 (0.07, 4/27) | 0.4969 ± 0.0156 |
+| HGD | 42 | 96.30 | −0.44 (0.14, 22/42) | −0.30 (0.14, 17/42) | +0.00 (0.03, 2/42) | 0.5003 ± 0.0142 |
+| SD-SSVEP | 30 | 96.17 | −1.83 (0.57, 12/30) | −8.83 (1.61, 26/30) | +0.11 (0.11, 1/30) | 0.4484 ± 0.0378 |
+
+**The fusion is load-bearing: deleting either route costs accuracy on all four corpora**, so the
+prefix-reversed reading carries information the forward reading does not, and vice versa — the
+reversed branch is not decorative. On SD-SSVEP the forward reading is doing most of the work
+(−8.83 to drop it, −1.83 to drop the reversed one); on 2a it is the other way round.
+
+**The gate's *learning*, however, contributes nothing.** It sits within a few thousandths of its
+0.5 initialisation on every corpus, and pinning it exactly there is free (−0.06 to +0.11, all
+inside noise). We therefore describe the fusion as a **fixed equal-weight convex average**, not as
+a learned adaptive gate; `gamma` is kept only because it costs 64 parameters and leaves the door
+open on corpora we have not tried.
+
 ## Is it actually causal?
 
 Yes, and it is tested rather than asserted (`tests/test_deployment_causality.py`):
@@ -171,6 +222,8 @@ reader/          data roles, model, trainer, diagnostics, anytime scoring
   diagnostics.py per-layer/per-epoch instrument: weight & gradient norms, activation
                  distributions, effective rank, train->test probes, calibration
   anytime.py     one model vs the per-deadline specialist bank
+  ablation.py    prefix supervision vs endpoint-only loss, with a matched-arms guard
+  gate_intervention.py  pin the fusion gate at 0 / 1 / 0.5 on trained weights
 analysis/        model-free input probes behind the paper's negative results
 results/         scored tables + probe outputs, checkable without a GPU
 tests/           causality, compact parity, LOSO role gates
