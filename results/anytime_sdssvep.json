@@ -1,0 +1,45 @@
+{
+ "dataset": "sdssvep",
+ "reader_arm": "reader_anytime",
+ "pool_ms": 15.625,
+ "full_trial_s": 1.0,
+ "holm_over_early_deadlines": false,
+ "deadlines": {
+  "0.25": {
+   "reader_mean": 65.33333331346512,
+   "reader_n": 30,
+   "paired_delta_vs": {},
+   "bank_means": {},
+   "strongest_bank": null,
+   "paired_delta_vs_strongest": null,
+   "subject_level_vs": {}
+  },
+  "0.5": {
+   "reader_mean": 84.27777787049611,
+   "reader_n": 30,
+   "paired_delta_vs": {},
+   "bank_means": {},
+   "strongest_bank": null,
+   "paired_delta_vs_strongest": null,
+   "subject_level_vs": {}
+  },
+  "0.75": {
+   "reader_mean": 88.00000031789143,
+   "reader_n": 30,
+   "paired_delta_vs": {},
+   "bank_means": {},
+   "strongest_bank": null,
+   "paired_delta_vs_strongest": null,
+   "subject_level_vs": {}
+  },
+  "1.0": {
+   "reader_mean": 94.33333337306976,
+   "reader_n": 30,
+   "paired_delta_vs": {},
+   "bank_means": {},
+   "strongest_bank": null,
+   "paired_delta_vs_strongest": null,
+   "subject_level_vs": {}
+  }
+ }
+}

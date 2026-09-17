@@ -12,54 +12,94 @@ future. No output exists until the trial ends, so a deployed system must train a
 model per decision deadline.
 
 **READER** applies the backward branch to the **observed prefix** instead. At deadline *t* a second
-causal TCN reads tokens *t−1 … 0* and is fused with the forward reading by a convex per-feature
-gate. Reversed over the trial is non-causal; reversed over the prefix is not.
+causal TCN reads tokens *t−1 … 0* and is averaged with the forward reading (a convex per-feature gate that
+stays at its equal-weight initialisation; pinning it there is free). Reversed over the trial is non-causal;
+reversed over the prefix is not.
+
+**Where everything is.** `results/README.md` maps every paper table and figure to its file and script;
+`docs/REVIEWER_QUESTIONS.md` answers the questions a reviewer will ask, with evidence and open items;
+`results/raw/runs.csv` holds every run so any number can be recomputed without a GPU.
 
 ## Results
 
-Within-subject, 42 subjects × 3 seeds = 126 runs per arm, official roles, fixed final epoch, no
-model selection (`results/within_subject.json`):
+### Within-subject, against every baseline re-run with 3 seeds (`results/MAIN_TABLE.md`)
 
-| model | params | 2a | 2b | HGD | SD-SSVEP | corpus-bal |
-|---|---:|---:|---:|---:|---:|---:|
-| EEGNet | — | 71.14 | 82.70 | 93.97 | 64.83 | 78.16 |
-| DeepConvNet | — | 72.38 | 85.51 | 93.08 | **95.50** | 86.62 |
-| ATCNet | — | 81.02 | 84.25 | 95.89 | 84.50 | 86.42 |
-| BiTE (published) | 14.5K | **85.34** | **88.37** | 95.93 | 94.16 | 90.95 |
-| BiTE (this harness) | 14.5–17.9K | 84.08 | 87.33 | 95.57 | 94.22 | 90.30 |
-| compact (forward-only parent) | 17.8K | 82.33 | 85.32 | 95.69 | 94.11 | 89.36 |
-| **READER** | 19.0–32.4K | 84.71 | 86.41 | **96.30** | **96.17** | **90.90** |
+Official roles (session 1 train, session 2 test), 600 epochs, fixed final epoch, no validation set, no model
+selection, seeds 2025-2027. BiTE and its ten released baselines were **re-run under the identical protocol**, so
+the comparison is paired and multi-seed; BiTE's published single-seed numbers are shown beside. Mean ± SD across
+subjects. Strongest re-run baselines shown; all eleven are in `results/MAIN_TABLE.md` and
+`results/model_zoo/MODEL_ZOO.md`.
 
-Two of four published bars cleared: HGD **+0.37**, SD-SSVEP **+0.67** over DeepConvNet (+2.01 over
-BiTE). 2a is **−0.63** and 2b **−1.96** short. Paired against BiTE in this harness (126 pairs):
-**+0.59** corpus-balanced (2a +0.63, 2b −0.92, HGD +0.73, SD +1.94).
+| model | params (2a) | 2a | 2b | HGD | SD-SSVEP |
+|---|---:|---:|---:|---:|---:|
+| ATCNet (re-run) | 113.7K | 81.29 ± 8.46 | 84.07 ± 8.81 | pending | 85.33 ± 17.57 |
+| MBCNNEATCFNet (re-run) | 29.5K | 81.76 ± 7.87 | 84.40 ± 7.91 | pending | 94.22 ± 7.29 |
+| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | pending | 96.56 ± 7.80 (29/30 runs) |
+| BiTE (re-run) | 16.3K | 84.08 ± 8.13 | **87.33** ± 7.14 | 95.57 ± 3.40 | 94.22 ± 8.69 |
+| BiTE (published, 1 seed) | 14.5K | 85.34 | 88.37 | 95.93 | 94.16 |
+| Compact (READER without the reversed branch) | 17.8K | 82.33 ± 10.06 | 85.32 ± 8.06 | 95.69 ± 2.73 | 94.11 ± 11.13 |
+| **READER** | 21.0K | **84.71** ± 8.27 | 86.41 ± 7.30 | **96.30** ± 2.79 | 96.17 ± 7.89 |
 
-Cross-subject, leave-one-subject-out, seed 2025 (`results/cross_subject.json`). BiTE publishes no
-HGD LOSO row:
+READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.63 [−0.80, +2.01], 2b −0.92 [−1.88, +0.08],
+HGD +0.73 [−0.02, +1.59], SD-SSVEP +1.94 [+0.72, +3.39]. **At the endpoint READER is at parity with BiTE on motor
+imagery and ahead on SD-SSVEP**; it is above every other re-run baseline on 2a and 2b. Against the published
+single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). The HGD zoo wave and three
+SD-SSVEP zoo runs are still training; `scripts/rebuild_results.sh` fills them in.
+
+### Cross-subject (`results/CROSS_SUBJECT.md`)
+
+Leave-one-subject-out as BiTE defines it; BiTE publishes no HGD row. Seed 2025 so far:
 
 | model | 2a | 2b | SD-SSVEP |
 |---|---:|---:|---:|
-| BiTE (published) | **64.56** | **76.44** | 79.72 |
-| BiTE (this harness) | 61.11 | 76.08 | 79.44 |
-| compact | 59.66 | **76.65** | 80.11 |
+| BiTE (published) | **64.56** | 76.44 | 79.72 |
+| Compact | 59.66 | **76.65** | 80.11 |
 | **READER** | 60.36 | 75.83 | **81.22** |
 
-Parity, with one win: SD-SSVEP +1.78 paired, 7/10. Our BiTE reproduction is within 0.4 of the
-published 2b/SD bars but 3.45 under on 2a, so the 2a shortfall is in the reproduction, not the arm.
-**One seed** — the 2a/2b signs are not established.
+Parity, with SD-SSVEP READER − Compact +1.11 [+0.06, +2.11]. Seeds 2026-2027 are training. The first BiTE
+cross-subject runs were found to use gradient clip 5 (our trainer's default) whereas BiTE's release does not clip;
+all three BiTE seeds are being re-run at `--clip 0` and the clip-5 numbers (61.11 / 76.08 / 79.44) are marked
+superseded.
 
-Anytime on 2a: **one** READER read at each deadline vs a **bank of separately retrained**
-specialists, paired by subject and seed, 9 subjects × 3 seeds (`results/anytime_2a.md`):
+### Anytime: one model against retrained per-deadline specialists (`results/anytime_2a.md`)
 
-| deadline | READER (1 model) | bite bank | compact bank | paired vs STRONGEST bank |
-|---|---:|---:|---:|---:|
-| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.01** (vs compact) |
-| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.80** (vs compact) |
-| 3.0 s | 84.10 | 82.93 | 83.35 | **+0.76** (vs compact) |
-| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 (vs bite) |
+**One** READER read at each deadline vs a **bank of separately retrained** specialists (one model per deadline,
+trained from scratch on truncated trials). Subject-level difference against the strongest bank at each deadline,
+9 subjects × 3 seeds:
 
-An earlier version of this table headlined the delta against the *weaker* bank (+2.57 / +1.88 / +1.17);
-`reader/anytime.py` now reports every family and names the strongest one as the comparison of record.
+| deadline | READER (1 model) | BiTE bank | Compact bank | READER − strongest bank [95% CI], W/T/L |
+|---|---:|---:|---:|---|
+| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.01** [+0.76, +3.09] 7/0/2 |
+| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.80** [+0.48, +2.89] 7/1/1 |
+| 3.0 s | 84.10 | 82.93 | 83.35 | +0.76 [−0.72, +2.42] 5/1/3 |
+| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 [+0.01, +1.63] 6/1/2 |
+
+With 9 subjects, Holm over the three early deadlines gives p = .082 / .082 / .53: the 1 s and 2 s intervals exclude
+zero but do not survive correction. The SD-SSVEP bank (0.25 / 0.5 / 0.75 s, second paradigm) is training
+(`results/anytime_sdssvep.md`). An earlier version of this table headlined the delta against the *weaker* bank
+(+2.57 / +1.88 / +1.17).
+
+### Ablations (`results/ABLATION.md`)
+
+| variant (minus READER, subject-level) | 2a full | 2b full | SD-SSVEP full | 2a at 1 s | SD-SSVEP at 0.25 s |
+|---|---:|---:|---:|---:|---:|
+| − reversed branch (Compact) | −2.38 | −1.09 | −2.06 | −39.17 | −24.67 |
+| reversed → forward second branch (FF-Control, same size and init) | −1.63 | −1.26 | −2.00 | −39.85 | −23.72 |
+| second branch → running-mean readout (Compact-Mean) | −12.35 | −1.36 | −29.72 | −29.66 | −6.33 |
+| forward route only, g = 0 (inference, same weights) | −0.60 | −0.70 | −1.83 | −37.17 | −24.06 |
+| reversed route only, g = 1 (inference, same weights) | −2.12 | −0.77 | −8.83 | +1.38 | +4.89 |
+| equal average, g = 0.5 (inference, same weights) | −0.06 | +0.02 | +0.11 | +0.19 | +0.50 |
+| + prefix supervision (loss) | +0.13 | −0.67 | −1.83 | +6.73 | +30.72 |
+
+Early columns are the same checkpoints given only the first quarter of each trial. CIs, W/T/L and HGD are in
+`results/ABLATION.md`, which also holds the matched-loss ablation (Compact retrained with the same prefix loss,
+training now) that separates the architecture from the loss.
+
+### Efficiency (`results/EFFICIENCY.md`)
+
+One READER decision costs 1.6–10.6 ms on one CPU thread, below BiTE's specialist at the same deadline in every
+corpus and deadline measured, and one READER replaces a bank of four BiTE specialists (e.g. 21.0K vs 65.2K
+parameters on 2a). A single READER has 1.3–2.2× BiTE's parameters, so no single-model efficiency claim is made.
 
 ### Scope of the anytime claim
 
@@ -230,7 +270,7 @@ pip install -r requirements.txt
 export READER_DATA=/path/to/prepared/data      # see docs/DATA.md
 export PYTHONPATH=$PWD
 python scripts/fetch_baseline.py               # BiTE, for the baseline arms and the LOSO gate
-pytest tests/ -q                               # 77 gates
+pytest tests/ -q                               # 144 gates
 
 python reader/train.py --model reader --dataset 2b --subject 4 --seed 2025 --epochs 600 \
        --out runs/demo/reader/2b_S4_seed2025
@@ -239,12 +279,13 @@ python reader/train.py --model reader --dataset 2b --subject 4 --seed 2025 --epo
 Full reproductions (SLURM; edit the partition in `scripts/slurm/pack.sbatch`):
 
 ```bash
-./scripts/reproduce_within.sh     # 378 runs: 3 arms x 42 subjects x 3 seeds
-./scripts/reproduce_loso.sh       #  84 runs: cross-subject, no HGD row
-./scripts/reproduce_anytime.sh    # the per-deadline specialist bank on 2a
-./scripts/reproduce_controls.sh   # 168 runs: FF-Control + Compact-Mean x 28 subjects x 3 seeds
-python scripts/score.py --runs runs/cohort --name within_subject --reference bite
-python reader/subject_stats.py    # needs reader/exact_duration.py outputs, see reproduce_controls.sh
+./scripts/reproduce_within.sh     #   378 runs: READER, Compact, BiTE x 42 subjects x 3 seeds
+./scripts/reproduce_zoo.sh        # 1,230 runs: BiTE's 10 released baselines x 42 subjects x 3 seeds
+./scripts/reproduce_loso.sh       #   252 runs: cross-subject, 3 arms x 28 subjects x 3 seeds, no HGD row
+./scripts/reproduce_anytime.sh    # prefix-supervised READER + Compact, specialist banks on 2a / 2b / SD-SSVEP
+./scripts/reproduce_controls.sh   #   168 runs: FF-Control + Compact-Mean x 28 subjects x 3 seeds
+./scripts/rebuild_results.sh      # every file in results/ from runs/, CPU only
+python scripts/efficiency.py      # parameters + CPU latency (run on an idle CPU)
 ```
 
 ## Reproducing from scratch
@@ -253,7 +294,7 @@ What ships here is **code**, not cached results. `results/` holds our scored out
 can be checked without a GPU; re-running `scripts/score.py` **overwrites them** from your own runs,
 so a regenerated table is your table, not ours.
 
-Verified on a clean clone: `pytest` (77 gates), a single `reader/train.py` run, the
+Verified on a clean clone: `pytest` (the gates at the time: 77), a single `reader/train.py` run, the
 manifest -> `sbatch` -> `scripts/score.py` pipeline, and the BiTE baseline after
 `scripts/fetch_baseline.py`.
 
@@ -314,12 +355,24 @@ reader/          data roles, model, trainer, diagnostics, anytime scoring
   subject_stats.py   subject-level paired CIs, exact sign-flip Wilcoxon, Holm over declared families
   ablation.py    prefix supervision vs endpoint-only loss, with a matched-arms guard
   gate_intervention.py  pin the fusion gate at 0 / 1 / 0.5 on trained weights
-analysis/        model-free input probes behind the paper's negative results
-results/         scored tables + probe outputs, checkable without a GPU
-tests/           causality (activated + leaky mutant), controls, compact parity, LOSO role gates
+  zoo_report.py  BiTE's baselines re-run here: per-subject tables, READER minus each model
+  models/zoo.py  BiTE's 10 released baselines through BiTE's own get_model, code unchanged
+scripts/
+  reproduce_*.sh         SLURM launchers for every cohort in the paper
+  rebuild_results.sh     all of results/ from runs/, in dependency order
+  link_record_runs.py    runs of record from the development harness (MIG -> full-GPU re-run rule)
+  export_runs.py         results/raw/*.csv: every run, flat, with kappa
+  paper_tables.py        MAIN_TABLE, CROSS_SUBJECT, DEVELOPMENT_DISCLOSURE, REPRODUCIBILITY
+  ablation_table.py      ABLATION: architecture, inference interventions, loss, matched loss
+  efficiency.py          EFFICIENCY: parameters and single-thread CPU latency per decision
+  make_figures.py        results/figures/*.pdf, *.png
+analysis/        model-free input probes (not reported in the paper)
+results/         every paper table and figure, checkable without a GPU (index: results/README.md)
+docs/            DATA.md, CONTROLS.md, REVIEWER_QUESTIONS.md
+tests/           causality (activated + leaky mutant), controls, compact parity, LOSO roles, zoo, results pipeline
 ```
 
-## Model-free probes (the paper's negative results)
+## Model-free probes (development evidence, not reported in the paper)
 
 `analysis/` reproduces the input-level measurements that rule out three families before any
 training, each with the same ridge protocol (fit on the training role, score the test role):
@@ -334,8 +387,14 @@ training, each with the same ridge protocol (fit on the training role, score the
 
 ## Honest limitations
 
-- 2a (−0.63) and 2b (−1.96) remain below the published bars; only HGD and SD-SSVEP clear them.
-- Cross-subject is one seed, and is parity rather than a win outside SD-SSVEP.
+- 2a (−0.63) and 2b (−1.96) remain below the published bars; only HGD and SD-SSVEP clear them. Against BiTE
+  re-run with 3 seeds READER is at parity on motor imagery (2b leans to BiTE, −0.92 [−1.88, +0.08]).
+- DeepConvNet re-run on SD-SSVEP currently reads 96.56 (29/30 runs), above READER's 96.17.
+- The anytime advantage over retrained banks is a 2a result so far (2b is a flat −1.5, the endpoint gap); it needs
+  prefix supervision, which costs −0.67 (2b) and −1.83 (SD-SSVEP) at the endpoint; with 9 subjects the 1 s and 2 s
+  intervals exclude zero but do not survive Holm correction.
+- The fusion gate does not learn (it stays at 0.5 and pinning it is free); the fusion is a fixed average.
+- Cross-subject is parity rather than a win outside SD-SSVEP; seeds 2026-2027 are still training.
 - READER is 1.3–2.2× BiTE's parameter count, so no efficiency claim is made.
 - **Development was test-informed.** Architecture screens scored the official test session, and READER was
   chosen among eight arms that way. What bounds the bias: on the 34 subjects the screen never used, READER
@@ -343,8 +402,13 @@ training, each with the same ridge protocol (fit on the training role, score the
   choices were independent of test data.
 - The prefix gain over Compact is partly start-anchoring (see above); FF-Control does not separate direction
   from anchoring.
-- Every arm, ours and BiTE's, loses 1.5–3.2 pp from its own test-curve peak to the reported final
-  epoch. This is a property of BiTE's recipe (600 epochs, no validation set, final-epoch reporting)
-  which we match deliberately; it is **not** differential between arms (reader−BiTE decay is
-  −0.14/+0.04/+0.03/−0.67 pp, all inside their standard errors).
+- Every model loses accuracy from its own test-curve peak to the reported final epoch (READER 1.89, BiTE 2.06,
+  zoo baselines 2.20–4.54 pp; `results/REPRODUCIBILITY.md`). This is BiTE's recipe (600 epochs, no validation
+  set, final-epoch reporting), matched deliberately; it does not favour READER over BiTE, and it costs the zoo
+  baselines somewhat more.
+- Zoo baselines are trained with this repository's recipe (float32, clip 5), not BiTE's trainer (AMP, no clip);
+  their seed-2025 re-runs track BiTE's published table within about 1 pp on average.
+- 147 runs of comparisons of record first ran on MIG-partitioned GPU slices, which do not reproduce full-GPU runs
+  bit-for-bit; they are being re-run on H200 and replace the originals (`results/REPRODUCIBILITY.md`).
+- HGD has endpoint and gate-intervention results only: no FF-Control, Compact-Mean, exact-duration or anytime runs.
 - The BiTE repository ships no license. It is fetched, never redistributed here.

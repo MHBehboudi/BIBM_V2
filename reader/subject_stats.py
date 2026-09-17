@@ -249,7 +249,8 @@ def main():
         bank = BANK
         spec_rows = []
         for fam in ("bite", "compact"):
-            for n, tag in zip(PRIMARY_N[ds][:3], ("1s", "2s", "3s")):
+            tags = ("0.25s", "0.5s", "0.75s") if ds == "sdssvep" else ("1s", "2s", "3s")
+            for n, tag in zip(PRIMARY_N[ds][:3], tags):
                 arm_dir = bank / f"{fam}_{tag}"
                 acc = endpoint_acc(arm_dir, ds) if arm_dir.exists() else {}
                 if not acc:

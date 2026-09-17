@@ -1,4 +1,4 @@
-# Anytime: one reader vs per-deadline specialist banks (2b)
+# Anytime: one reader vs per-deadline specialist banks (sdssvep)
 
 Each baseline column at deadline d is a **separately trained model**, trained from scratch on trials truncated to d; the reader column is **one model** read at d. The full-trial row of every bank is its within-subject cohort run.
 
@@ -6,9 +6,11 @@ Reader arm: `reader_anytime`. Prefix supervision moves the early deadlines by se
 
 The comparison of record is against the STRONGEST bank at each deadline (the most accurate retrained specialist family), not the weakest. Mean columns are over (subject, seed) runs; the difference against the strongest bank is subject-level (seeds averaged per subject) with a 95% paired bootstrap CI, subject W/T/L and an exact sign-flip Wilcoxon p, Holm over the early deadlines.
 
-| deadline | reader (1 model) | bite bank | reader minus STRONGEST bank, subject-level | vs bite (runs) |
-|---|---|---|---|---|
-| 1 s | 75.92 (27) | 77.42 (27) | bite: -1.50 [-3.57, +0.32]  3/0/6  p 0.312 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.312 | -1.50 |
-| 2 s | 83.62 (27) | 85.24 (27) | bite: -1.62 [-2.85, -0.59]  1/2/6  p 0.031 (exact sign-flip (mid-ranks), zeros 2), Holm p 0.094 | -1.62 |
-| 3 s | 85.42 (27) | 86.86 (27) | bite: -1.44 [-2.50, -0.45]  2/0/7  p 0.035 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.094 | -1.44 |
-| 4 s (full trial) | 85.74 (27) | 87.33 (27) | bite: -1.59 [-2.70, -0.23]  1/0/8  p 0.059 (exact sign-flip (mid-ranks), zeros 0) | -1.59 |
+| deadline | reader (1 model) |  | reader minus STRONGEST bank, subject-level |  |
+|---|---|---|
+| 0.25 s | 65.33 (30) |  | no bank |  |
+| 0.5 s | 84.28 (30) |  | no bank |  |
+| 0.75 s | 88.00 (30) |  | no bank |  |
+| 1 s (full trial) | 94.33 (30) |  | no bank |  |
+
+No specialist bank exists for this corpus yet.

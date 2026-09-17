@@ -1,0 +1,323 @@
+{
+ "cpu": "AMD EPYC 9334 32-Core Processor",
+ "threads": 1,
+ "torch": "2.5.1+cu124",
+ "reps": 50,
+ "corpora": {
+  "2a": {
+   "parameters": {
+    "reader": 20964,
+    "compact": 17828,
+    "bite": 16294
+   },
+   "full_trial_ms": {
+    "reader": 10.29802393168211,
+    "compact": 10.489227250218391,
+    "bite": 13.712224550545216
+   },
+   "reader_full_anytime_curve_ms": 32.14310947805643,
+   "tokens": 32,
+   "per_deadline": {
+    "1.0": {
+     "reader_single_decision_ms": 2.2926442325115204,
+     "bite_specialist_ms": 4.006132483482361,
+     "bite_specialist_parameters": 16294
+    },
+    "2.0": {
+     "reader_single_decision_ms": 2.9424596577882767,
+     "bite_specialist_ms": 5.347175523638725,
+     "bite_specialist_parameters": 16294
+    },
+    "3.0": {
+     "reader_single_decision_ms": 8.884294889867306,
+     "bite_specialist_ms": 13.07668723165989,
+     "bite_specialist_parameters": 16294
+    },
+    "4.0": {
+     "reader_single_decision_ms": 10.59198472648859,
+     "bite_specialist_ms": 14.56736121326685,
+     "bite_specialist_parameters": 16294
+    }
+   },
+   "zoo": {
+    "ATCNet": {
+     "parameters": 113732,
+     "full_trial_ms": 4.795911721885204
+    },
+    "DMSANet": {
+     "parameters": 35884,
+     "full_trial_ms": 21.485095843672752
+    },
+    "DeepConvNet": {
+     "parameters": 102329,
+     "full_trial_ms": 1.6857311129570007
+    },
+    "EEGNeX": {
+     "parameters": 56452,
+     "full_trial_ms": 13.425598852336407
+    },
+    "EEGNet": {
+     "parameters": 3444,
+     "full_trial_ms": 1.2973528355360031
+    },
+    "EEGTCNet": {
+     "parameters": 4096,
+     "full_trial_ms": 1.0293284431099892
+    },
+    "EISATC": {
+     "parameters": 26383,
+     "full_trial_ms": 2.285645343363285
+    },
+    "FACTNet": {
+     "parameters": 5406,
+     "full_trial_ms": 7.4598342180252075
+    },
+    "MBCNNEATCFNet": {
+     "parameters": 29520,
+     "full_trial_ms": 15.72155486792326
+    },
+    "ShallowConvNet": {
+     "parameters": 46084,
+     "full_trial_ms": 7.143753580749035
+    }
+   },
+   "bite_bank_parameters": 65176
+  },
+  "2b": {
+   "parameters": {
+    "reader": 19010,
+    "compact": 15874,
+    "bite": 14738
+   },
+   "full_trial_ms": {
+    "reader": 2.082296647131443,
+    "compact": 1.2792544439435005,
+    "bite": 3.3600525930523872
+   },
+   "reader_full_anytime_curve_ms": 23.265518248081207,
+   "tokens": 32,
+   "per_deadline": {
+    "1.0": {
+     "reader_single_decision_ms": 1.6957521438598633,
+     "bite_specialist_ms": 2.554277889430523,
+     "bite_specialist_parameters": 14738
+    },
+    "2.0": {
+     "reader_single_decision_ms": 1.754656434059143,
+     "bite_specialist_ms": 2.903788350522518,
+     "bite_specialist_parameters": 14738
+    },
+    "3.0": {
+     "reader_single_decision_ms": 1.9726604223251343,
+     "bite_specialist_ms": 2.9933899641036987,
+     "bite_specialist_parameters": 14738
+    },
+    "4.0": {
+     "reader_single_decision_ms": 1.8402040004730225,
+     "bite_specialist_ms": 3.444019705057144,
+     "bite_specialist_parameters": 14738
+    }
+   },
+   "zoo": {
+    "ATCNet": {
+     "parameters": 112794,
+     "full_trial_ms": 3.5025347024202347
+    },
+    "DMSANet": {
+     "parameters": 18722,
+     "full_trial_ms": 2.7094893157482147
+    },
+    "DeepConvNet": {
+     "parameters": 86052,
+     "full_trial_ms": 0.9811520576477051
+    },
+    "EEGNeX": {
+     "parameters": 54738,
+     "full_trial_ms": 2.6291199028491974
+    },
+    "EEGNet": {
+     "parameters": 2146,
+     "full_trial_ms": 0.4296405240893364
+    },
+    "EEGTCNet": {
+     "parameters": 3766,
+     "full_trial_ms": 0.7388051599264145
+    },
+    "EISATC": {
+     "parameters": 24683,
+     "full_trial_ms": 1.8892493098974228
+    },
+    "FACTNet": {
+     "parameters": 4620,
+     "full_trial_ms": 6.126411259174347
+    },
+    "MBCNNEATCFNet": {
+     "parameters": 25098,
+     "full_trial_ms": 5.462456494569778
+    },
+    "ShallowConvNet": {
+     "parameters": 10802,
+     "full_trial_ms": 0.5040466785430908
+    }
+   },
+   "bite_bank_parameters": 58952
+  },
+  "hgd": {
+   "parameters": {
+    "reader": 23076,
+    "compact": 19940,
+    "bite": 17922
+   },
+   "full_trial_ms": {
+    "reader": 21.135742776095867,
+    "compact": 20.601755008101463,
+    "bite": 27.141408994793892
+   },
+   "reader_full_anytime_curve_ms": 40.75240716338158,
+   "tokens": 32,
+   "per_deadline": {
+    "1.0": {
+     "reader_single_decision_ms": 2.4702632799744606,
+     "bite_specialist_ms": 4.73514199256897,
+     "bite_specialist_parameters": 17922
+    },
+    "2.0": {
+     "reader_single_decision_ms": 3.387643024325371,
+     "bite_specialist_ms": 8.324763737618923,
+     "bite_specialist_parameters": 17922
+    },
+    "3.0": {
+     "reader_single_decision_ms": 4.631419666111469,
+     "bite_specialist_ms": 21.682114340364933,
+     "bite_specialist_parameters": 17922
+    },
+    "4.0": {
+     "reader_single_decision_ms": 5.7066939771175385,
+     "bite_specialist_ms": 29.94680218398571,
+     "bite_specialist_parameters": 17922
+    }
+   },
+   "zoo": {
+    "ATCNet": {
+     "parameters": 114436,
+     "full_trial_ms": 6.291978061199188
+    },
+    "DMSANet": {
+     "parameters": 38524,
+     "full_trial_ms": 32.542381435632706
+    },
+    "DeepConvNet": {
+     "parameters": 116079,
+     "full_trial_ms": 2.7993498370051384
+    },
+    "EEGNeX": {
+     "parameters": 57860,
+     "full_trial_ms": 25.034823454916477
+    },
+    "EEGNet": {
+     "parameters": 3796,
+     "full_trial_ms": 2.000299282371998
+    },
+    "EEGTCNet": {
+     "parameters": 4448,
+     "full_trial_ms": 1.5265094116330147
+    },
+    "EISATC": {
+     "parameters": 27087,
+     "full_trial_ms": 2.6475507766008377
+    },
+    "FACTNet": {
+     "parameters": 5758,
+     "full_trial_ms": 8.809640072286129
+    },
+    "MBCNNEATCFNet": {
+     "parameters": 33744,
+     "full_trial_ms": 16.724384389817715
+    },
+    "ShallowConvNet": {
+     "parameters": 81284,
+     "full_trial_ms": 5.17137348651886
+    }
+   },
+   "bite_bank_parameters": 71688
+  },
+  "sdssvep": {
+   "parameters": {
+    "reader": 32428,
+    "compact": 29292,
+    "bite": 14548
+   },
+   "full_trial_ms": {
+    "reader": 1.8801139667630196,
+    "compact": 1.2180199846625328,
+    "bite": 2.7863364666700363
+   },
+   "reader_full_anytime_curve_ms": 43.5774615034461,
+   "tokens": 64,
+   "per_deadline": {
+    "0.25": {
+     "reader_single_decision_ms": 1.5509864315390587,
+     "bite_specialist_ms": 2.4176230654120445,
+     "bite_specialist_parameters": 14548
+    },
+    "0.5": {
+     "reader_single_decision_ms": 1.7183227464556694,
+     "bite_specialist_ms": 2.472011372447014,
+     "bite_specialist_parameters": 14548
+    },
+    "0.75": {
+     "reader_single_decision_ms": 1.6285404562950134,
+     "bite_specialist_ms": 2.5620535016059875,
+     "bite_specialist_parameters": 14548
+    },
+    "1.0": {
+     "reader_single_decision_ms": 1.9170157611370087,
+     "bite_specialist_ms": 2.7026301249861717,
+     "bite_specialist_parameters": 14548
+    }
+   },
+   "zoo": {
+    "ATCNet": {
+     "parameters": 114604,
+     "full_trial_ms": 2.971118316054344
+    },
+    "DMSANet": {
+     "parameters": 21732,
+     "full_trial_ms": 2.0006923004984856
+    },
+    "DeepConvNet": {
+     "parameters": 46262,
+     "full_trial_ms": 0.3523053601384163
+    },
+    "EEGNeX": {
+     "parameters": 55340,
+     "full_trial_ms": 1.478550024330616
+    },
+    "EEGNet": {
+     "parameters": 2780,
+     "full_trial_ms": 0.35633519291877747
+    },
+    "EEGTCNet": {
+     "parameters": 3976,
+     "full_trial_ms": 0.6581274792551994
+    },
+    "EISATC": {
+     "parameters": 26057,
+     "full_trial_ms": 1.7382828518748283
+    },
+    "FACTNet": {
+     "error": "IndexError: index 162 is out of bounds for dimension 2 with size 129"
+    },
+    "MBCNNEATCFNet": {
+     "parameters": 29928,
+     "full_trial_ms": 4.487099125981331
+    },
+    "ShallowConvNet": {
+     "parameters": 19212,
+     "full_trial_ms": 0.37214532494544983
+    }
+   },
+   "bite_bank_parameters": 58192
+  }
+ }
+}

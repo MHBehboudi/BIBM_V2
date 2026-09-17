@@ -53,6 +53,9 @@ def main():
     ap.add_argument("--runs", type=Path, required=True, help="arm directory holding <ds>_S<sub>_seed<seed>/final.pt")
     ap.add_argument("--out", type=Path, default=ROOT / "runs/exact_duration")
     ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--accuracy-only", action="store_true",
+                    help="skip the gate interventions and the trained-weight causality checks (already established "
+                         "on every endpoint-trained checkpoint); used for the loss-ablation arms")
     args = ap.parse_args()
     torch.set_num_threads(args.threads)
     ds, spec = args.dataset, SPECS[args.dataset]
@@ -61,10 +64,18 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     for run in sorted(args.runs.glob(f"{ds}_S*_seed*")):
         target = out_dir / f"{run.name}.json"
-        if target.exists() or not (run / "final.pt").exists():
+        if not (run / "final.pt").exists():
             continue
-        started = time.time()
         summary = json.loads((run / "summary.json").read_text())
+        if target.exists():
+            # Skip only if the record was computed from THIS run. A run of record can be replaced (e.g. a MIG
+            # original by its full-GPU re-run) under the same name; its GPU or logged accuracy then differs.
+            old = json.loads(target.read_text())
+            if old.get("device_trained") == summary.get("device") and \
+                    abs(float(old.get("final_test_acc_logged", -1)) - summary["final_test"]["acc"]) < 1e-9:
+                continue
+            print(f"recomputing {target.name}: its run of record changed", flush=True)
+        started = time.time()
         sub, seed = summary["subject"], summary["seed"]
         _, _, xte, yte = load_roles(ds, sub, "bite")
         model, _, _, needs_spectral = registry.build(args.arm, ds)
@@ -88,7 +99,7 @@ def main():
             lg = logits_of(model, tensors(n))
             rec["acc"][str(n)] = float((lg.argmax(1) == y).float().mean())
             saved[f"n{n}"] = lg.numpy()
-            if getattr(model, "reader_mode", None) in ("bidir", "ff"):
+            if getattr(model, "reader_mode", None) in ("bidir", "ff") and not args.accuracy_only:
                 for g in (0.0, 0.5, 1.0):
                     model._intervention = {"gate": g}
                     lg2 = logits_of(model, tensors(n))
@@ -97,7 +108,7 @@ def main():
         full = spec["samples"]
         rec["full_length_matches_logged"] = abs(rec["acc"].get(str(full), -1) - summary["final_test"]["acc"]) < 1e-9
 
-        if hasattr(model, "anytime_logits"):
+        if hasattr(model, "anytime_logits") and not args.accuracy_only:
             pool = spec["pool"]
             curve = curve_of(model, x)
             n_tokens = curve.shape[1]
