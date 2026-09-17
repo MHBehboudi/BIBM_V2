@@ -9,10 +9,14 @@ def build(name: str, dataset: str, **options):
     if name == "bite":
         from reader.models import baseline
         return baseline.build(name, dataset, samples, **options)
+    if name.startswith("zoo_"):
+        from reader.models import zoo           # BiTE's released baselines, via BiTE's own get_model
+        return zoo.build(name[len("zoo_"):], dataset, samples), {}, {}, False
     from reader.models import reader as reader_module
     return reader_module.build(name, dataset, **options)
 
 
 def available():
     from reader.models.reader import ARMS
-    return sorted(ARMS) + ["bite"]
+    from reader.models.zoo import MODELS
+    return sorted(ARMS) + ["bite"] + [f"zoo_{m}" for m in MODELS]
