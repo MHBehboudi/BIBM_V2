@@ -71,6 +71,7 @@ def main():
     ap.add_argument("--warmup", type=int, default=5)
     ap.add_argument("--corpora", default="2a,2b,hgd,sdssvep")
     ap.add_argument("--out", type=Path, default=ROOT / "results")
+    ap.add_argument("--note", default="", help="caveat printed under the header (e.g. measurement conditions)")
     args = ap.parse_args()
     torch.set_num_threads(1)
     torch.manual_seed(0)
@@ -80,6 +81,8 @@ def main():
     lines = ["# Efficiency: parameters and CPU latency per decision", "",
              f"CPU: {cpu}, 1 thread, float32, batch 1, median of {args.reps} calls. Latency is milliseconds of "
              "compute per decision, not including acquisition. BiTE includes its STFT.", ""]
+    if args.note:
+        lines += [args.note, ""]
 
     for ds in args.corpora.split(","):
         spec = SPECS[ds]

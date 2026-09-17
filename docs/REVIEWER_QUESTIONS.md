@@ -112,11 +112,13 @@ Evidence: `results/REPRODUCIBILITY.md`, `results/raw/runs.csv` (`test_peak_*_dia
 
 ## 12. Parameters, latency, and the O(T²) anytime curve
 
-**Measured.** READER has 19.0K–32.4K parameters against BiTE's 14.5K–17.9K; no efficiency claim is made for a
-single model. One READER decision costs 1.6–10.6 ms on one CPU thread depending on corpus and deadline, below BiTE's
-specialist at the same deadline in every cell measured, and one READER replaces a bank of four BiTE specialists.
-Recomputing the whole anytime curve from scratch is O(T²) (23–44 ms for all 32–64 decisions); a streaming system
-computes only the newest one. Evidence: `results/EFFICIENCY.md`.
+**Parameters: measured. Latency: PENDING a clean measurement.** READER has 19.0K–32.4K parameters against BiTE's
+14.5K–17.9K, so no efficiency claim is made for a single model; one READER does replace a bank of four BiTE
+specialists (58K–72K parameters in total). Recomputing the whole anytime curve from scratch is O(T²); a single
+decision at deadline t reads t tokens (O(t)), and the timed code path is asserted equal to the model's output.
+The CPU timings in `results/EFFICIENCY.md` were taken on a shared cluster node and repeated measurements of the
+same configuration differed by up to 3×, so no latency ordering between READER and BiTE is claimed yet.
+Evidence: `results/EFFICIENCY.md`, `tests/test_results_pipeline.py::test_single_decision_path_equals_the_model`.
 
 ## 13. Are the baselines trained fairly?
 

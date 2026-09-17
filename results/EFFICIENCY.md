@@ -2,6 +2,8 @@
 
 CPU: AMD EPYC 9334 32-Core Processor, 1 thread, float32, batch 1, median of 50 calls. Latency is milliseconds of compute per decision, not including acquisition. BiTE includes its STFT.
 
+**Latency is provisional.** These timings were taken on a shared cluster node; re-timing the same configuration later differed by up to 3x (READER on 2a at 1,000 samples: 10.6 ms here, 3.6 ms on re-measurement). Parameter counts are exact; do not quote the millisecond values, or any READER-vs-BiTE latency ordering, until they are re-measured on an idle node with interleaved repeats.
+
 ## 2a (22 channels, 1000 samples, 32 tokens of 128 ms)
 
 | model | parameters | full-trial decision (ms) |

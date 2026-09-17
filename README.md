@@ -97,9 +97,10 @@ training now) that separates the architecture from the loss.
 
 ### Efficiency (`results/EFFICIENCY.md`)
 
-One READER decision costs 1.6–10.6 ms on one CPU thread, below BiTE's specialist at the same deadline in every
-corpus and deadline measured, and one READER replaces a bank of four BiTE specialists (e.g. 21.0K vs 65.2K
-parameters on 2a). A single READER has 1.3–2.2× BiTE's parameters, so no single-model efficiency claim is made.
+One READER replaces a bank of four per-deadline BiTE specialists (e.g. 21.0K vs 65.2K parameters on 2a). A single
+READER has 1.3–2.2× BiTE's parameters, so no single-model efficiency claim is made. **CPU latency is provisional**:
+it was timed on a shared node and repeated measurements of the same configuration differed by up to 3×, so no
+latency comparison is claimed until it is re-measured on an idle node.
 
 ### Scope of the anytime claim
 
@@ -411,4 +412,5 @@ training, each with the same ridge protocol (fit on the training role, score the
 - 147 runs of comparisons of record first ran on MIG-partitioned GPU slices, which do not reproduce full-GPU runs
   bit-for-bit; they are being re-run on H200 and replace the originals (`results/REPRODUCIBILITY.md`).
 - HGD has endpoint and gate-intervention results only: no FF-Control, Compact-Mean, exact-duration or anytime runs.
+- CPU latency in `results/EFFICIENCY.md` is provisional: shared-node timings of the same configuration varied up to 3×.
 - The BiTE repository ships no license. It is fetched, never redistributed here.

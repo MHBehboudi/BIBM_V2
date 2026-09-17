@@ -23,7 +23,7 @@ is complete for what exists and marks the rest as pending).
 | Gate interventions (fusion load-bearing, gate learning absorbable) | `gate_intervention.md` | `reader/gate_intervention.py` | final |
 | Subject-level statistics: 12 endpoint + 12 prefix tests, Holm, exact-duration curves | `subject_stats/SUBJECT_STATS.md` | `reader/subject_stats.py` | final |
 | Same-checkpoint accuracy on truncated input + causality on trained weights | `exact_duration.json` | `reader/exact_duration.py` + `scripts/collect_exact_duration.py` | final (BiTE 2a recomputed when its re-runs land) |
-| Parameters and CPU latency per decision; bank size | `EFFICIENCY.md`, `efficiency.json` | `scripts/efficiency.py` (timing: run on an idle CPU) | final |
+| Parameters and CPU latency per decision; bank size | `EFFICIENCY.md`, `efficiency.json` | `scripts/efficiency.py` (timing: run on an idle CPU) | parameters final; latency PROVISIONAL (shared-node timings varied up to 3×) |
 | Screen subjects vs fresh subjects (test-informed development) | `DEVELOPMENT_DISCLOSURE.md` | `scripts/paper_tables.py` | final |
 | GPU per run, MIG vs full-GPU re-runs, peak-to-final decay | `REPRODUCIBILITY.md` | `scripts/paper_tables.py` | MIG comparison PENDING |
 
