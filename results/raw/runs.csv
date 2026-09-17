@@ -1,31 +1,31 @@
 group,arm,dataset,subject,seed,protocol,window_seconds,prefix_weight,model,parameters,epochs,test_acc,test_balanced_acc,test_kappa,test_nll,test_ece,train_acc,test_peak_acc_diagnostic,test_peak_epoch_diagnostic,device,hours,record_status,harness_source
-cohort,bite,2a,1,2025,within,,0.0,bite,16294,600,89.2361,89.2361,0.8565,0.4325,0.176,100.0,91.3194,192,H100 NVL MIG 3g.47gb,0.376,mig_pending,cohort_20260915/bite/2a_S1_seed2025
-cohort,bite,2a,1,2026,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4318,0.161,100.0,90.2778,145,H100 NVL MIG 3g.47gb,0.375,mig_pending,cohort_20260915/bite/2a_S1_seed2026
-cohort,bite,2a,1,2027,within,,0.0,bite,16294,600,88.8889,88.8889,0.8519,0.4402,0.1787,100.0,90.625,342,H100 NVL MIG 3g.47gb,0.376,mig_pending,cohort_20260915/bite/2a_S1_seed2027
-cohort,bite,2a,2,2025,within,,0.0,bite,16294,600,71.5278,71.5278,0.6204,0.745,0.0645,100.0,75.3472,215,H100 NVL MIG 3g.47gb,0.375,mig_pending,cohort_20260915/bite/2a_S2_seed2025
-cohort,bite,2a,2,2026,within,,0.0,bite,16294,600,68.75,68.75,0.5833,0.9443,0.0915,100.0,74.3056,274,H100 NVL MIG 3g.47gb,0.375,mig_pending,cohort_20260915/bite/2a_S2_seed2026
-cohort,bite,2a,2,2027,within,,0.0,bite,16294,600,73.9583,73.9583,0.6528,0.712,0.1111,100.0,76.3889,331,H100 NVL MIG 3g.47gb,0.377,mig_pending,cohort_20260915/bite/2a_S2_seed2027
-cohort,bite,2a,3,2025,within,,0.0,bite,16294,600,95.8333,95.8333,0.9444,0.2808,0.163,100.0,97.9167,221,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S3_seed2025
-cohort,bite,2a,3,2026,within,,0.0,bite,16294,600,96.875,96.875,0.9583,0.2623,0.166,100.0,98.2639,386,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S3_seed2026
-cohort,bite,2a,3,2027,within,,0.0,bite,16294,600,96.5278,96.5278,0.9537,0.2799,0.1613,100.0,96.875,356,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S3_seed2027
-cohort,bite,2a,4,2025,within,,0.0,bite,16294,600,81.5972,81.5972,0.7546,0.5498,0.1303,100.0,84.0278,387,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S4_seed2025
-cohort,bite,2a,4,2026,within,,0.0,bite,16294,600,83.3333,83.3333,0.7778,0.5289,0.1266,100.0,85.7639,296,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S4_seed2026
-cohort,bite,2a,4,2027,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4757,0.1631,100.0,87.8472,438,H100 NVL MIG 3g.47gb,0.37,mig_pending,cohort_20260915/bite/2a_S4_seed2027
-cohort,bite,2a,5,2025,within,,0.0,bite,16294,600,77.0833,77.0833,0.6944,0.5958,0.0888,100.0,79.8611,199,H100 NVL MIG 3g.47gb,0.361,mig_pending,cohort_20260915/bite/2a_S5_seed2025
-cohort,bite,2a,5,2026,within,,0.0,bite,16294,600,79.1667,79.1667,0.7222,0.6007,0.1006,100.0,83.3333,188,H100 NVL MIG 3g.47gb,0.358,mig_pending,cohort_20260915/bite/2a_S5_seed2026
-cohort,bite,2a,5,2027,within,,0.0,bite,16294,600,79.5139,79.5139,0.7269,0.5752,0.0993,100.0,83.3333,328,H100 NVL MIG 3g.47gb,0.358,mig_pending,cohort_20260915/bite/2a_S5_seed2027
-cohort,bite,2a,6,2025,within,,0.0,bite,16294,600,76.3889,76.3889,0.6852,0.7233,0.1082,100.0,78.8194,455,H100 NVL MIG 3g.47gb,0.363,mig_pending,cohort_20260915/bite/2a_S6_seed2025
-cohort,bite,2a,6,2026,within,,0.0,bite,16294,600,73.6111,73.6111,0.6481,0.7253,0.1084,100.0,78.125,242,H100 NVL MIG 3g.47gb,0.362,mig_pending,cohort_20260915/bite/2a_S6_seed2026
-cohort,bite,2a,6,2027,within,,0.0,bite,16294,600,72.9167,72.9167,0.6389,0.7336,0.1023,100.0,76.0417,131,H100 NVL MIG 3g.47gb,0.299,mig_pending,cohort_20260915/bite/2a_S6_seed2027
-cohort,bite,2a,7,2025,within,,0.0,bite,16294,600,92.7083,92.7083,0.9028,0.3575,0.1666,100.0,95.4861,429,H100 NVL MIG 3g.47gb,0.319,mig_pending,cohort_20260915/bite/2a_S7_seed2025
-cohort,bite,2a,7,2026,within,,0.0,bite,16294,600,91.6667,91.6667,0.8889,0.3783,0.1735,100.0,94.4444,408,H100 NVL MIG 3g.47gb,0.319,mig_pending,cohort_20260915/bite/2a_S7_seed2026
-cohort,bite,2a,7,2027,within,,0.0,bite,16294,600,91.3194,91.3194,0.8843,0.3676,0.17,100.0,94.4444,457,H100 NVL MIG 3g.47gb,0.32,mig_pending,cohort_20260915/bite/2a_S7_seed2027
-cohort,bite,2a,8,2025,within,,0.0,bite,16294,600,84.0278,84.0278,0.787,0.5096,0.161,100.0,87.5,345,H100 NVL MIG 3g.47gb,0.335,mig_pending,cohort_20260915/bite/2a_S8_seed2025
-cohort,bite,2a,8,2026,within,,0.0,bite,16294,600,84.0278,84.0278,0.787,0.5238,0.1575,100.0,87.1528,356,H100 NVL MIG 3g.47gb,0.258,mig_pending,cohort_20260915/bite/2a_S8_seed2026
-cohort,bite,2a,8,2027,within,,0.0,bite,16294,600,85.4167,85.4167,0.8056,0.5194,0.1615,100.0,87.1528,427,H100 NVL MIG 3g.47gb,0.258,mig_pending,cohort_20260915/bite/2a_S8_seed2027
-cohort,bite,2a,9,2025,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4569,0.1345,100.0,89.2361,112,H100 NVL MIG 3g.47gb,0.312,mig_pending,cohort_20260915/bite/2a_S9_seed2025
-cohort,bite,2a,9,2026,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4622,0.1509,100.0,88.8889,432,H100 NVL MIG 3g.47gb,0.312,mig_pending,cohort_20260915/bite/2a_S9_seed2026
-cohort,bite,2a,9,2027,within,,0.0,bite,16294,600,86.4583,86.4583,0.8194,0.4734,0.1494,100.0,90.2778,379,H100 NVL MIG 3g.47gb,0.278,mig_pending,cohort_20260915/bite/2a_S9_seed2027
+cohort,bite,2a,1,2025,within,,0.0,bite,16294,600,89.9306,89.9306,0.8657,0.4228,0.1833,100.0,91.3194,241,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S1_seed2025
+cohort,bite,2a,1,2026,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4289,0.1689,100.0,89.9306,349,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S1_seed2026
+cohort,bite,2a,1,2027,within,,0.0,bite,16294,600,88.8889,88.8889,0.8519,0.4458,0.1807,100.0,90.625,277,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S1_seed2027
+cohort,bite,2a,2,2025,within,,0.0,bite,16294,600,72.2222,72.2222,0.6296,0.7422,0.0744,100.0,76.0417,215,H200 NVL,0.241,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S2_seed2025
+cohort,bite,2a,2,2026,within,,0.0,bite,16294,600,69.0972,69.0972,0.588,0.9603,0.0934,100.0,74.3056,274,H200 NVL,0.243,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S2_seed2026
+cohort,bite,2a,2,2027,within,,0.0,bite,16294,600,74.3056,74.3056,0.6574,0.7091,0.103,100.0,77.7778,358,H200 NVL,0.243,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S2_seed2027
+cohort,bite,2a,3,2025,within,,0.0,bite,16294,600,95.8333,95.8333,0.9444,0.2812,0.1633,100.0,97.9167,289,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S3_seed2025
+cohort,bite,2a,3,2026,within,,0.0,bite,16294,600,96.875,96.875,0.9583,0.2623,0.1659,100.0,98.2639,415,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S3_seed2026
+cohort,bite,2a,3,2027,within,,0.0,bite,16294,600,96.1806,96.1806,0.9491,0.2808,0.1598,100.0,96.875,155,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S3_seed2027
+cohort,bite,2a,4,2025,within,,0.0,bite,16294,600,81.25,81.25,0.75,0.5486,0.1407,100.0,84.0278,374,H200 NVL,0.241,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S4_seed2025
+cohort,bite,2a,4,2026,within,,0.0,bite,16294,600,83.3333,83.3333,0.7778,0.527,0.1298,100.0,85.4167,296,H200 NVL,0.243,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S4_seed2026
+cohort,bite,2a,4,2027,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4747,0.1665,100.0,88.1944,438,H200 NVL,0.248,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S4_seed2027
+cohort,bite,2a,5,2025,within,,0.0,bite,16294,600,78.125,78.125,0.7083,0.5927,0.0968,100.0,80.5556,199,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S5_seed2025
+cohort,bite,2a,5,2026,within,,0.0,bite,16294,600,78.4722,78.4722,0.713,0.5966,0.1014,100.0,82.9861,173,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S5_seed2026
+cohort,bite,2a,5,2027,within,,0.0,bite,16294,600,79.1667,79.1667,0.7222,0.5744,0.0975,100.0,83.6806,269,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S5_seed2027
+cohort,bite,2a,6,2025,within,,0.0,bite,16294,600,76.3889,76.3889,0.6852,0.7266,0.1076,100.0,79.1667,455,H200 NVL,0.241,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S6_seed2025
+cohort,bite,2a,6,2026,within,,0.0,bite,16294,600,73.6111,73.6111,0.6481,0.7262,0.093,100.0,77.7778,208,H200 NVL,0.248,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S6_seed2026
+cohort,bite,2a,6,2027,within,,0.0,bite,16294,600,72.5694,72.5694,0.6343,0.7307,0.0938,100.0,76.3889,243,H200 NVL,0.244,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S6_seed2027
+cohort,bite,2a,7,2025,within,,0.0,bite,16294,600,92.7083,92.7083,0.9028,0.3575,0.1667,100.0,95.4861,429,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S7_seed2025
+cohort,bite,2a,7,2026,within,,0.0,bite,16294,600,91.6667,91.6667,0.8889,0.3785,0.1734,100.0,94.4444,408,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S7_seed2026
+cohort,bite,2a,7,2027,within,,0.0,bite,16294,600,91.3194,91.3194,0.8843,0.3674,0.17,100.0,94.4444,457,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S7_seed2027
+cohort,bite,2a,8,2025,within,,0.0,bite,16294,600,84.0278,84.0278,0.787,0.5107,0.1618,100.0,87.1528,320,H200 NVL,0.241,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S8_seed2025
+cohort,bite,2a,8,2026,within,,0.0,bite,16294,600,83.6806,83.6806,0.7824,0.5246,0.1541,100.0,87.1528,246,H200 NVL,0.243,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S8_seed2026
+cohort,bite,2a,8,2027,within,,0.0,bite,16294,600,85.4167,85.4167,0.8056,0.5184,0.1614,100.0,87.1528,305,H200 NVL,0.243,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S8_seed2027
+cohort,bite,2a,9,2025,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4571,0.133,100.0,89.5833,206,H200 NVL,0.234,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S9_seed2025
+cohort,bite,2a,9,2026,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4622,0.1509,100.0,88.8889,432,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S9_seed2026
+cohort,bite,2a,9,2027,within,,0.0,bite,16294,600,86.4583,86.4583,0.8194,0.473,0.1492,100.0,90.2778,379,H200 NVL,0.235,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/2a_S9_seed2027
 cohort,bite,2b,1,2025,within,,0.0,bite,14738,600,78.125,78.125,0.5625,0.4937,0.0737,100.0,82.1875,142,H100 NVL MIG 3g.47gb,0.159,mig_pending,cohort_20260915/bite/2b_S1_seed2025
 cohort,bite,2b,1,2026,within,,0.0,bite,14738,600,78.75,78.75,0.575,0.4902,0.0641,100.0,82.1875,94,H100 NVL MIG 3g.47gb,0.238,mig_pending,cohort_20260915/bite/2b_S1_seed2026
 cohort,bite,2b,1,2027,within,,0.0,bite,14738,600,79.6875,79.6875,0.5938,0.4856,0.0514,100.0,81.875,131,H100 NVL MIG 3g.47gb,0.24,mig_pending,cohort_20260915/bite/2b_S1_seed2027
@@ -70,7 +70,7 @@ cohort,bite,hgd,14,2026,within,,0.0,bite,17922,600,98.2955,98.4149,0.9772,0.2025
 cohort,bite,hgd,14,2027,within,,0.0,bite,17922,600,97.1591,97.3732,0.9621,0.2126,0.1464,100.0,99.4318,79,H200 NVL,0.472,original,cohort_20260915/bite/hgd_S14_seed2027
 cohort,bite,hgd,1,2025,within,,0.0,bite,17922,600,100.0,100.0,1.0,0.2031,0.1714,100.0,100.0,114,H100 NVL MIG 3g.47gb,0.376,mig_pending,cohort_20260915/bite/hgd_S1_seed2025
 cohort,bite,hgd,1,2026,within,,0.0,bite,17922,600,100.0,100.0,1.0,0.1932,0.1669,100.0,100.0,36,H100 NVL MIG 3g.47gb,0.376,mig_pending,cohort_20260915/bite/hgd_S1_seed2026
-cohort,bite,hgd,1,2027,within,,0.0,bite,17922,600,100.0,100.0,1.0,0.1917,0.1629,100.0,100.0,40,H100 NVL MIG 3g.47gb,0.371,mig_pending,cohort_20260915/bite/hgd_S1_seed2027
+cohort,bite,hgd,1,2027,within,,0.0,bite,17922,600,100.0,100.0,1.0,0.1917,0.1628,100.0,100.0,40,H200 NVL,0.278,full-GPU re-run replaces MIG original,fullgpu_20260917/cohort_20260915/bite/hgd_S1_seed2027
 cohort,bite,hgd,2,2025,within,,0.0,bite,17922,600,93.2515,93.2626,0.9099,0.3018,0.1333,99.8462,94.4785,297,H200 NVL,0.453,original,cohort_20260915/bite/hgd_S2_seed2025
 cohort,bite,hgd,2,2026,within,,0.0,bite,17922,600,92.0245,92.0633,0.8935,0.3101,0.1604,100.0,95.092,390,H200 NVL,0.497,original,cohort_20260915/bite/hgd_S2_seed2026
 cohort,bite,hgd,2,2027,within,,0.0,bite,17922,600,92.638,92.6883,0.9017,0.3049,0.1417,99.8462,94.4785,417,H200 NVL,0.486,original,cohort_20260915/bite/hgd_S2_seed2027
@@ -545,6 +545,90 @@ controls,ff_control,sdssvep,8,2027,within,,0.0,ff_reader,32428,600,100.0,100.0,1
 controls,ff_control,sdssvep,9,2025,within,,0.0,ff_reader,32428,600,100.0,100.0,1.0,0.2694,0.2081,100.0,100.0,101,H200 NVL,0.034,original,controls_20260916/ff_reader/sdssvep_S9_seed2025
 controls,ff_control,sdssvep,9,2026,within,,0.0,ff_reader,32428,600,100.0,100.0,1.0,0.2644,0.2058,100.0,100.0,72,H200 NVL,0.034,original,controls_20260916/ff_reader/sdssvep_S9_seed2026
 controls,ff_control,sdssvep,9,2027,within,,0.0,ff_reader,32428,600,98.3333,98.3333,0.9818,0.271,0.2081,100.0,100.0,182,H200 NVL,0.034,original,controls_20260916/ff_reader/sdssvep_S9_seed2027
+anytime,compact_anytime,2a,1,2025,within,,0.3,compact,17828,600,90.2778,90.2778,0.8704,0.4418,0.1785,100.0,91.3194,444,H200 NVL,0.184,original,anytime_20260917/compact_anytime/2a_S1_seed2025
+anytime,compact_anytime,2a,1,2026,within,,0.3,compact,17828,600,90.9722,90.9722,0.8796,0.4353,0.1911,100.0,91.6667,489,H200 NVL,0.183,original,anytime_20260917/compact_anytime/2a_S1_seed2026
+anytime,compact_anytime,2a,1,2027,within,,0.3,compact,17828,600,89.2361,89.2361,0.8565,0.4164,0.1733,100.0,91.3194,430,H200 NVL,0.182,original,anytime_20260917/compact_anytime/2a_S1_seed2027
+anytime,compact_anytime,2a,2,2025,within,,0.3,compact,17828,600,66.3194,66.3194,0.5509,0.7999,0.0769,100.0,71.875,222,H200 NVL,0.166,original,anytime_20260917/compact_anytime/2a_S2_seed2025
+anytime,compact_anytime,2a,2,2026,within,,0.3,compact,17828,600,67.3611,67.3611,0.5648,0.8058,0.0694,100.0,72.5694,320,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S2_seed2026
+anytime,compact_anytime,2a,2,2027,within,,0.3,compact,17828,600,69.0972,69.0972,0.588,0.7847,0.0985,100.0,74.6528,269,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S2_seed2027
+anytime,compact_anytime,2a,3,2025,within,,0.3,compact,17828,600,93.4028,93.4028,0.912,0.3582,0.1534,100.0,96.1806,291,H200 NVL,0.184,original,anytime_20260917/compact_anytime/2a_S3_seed2025
+anytime,compact_anytime,2a,3,2026,within,,0.3,compact,17828,600,94.7917,94.7917,0.9306,0.3175,0.1624,100.0,96.5278,374,H200 NVL,0.183,original,anytime_20260917/compact_anytime/2a_S3_seed2026
+anytime,compact_anytime,2a,3,2027,within,,0.3,compact,17828,600,94.7917,94.7917,0.9306,0.3267,0.1653,100.0,96.875,246,H200 NVL,0.182,original,anytime_20260917/compact_anytime/2a_S3_seed2027
+anytime,compact_anytime,2a,4,2025,within,,0.3,compact,17828,600,84.7222,84.7222,0.7963,0.5665,0.1966,100.0,86.1111,501,H200 NVL,0.166,original,anytime_20260917/compact_anytime/2a_S4_seed2025
+anytime,compact_anytime,2a,4,2026,within,,0.3,compact,17828,600,84.7222,84.7222,0.7963,0.5601,0.1803,100.0,86.1111,428,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S4_seed2026
+anytime,compact_anytime,2a,4,2027,within,,0.3,compact,17828,600,84.7222,84.7222,0.7963,0.5442,0.1841,100.0,86.4583,289,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S4_seed2027
+anytime,compact_anytime,2a,5,2025,within,,0.3,compact,17828,600,51.3889,51.3889,0.3519,0.9897,0.1773,100.0,81.25,210,H200 NVL,0.184,original,anytime_20260917/compact_anytime/2a_S5_seed2025
+anytime,compact_anytime,2a,5,2026,within,,0.3,compact,17828,600,60.0694,60.0694,0.4676,0.9084,0.129,100.0,79.8611,163,H200 NVL,0.183,original,anytime_20260917/compact_anytime/2a_S5_seed2026
+anytime,compact_anytime,2a,5,2027,within,,0.3,compact,17828,600,79.5139,79.5139,0.7269,0.6689,0.1673,100.0,80.9028,459,H200 NVL,0.182,original,anytime_20260917/compact_anytime/2a_S5_seed2027
+anytime,compact_anytime,2a,6,2025,within,,0.3,compact,17828,600,69.4444,69.4444,0.5926,0.7949,0.0902,100.0,76.0417,328,H200 NVL,0.166,original,anytime_20260917/compact_anytime/2a_S6_seed2025
+anytime,compact_anytime,2a,6,2026,within,,0.3,compact,17828,600,67.3611,67.3611,0.5648,0.8111,0.0885,100.0,72.9167,342,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S6_seed2026
+anytime,compact_anytime,2a,6,2027,within,,0.3,compact,17828,600,71.5278,71.5278,0.6204,0.8343,0.1127,100.0,72.5694,456,H200 NVL,0.165,original,anytime_20260917/compact_anytime/2a_S6_seed2027
+anytime,compact_anytime,2a,7,2025,within,,0.3,compact,17828,600,93.0556,93.0556,0.9074,0.3739,0.1824,100.0,95.1389,335,H200 NVL,0.184,original,anytime_20260917/compact_anytime/2a_S7_seed2025
+anytime,compact_anytime,2a,7,2026,within,,0.3,compact,17828,600,92.7083,92.7083,0.9028,0.3593,0.1674,100.0,94.4444,239,H200 NVL,0.183,original,anytime_20260917/compact_anytime/2a_S7_seed2026
+anytime,compact_anytime,2a,7,2027,within,,0.3,compact,17828,600,92.3611,92.3611,0.8981,0.3817,0.1836,100.0,94.4444,417,H200 NVL,0.182,original,anytime_20260917/compact_anytime/2a_S7_seed2027
+anytime,compact_anytime,2a,8,2025,within,,0.3,compact,17828,600,88.8889,88.8889,0.8519,0.4807,0.1852,100.0,90.625,467,H200 NVL,0.119,original,anytime_20260917/compact_anytime/2a_S8_seed2025
+anytime,compact_anytime,2a,8,2026,within,,0.3,compact,17828,600,86.8056,86.8056,0.8241,0.4679,0.1689,100.0,88.8889,284,H200 NVL,0.119,original,anytime_20260917/compact_anytime/2a_S8_seed2026
+anytime,compact_anytime,2a,8,2027,within,,0.3,compact,17828,600,87.5,87.5,0.8333,0.4878,0.1804,100.0,89.2361,381,H200 NVL,0.12,original,anytime_20260917/compact_anytime/2a_S8_seed2027
+anytime,compact_anytime,2a,9,2025,within,,0.3,compact,17828,600,87.8472,87.8472,0.838,0.4703,0.1596,100.0,90.2778,311,H200 NVL,0.115,original,anytime_20260917/compact_anytime/2a_S9_seed2025
+anytime,compact_anytime,2a,9,2026,within,,0.3,compact,17828,600,88.5417,88.5417,0.8472,0.4477,0.165,100.0,92.0139,223,H200 NVL,0.119,original,anytime_20260917/compact_anytime/2a_S9_seed2026
+anytime,compact_anytime,2a,9,2027,within,,0.3,compact,17828,600,89.2361,89.2361,0.8565,0.4298,0.1552,100.0,90.625,291,H200 NVL,0.12,original,anytime_20260917/compact_anytime/2a_S9_seed2027
+anytime,compact_anytime,2b,1,2025,within,,0.3,compact,15874,600,77.5,77.5,0.55,0.4983,0.0601,100.0,80.625,133,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S1_seed2025
+anytime,compact_anytime,2b,1,2026,within,,0.3,compact,15874,600,79.0625,79.0625,0.5813,0.4809,0.065,100.0,81.875,113,H200 NVL,0.1,original,anytime_20260917/compact_anytime/2b_S1_seed2026
+anytime,compact_anytime,2b,1,2027,within,,0.3,compact,15874,600,77.5,77.5,0.55,0.4884,0.0515,100.0,82.5,185,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S1_seed2027
+anytime,compact_anytime,2b,2,2025,within,,0.3,compact,15874,600,70.3571,70.3571,0.4071,0.6184,0.0872,100.0,75.0,127,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S2_seed2025
+anytime,compact_anytime,2b,2,2026,within,,0.3,compact,15874,600,68.9286,68.9286,0.3786,0.6059,0.0847,100.0,72.5,127,H200 NVL,0.101,original,anytime_20260917/compact_anytime/2b_S2_seed2026
+anytime,compact_anytime,2b,2,2027,within,,0.3,compact,15874,600,73.2143,73.2143,0.4643,0.551,0.0403,100.0,76.4286,164,H200 NVL,0.103,original,anytime_20260917/compact_anytime/2b_S2_seed2027
+anytime,compact_anytime,2b,3,2025,within,,0.3,compact,15874,600,81.25,81.25,0.625,0.4,0.0469,100.0,86.875,85,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S3_seed2025
+anytime,compact_anytime,2b,3,2026,within,,0.3,compact,15874,600,83.125,83.125,0.6625,0.3605,0.0635,100.0,87.1875,28,H200 NVL,0.1,original,anytime_20260917/compact_anytime/2b_S3_seed2026
+anytime,compact_anytime,2b,3,2027,within,,0.3,compact,15874,600,83.125,83.125,0.6625,0.371,0.0476,100.0,87.5,24,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S3_seed2027
+anytime,compact_anytime,2b,4,2025,within,,0.3,compact,15874,600,96.25,96.25,0.925,0.158,0.0684,100.0,98.4375,70,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S4_seed2025
+anytime,compact_anytime,2b,4,2026,within,,0.3,compact,15874,600,94.6875,94.6875,0.8938,0.1786,0.0638,100.0,98.4375,84,H200 NVL,0.102,original,anytime_20260917/compact_anytime/2b_S4_seed2026
+anytime,compact_anytime,2b,4,2027,within,,0.3,compact,15874,600,95.625,95.625,0.9125,0.1536,0.0631,100.0,98.4375,64,H200 NVL,0.103,original,anytime_20260917/compact_anytime/2b_S4_seed2027
+anytime,compact_anytime,2b,5,2025,within,,0.3,compact,15874,600,95.625,95.625,0.9125,0.2179,0.1234,100.0,96.25,501,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S5_seed2025
+anytime,compact_anytime,2b,5,2026,within,,0.3,compact,15874,600,95.0,95.0,0.9,0.2091,0.1202,100.0,96.25,384,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S5_seed2026
+anytime,compact_anytime,2b,5,2027,within,,0.3,compact,15874,600,95.3125,95.3125,0.9062,0.2126,0.1183,100.0,98.125,265,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S5_seed2027
+anytime,compact_anytime,2b,6,2025,within,,0.3,compact,15874,600,86.25,86.25,0.725,0.3184,0.0572,100.0,89.6875,313,H200 NVL,0.098,original,anytime_20260917/compact_anytime/2b_S6_seed2025
+anytime,compact_anytime,2b,6,2026,within,,0.3,compact,15874,600,87.8125,87.8125,0.7563,0.2865,0.05,100.0,89.6875,115,H200 NVL,0.101,original,anytime_20260917/compact_anytime/2b_S6_seed2026
+anytime,compact_anytime,2b,6,2027,within,,0.3,compact,15874,600,85.9375,85.9375,0.7188,0.3093,0.0589,100.0,88.75,370,H200 NVL,0.103,original,anytime_20260917/compact_anytime/2b_S6_seed2027
+anytime,compact_anytime,2b,7,2025,within,,0.3,compact,15874,600,89.6875,89.6875,0.7937,0.2578,0.0475,100.0,92.8125,66,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S7_seed2025
+anytime,compact_anytime,2b,7,2026,within,,0.3,compact,15874,600,87.8125,87.8125,0.7563,0.2783,0.0518,100.0,92.1875,95,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S7_seed2026
+anytime,compact_anytime,2b,7,2027,within,,0.3,compact,15874,600,89.0625,89.0625,0.7812,0.2573,0.0574,100.0,92.8125,46,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S7_seed2027
+anytime,compact_anytime,2b,8,2025,within,,0.3,compact,15874,600,95.0,95.0,0.9,0.1723,0.0626,100.0,95.9375,184,H200 NVL,0.074,original,anytime_20260917/compact_anytime/2b_S8_seed2025
+anytime,compact_anytime,2b,8,2026,within,,0.3,compact,15874,600,95.625,95.625,0.9125,0.179,0.0786,100.0,96.5625,343,H200 NVL,0.076,original,anytime_20260917/compact_anytime/2b_S8_seed2026
+anytime,compact_anytime,2b,8,2027,within,,0.3,compact,15874,600,94.375,94.375,0.8875,0.169,0.0713,100.0,96.25,309,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S8_seed2027
+anytime,compact_anytime,2b,9,2025,within,,0.3,compact,15874,600,85.625,85.625,0.7125,0.3328,0.0607,100.0,88.75,371,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S9_seed2025
+anytime,compact_anytime,2b,9,2026,within,,0.3,compact,15874,600,84.0625,84.0625,0.6812,0.3471,0.0641,100.0,88.4375,55,H200 NVL,0.078,original,anytime_20260917/compact_anytime/2b_S9_seed2026
+anytime,compact_anytime,2b,9,2027,within,,0.3,compact,15874,600,87.5,87.5,0.75,0.3309,0.0645,100.0,90.3125,216,H200 NVL,0.077,original,anytime_20260917/compact_anytime/2b_S9_seed2027
+anytime,compact_anytime,sdssvep,10,2025,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.3959,0.3005,100.0,100.0,193,H200 NVL,0.019,original,anytime_20260917/compact_anytime/sdssvep_S10_seed2025
+anytime,compact_anytime,sdssvep,10,2026,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.43,0.3247,100.0,100.0,128,H200 NVL,0.018,original,anytime_20260917/compact_anytime/sdssvep_S10_seed2026
+anytime,compact_anytime,sdssvep,10,2027,within,,0.3,compact,29292,600,98.3333,98.3333,0.9818,0.4234,0.3064,100.0,100.0,157,H200 NVL,0.017,original,anytime_20260917/compact_anytime/sdssvep_S10_seed2027
+anytime,compact_anytime,sdssvep,1,2025,within,,0.3,compact,29292,600,88.3333,88.3333,0.8727,1.0443,0.4832,100.0,93.3333,231,H200 NVL,0.022,original,anytime_20260917/compact_anytime/sdssvep_S1_seed2025
+anytime,compact_anytime,sdssvep,1,2026,within,,0.3,compact,29292,600,88.3333,88.3333,0.8727,1.0326,0.4678,100.0,91.6667,85,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S1_seed2026
+anytime,compact_anytime,sdssvep,1,2027,within,,0.3,compact,29292,600,91.6667,91.6667,0.9091,0.9759,0.492,100.0,93.3333,245,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S1_seed2027
+anytime,compact_anytime,sdssvep,2,2025,within,,0.3,compact,29292,600,95.0,95.0,0.9455,0.6149,0.357,100.0,96.6667,52,H200 NVL,0.022,original,anytime_20260917/compact_anytime/sdssvep_S2_seed2025
+anytime,compact_anytime,sdssvep,2,2026,within,,0.3,compact,29292,600,95.0,95.0,0.9455,0.5823,0.3368,100.0,98.3333,242,H200 NVL,0.024,original,anytime_20260917/compact_anytime/sdssvep_S2_seed2026
+anytime,compact_anytime,sdssvep,2,2027,within,,0.3,compact,29292,600,95.0,95.0,0.9455,0.6126,0.3541,100.0,96.6667,175,H200 NVL,0.023,original,anytime_20260917/compact_anytime/sdssvep_S2_seed2027
+anytime,compact_anytime,sdssvep,3,2025,within,,0.3,compact,29292,600,71.6667,71.6667,0.6909,1.446,0.4126,100.0,76.6667,262,H200 NVL,0.022,original,anytime_20260917/compact_anytime/sdssvep_S3_seed2025
+anytime,compact_anytime,sdssvep,3,2026,within,,0.3,compact,29292,600,55.0,55.0,0.5091,1.5613,0.2434,100.0,65.0,252,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S3_seed2026
+anytime,compact_anytime,sdssvep,3,2027,within,,0.3,compact,29292,600,66.6667,66.6667,0.6364,1.5209,0.3565,100.0,71.6667,238,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S3_seed2027
+anytime,compact_anytime,sdssvep,4,2025,within,,0.3,compact,29292,600,98.3333,98.3333,0.9818,0.8305,0.51,100.0,100.0,219,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S4_seed2025
+anytime,compact_anytime,sdssvep,4,2026,within,,0.3,compact,29292,600,91.6667,91.6667,0.9091,0.8302,0.4332,100.0,96.6667,128,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S4_seed2026
+anytime,compact_anytime,sdssvep,4,2027,within,,0.3,compact,29292,600,96.6667,96.6667,0.9636,0.8452,0.495,100.0,100.0,129,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S4_seed2027
+anytime,compact_anytime,sdssvep,5,2025,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.5447,0.383,100.0,100.0,81,H200 NVL,0.015,original,anytime_20260917/compact_anytime/sdssvep_S5_seed2025
+anytime,compact_anytime,sdssvep,5,2026,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.5429,0.3833,100.0,100.0,57,H200 NVL,0.016,original,anytime_20260917/compact_anytime/sdssvep_S5_seed2026
+anytime,compact_anytime,sdssvep,5,2027,within,,0.3,compact,29292,600,98.3333,98.3333,0.9818,0.5663,0.3754,100.0,100.0,58,H200 NVL,0.016,original,anytime_20260917/compact_anytime/sdssvep_S5_seed2027
+anytime,compact_anytime,sdssvep,6,2025,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.345,0.2757,100.0,100.0,35,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S6_seed2025
+anytime,compact_anytime,sdssvep,6,2026,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.333,0.2636,100.0,100.0,31,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S6_seed2026
+anytime,compact_anytime,sdssvep,6,2027,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.3181,0.2573,100.0,100.0,36,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S6_seed2027
+anytime,compact_anytime,sdssvep,7,2025,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.4136,0.3197,100.0,100.0,33,H200 NVL,0.014,original,anytime_20260917/compact_anytime/sdssvep_S7_seed2025
+anytime,compact_anytime,sdssvep,7,2026,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.4432,0.3384,100.0,100.0,30,H200 NVL,0.016,original,anytime_20260917/compact_anytime/sdssvep_S7_seed2026
+anytime,compact_anytime,sdssvep,7,2027,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.3939,0.3078,100.0,100.0,29,H200 NVL,0.015,original,anytime_20260917/compact_anytime/sdssvep_S7_seed2027
+anytime,compact_anytime,sdssvep,8,2025,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.5292,0.3763,100.0,100.0,67,H200 NVL,0.021,original,anytime_20260917/compact_anytime/sdssvep_S8_seed2025
+anytime,compact_anytime,sdssvep,8,2026,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.5014,0.368,100.0,100.0,82,H200 NVL,0.02,original,anytime_20260917/compact_anytime/sdssvep_S8_seed2026
+anytime,compact_anytime,sdssvep,8,2027,within,,0.3,compact,29292,600,100.0,100.0,1.0,0.4982,0.3668,100.0,100.0,61,H200 NVL,0.02,original,anytime_20260917/compact_anytime/sdssvep_S8_seed2027
+anytime,compact_anytime,sdssvep,9,2025,within,,0.3,compact,29292,600,96.6667,96.6667,0.9636,0.3327,0.2269,100.0,100.0,37,H200 NVL,0.015,original,anytime_20260917/compact_anytime/sdssvep_S9_seed2025
+anytime,compact_anytime,sdssvep,9,2026,within,,0.3,compact,29292,600,98.3333,98.3333,0.9818,0.3325,0.2384,100.0,100.0,252,H200 NVL,0.016,original,anytime_20260917/compact_anytime/sdssvep_S9_seed2026
+anytime,compact_anytime,sdssvep,9,2027,within,,0.3,compact,29292,600,98.3333,98.3333,0.9818,0.3322,0.2388,100.0,98.3333,143,H200 NVL,0.016,original,anytime_20260917/compact_anytime/sdssvep_S9_seed2027
 anytime,reader_anytime,2a,1,2025,within,,0.3,reader,20964,600,89.5833,89.5833,0.8611,0.3825,0.1568,100.0,92.3611,189,H100 NVL MIG 3g.47gb,0.602,mig_pending,anytime_20260915/reader_anytime/2a_S1_seed2025
 anytime,reader_anytime,2a,1,2026,within,,0.3,reader,20964,600,89.9306,89.9306,0.8657,0.4045,0.1429,100.0,92.7083,434,H100 NVL MIG 3g.47gb,0.592,mig_pending,anytime_20260915/reader_anytime/2a_S1_seed2026
 anytime,reader_anytime,2a,1,2027,within,,0.3,reader,20964,600,88.8889,88.8889,0.8519,0.4143,0.1511,100.0,92.3611,205,H100 NVL MIG 3g.47gb,0.579,mig_pending,anytime_20260915/reader_anytime/2a_S1_seed2027
@@ -629,6 +713,96 @@ anytime,reader_anytime,sdssvep,8,2027,within,,0.3,reader,32428,600,100.0,100.0,1
 anytime,reader_anytime,sdssvep,9,2025,within,,0.3,reader,32428,600,96.6667,96.6667,0.9636,0.4243,0.274,100.0,98.3333,55,H100 NVL,0.101,original,anytime_20260915/reader_anytime/sdssvep_S9_seed2025
 anytime,reader_anytime,sdssvep,9,2026,within,,0.3,reader,32428,600,95.0,95.0,0.9455,0.4762,0.2702,100.0,98.3333,30,H100 NVL,0.101,original,anytime_20260915/reader_anytime/sdssvep_S9_seed2026
 anytime,reader_anytime,sdssvep,9,2027,within,,0.3,reader,32428,600,96.6667,96.6667,0.9636,0.4432,0.2701,100.0,98.3333,49,H100 NVL,0.033,original,anytime_20260915/reader_anytime/sdssvep_S9_seed2027
+bank,bite_0.25s,sdssvep,10,2025,within,0.25,0.0,bite,14548,600,50.0,50.0,0.4545,1.7528,0.1486,100.0,51.6667,476,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S10_seed2025
+bank,bite_0.25s,sdssvep,10,2026,within,0.25,0.0,bite,14548,600,51.6667,51.6667,0.4727,1.7754,0.1279,100.0,53.3333,330,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S10_seed2026
+bank,bite_0.25s,sdssvep,10,2027,within,0.25,0.0,bite,14548,600,46.6667,46.6667,0.4182,1.8135,0.1514,100.0,50.0,379,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S10_seed2027
+bank,bite_0.25s,sdssvep,1,2025,within,0.25,0.0,bite,14548,600,61.6667,61.6667,0.5818,1.3711,0.2479,100.0,65.0,366,H200 NVL,0.025,original,bank_20260917/bite_0.25s/sdssvep_S1_seed2025
+bank,bite_0.25s,sdssvep,1,2026,within,0.25,0.0,bite,14548,600,56.6667,56.6667,0.5273,1.4421,0.2025,100.0,58.3333,147,H200 NVL,0.025,original,bank_20260917/bite_0.25s/sdssvep_S1_seed2026
+bank,bite_0.25s,sdssvep,1,2027,within,0.25,0.0,bite,14548,600,55.0,55.0,0.5091,1.4445,0.1679,100.0,60.0,341,H200 NVL,0.025,original,bank_20260917/bite_0.25s/sdssvep_S1_seed2027
+bank,bite_0.25s,sdssvep,2,2025,within,0.25,0.0,bite,14548,600,36.6667,36.6667,0.3091,2.0351,0.1784,100.0,43.3333,123,H200 NVL,0.022,original,bank_20260917/bite_0.25s/sdssvep_S2_seed2025
+bank,bite_0.25s,sdssvep,2,2026,within,0.25,0.0,bite,14548,600,40.0,40.0,0.3455,2.0576,0.1645,100.0,45.0,319,H200 NVL,0.022,original,bank_20260917/bite_0.25s/sdssvep_S2_seed2026
+bank,bite_0.25s,sdssvep,2,2027,within,0.25,0.0,bite,14548,600,33.3333,33.3333,0.2727,2.0645,0.1088,100.0,40.0,81,H200 NVL,0.025,original,bank_20260917/bite_0.25s/sdssvep_S2_seed2027
+bank,bite_0.25s,sdssvep,3,2025,within,0.25,0.0,bite,14548,600,33.3333,33.3333,0.2727,1.9381,0.1051,100.0,40.0,97,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S3_seed2025
+bank,bite_0.25s,sdssvep,3,2026,within,0.25,0.0,bite,14548,600,40.0,40.0,0.3455,1.7311,0.1359,100.0,46.6667,201,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S3_seed2026
+bank,bite_0.25s,sdssvep,3,2027,within,0.25,0.0,bite,14548,600,33.3333,33.3333,0.2727,1.8255,0.1187,100.0,41.6667,69,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S3_seed2027
+bank,bite_0.25s,sdssvep,4,2025,within,0.25,0.0,bite,14548,600,70.0,70.0,0.6727,1.1558,0.2571,100.0,73.3333,561,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S4_seed2025
+bank,bite_0.25s,sdssvep,4,2026,within,0.25,0.0,bite,14548,600,70.0,70.0,0.6727,1.091,0.2764,100.0,76.6667,268,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S4_seed2026
+bank,bite_0.25s,sdssvep,4,2027,within,0.25,0.0,bite,14548,600,70.0,70.0,0.6727,1.112,0.2389,100.0,71.6667,462,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S4_seed2027
+bank,bite_0.25s,sdssvep,5,2025,within,0.25,0.0,bite,14548,600,88.3333,88.3333,0.8727,0.7438,0.3649,100.0,90.0,386,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S5_seed2025
+bank,bite_0.25s,sdssvep,5,2026,within,0.25,0.0,bite,14548,600,88.3333,88.3333,0.8727,0.7578,0.3384,100.0,88.3333,250,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S5_seed2026
+bank,bite_0.25s,sdssvep,5,2027,within,0.25,0.0,bite,14548,600,85.0,85.0,0.8364,0.7887,0.3232,100.0,88.3333,151,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S5_seed2027
+bank,bite_0.25s,sdssvep,6,2025,within,0.25,0.0,bite,14548,600,80.0,80.0,0.7818,0.8253,0.2523,100.0,81.6667,89,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S6_seed2025
+bank,bite_0.25s,sdssvep,6,2026,within,0.25,0.0,bite,14548,600,78.3333,78.3333,0.7636,0.8697,0.2753,100.0,81.6667,324,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S6_seed2026
+bank,bite_0.25s,sdssvep,6,2027,within,0.25,0.0,bite,14548,600,83.3333,83.3333,0.8182,0.8292,0.3096,100.0,86.6667,182,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S6_seed2027
+bank,bite_0.25s,sdssvep,7,2025,within,0.25,0.0,bite,14548,600,85.0,85.0,0.8364,0.6943,0.2862,100.0,90.0,115,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S7_seed2025
+bank,bite_0.25s,sdssvep,7,2026,within,0.25,0.0,bite,14548,600,93.3333,93.3333,0.9273,0.6827,0.3815,100.0,95.0,162,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S7_seed2026
+bank,bite_0.25s,sdssvep,7,2027,within,0.25,0.0,bite,14548,600,93.3333,93.3333,0.9273,0.6675,0.3744,100.0,93.3333,308,H200 NVL,0.028,original,bank_20260917/bite_0.25s/sdssvep_S7_seed2027
+bank,bite_0.25s,sdssvep,8,2025,within,0.25,0.0,bite,14548,600,88.3333,88.3333,0.8727,0.8627,0.4011,100.0,91.6667,244,H200 NVL,0.029,original,bank_20260917/bite_0.25s/sdssvep_S8_seed2025
+bank,bite_0.25s,sdssvep,8,2026,within,0.25,0.0,bite,14548,600,83.3333,83.3333,0.8182,0.951,0.3666,100.0,86.6667,348,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S8_seed2026
+bank,bite_0.25s,sdssvep,8,2027,within,0.25,0.0,bite,14548,600,81.6667,81.6667,0.8,0.9277,0.3361,100.0,85.0,90,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S8_seed2027
+bank,bite_0.25s,sdssvep,9,2025,within,0.25,0.0,bite,14548,600,68.3333,68.3333,0.6545,1.207,0.285,100.0,73.3333,222,H200 NVL,0.026,original,bank_20260917/bite_0.25s/sdssvep_S9_seed2025
+bank,bite_0.25s,sdssvep,9,2026,within,0.25,0.0,bite,14548,600,76.6667,76.6667,0.7455,1.0253,0.3202,100.0,80.0,295,H200 NVL,0.027,original,bank_20260917/bite_0.25s/sdssvep_S9_seed2026
+bank,bite_0.25s,sdssvep,9,2027,within,0.25,0.0,bite,14548,600,61.6667,61.6667,0.5818,1.1678,0.2014,100.0,65.0,225,H200 NVL,0.026,original,bank_20260917/bite_0.25s/sdssvep_S9_seed2027
+bank,bite_0.5s,sdssvep,10,2025,within,0.5,0.0,bite,14548,600,80.0,80.0,0.7818,0.9078,0.2785,100.0,81.6667,223,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S10_seed2025
+bank,bite_0.5s,sdssvep,10,2026,within,0.5,0.0,bite,14548,600,83.3333,83.3333,0.8182,0.9822,0.3628,100.0,83.3333,213,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S10_seed2026
+bank,bite_0.5s,sdssvep,10,2027,within,0.5,0.0,bite,14548,600,83.3333,83.3333,0.8182,0.9458,0.351,100.0,86.6667,382,H200 NVL,0.031,original,bank_20260917/bite_0.5s/sdssvep_S10_seed2027
+bank,bite_0.5s,sdssvep,1,2025,within,0.5,0.0,bite,14548,600,80.0,80.0,0.7818,1.1455,0.3985,100.0,80.0,361,H200 NVL,0.026,original,bank_20260917/bite_0.5s/sdssvep_S1_seed2025
+bank,bite_0.5s,sdssvep,1,2026,within,0.5,0.0,bite,14548,600,78.3333,78.3333,0.7636,1.1098,0.3545,100.0,78.3333,418,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S1_seed2026
+bank,bite_0.5s,sdssvep,1,2027,within,0.5,0.0,bite,14548,600,75.0,75.0,0.7273,1.139,0.3404,100.0,78.3333,342,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S1_seed2027
+bank,bite_0.5s,sdssvep,2,2025,within,0.5,0.0,bite,14548,600,65.0,65.0,0.6182,1.2954,0.2258,100.0,70.0,213,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S2_seed2025
+bank,bite_0.5s,sdssvep,2,2026,within,0.5,0.0,bite,14548,600,63.3333,63.3333,0.6,1.3954,0.227,100.0,66.6667,323,H200 NVL,0.031,original,bank_20260917/bite_0.5s/sdssvep_S2_seed2026
+bank,bite_0.5s,sdssvep,2,2027,within,0.5,0.0,bite,14548,600,65.0,65.0,0.6182,1.3903,0.2678,100.0,66.6667,116,H200 NVL,0.032,original,bank_20260917/bite_0.5s/sdssvep_S2_seed2027
+bank,bite_0.5s,sdssvep,3,2025,within,0.5,0.0,bite,14548,600,48.3333,48.3333,0.4364,1.6235,0.1399,100.0,51.6667,284,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S3_seed2025
+bank,bite_0.5s,sdssvep,3,2026,within,0.5,0.0,bite,14548,600,51.6667,51.6667,0.4727,1.5504,0.1697,100.0,60.0,154,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S3_seed2026
+bank,bite_0.5s,sdssvep,3,2027,within,0.5,0.0,bite,14548,600,58.3333,58.3333,0.5455,1.4921,0.2095,100.0,60.0,222,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S3_seed2027
+bank,bite_0.5s,sdssvep,4,2025,within,0.5,0.0,bite,14548,600,83.3333,83.3333,0.8182,0.9989,0.3812,100.0,85.0,484,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S4_seed2025
+bank,bite_0.5s,sdssvep,4,2026,within,0.5,0.0,bite,14548,600,85.0,85.0,0.8364,0.8931,0.3453,100.0,86.6667,368,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S4_seed2026
+bank,bite_0.5s,sdssvep,4,2027,within,0.5,0.0,bite,14548,600,78.3333,78.3333,0.7636,0.9346,0.3145,100.0,80.0,282,H200 NVL,0.032,original,bank_20260917/bite_0.5s/sdssvep_S4_seed2027
+bank,bite_0.5s,sdssvep,5,2025,within,0.5,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.5398,0.3636,100.0,98.3333,506,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S5_seed2025
+bank,bite_0.5s,sdssvep,5,2026,within,0.5,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.5117,0.3451,100.0,98.3333,221,H200 NVL,0.026,original,bank_20260917/bite_0.5s/sdssvep_S5_seed2026
+bank,bite_0.5s,sdssvep,5,2027,within,0.5,0.0,bite,14548,600,95.0,95.0,0.9455,0.5563,0.3366,100.0,96.6667,99,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S5_seed2027
+bank,bite_0.5s,sdssvep,6,2025,within,0.5,0.0,bite,14548,600,100.0,100.0,1.0,0.3971,0.3072,100.0,100.0,278,H200 NVL,0.034,original,bank_20260917/bite_0.5s/sdssvep_S6_seed2025
+bank,bite_0.5s,sdssvep,6,2026,within,0.5,0.0,bite,14548,600,100.0,100.0,1.0,0.3866,0.3032,100.0,100.0,132,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S6_seed2026
+bank,bite_0.5s,sdssvep,6,2027,within,0.5,0.0,bite,14548,600,100.0,100.0,1.0,0.3965,0.3064,100.0,100.0,98,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S6_seed2027
+bank,bite_0.5s,sdssvep,7,2025,within,0.5,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.5364,0.3492,100.0,96.6667,102,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S7_seed2025
+bank,bite_0.5s,sdssvep,7,2026,within,0.5,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.4926,0.3233,100.0,96.6667,119,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S7_seed2026
+bank,bite_0.5s,sdssvep,7,2027,within,0.5,0.0,bite,14548,600,100.0,100.0,1.0,0.4553,0.3463,100.0,100.0,269,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S7_seed2027
+bank,bite_0.5s,sdssvep,8,2025,within,0.5,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.6603,0.426,100.0,100.0,121,H200 NVL,0.034,original,bank_20260917/bite_0.5s/sdssvep_S8_seed2025
+bank,bite_0.5s,sdssvep,8,2026,within,0.5,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.6486,0.4168,100.0,98.3333,181,H200 NVL,0.033,original,bank_20260917/bite_0.5s/sdssvep_S8_seed2026
+bank,bite_0.5s,sdssvep,8,2027,within,0.5,0.0,bite,14548,600,100.0,100.0,1.0,0.6584,0.4516,100.0,100.0,213,H200 NVL,0.032,original,bank_20260917/bite_0.5s/sdssvep_S8_seed2027
+bank,bite_0.5s,sdssvep,9,2025,within,0.5,0.0,bite,14548,600,90.0,90.0,0.8909,0.6031,0.2935,100.0,93.3333,58,H200 NVL,0.027,original,bank_20260917/bite_0.5s/sdssvep_S9_seed2025
+bank,bite_0.5s,sdssvep,9,2026,within,0.5,0.0,bite,14548,600,90.0,90.0,0.8909,0.6344,0.2896,100.0,91.6667,91,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S9_seed2026
+bank,bite_0.5s,sdssvep,9,2027,within,0.5,0.0,bite,14548,600,88.3333,88.3333,0.8727,0.6428,0.2819,100.0,90.0,68,H200 NVL,0.028,original,bank_20260917/bite_0.5s/sdssvep_S9_seed2027
+bank,bite_0.75s,sdssvep,10,2025,within,0.75,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.5701,0.3602,100.0,96.6667,360,H200 NVL,0.039,original,bank_20260917/bite_0.75s/sdssvep_S10_seed2025
+bank,bite_0.75s,sdssvep,10,2026,within,0.75,0.0,bite,14548,600,93.3333,93.3333,0.9273,0.6028,0.3373,100.0,95.0,207,H200 NVL,0.04,original,bank_20260917/bite_0.75s/sdssvep_S10_seed2026
+bank,bite_0.75s,sdssvep,10,2027,within,0.75,0.0,bite,14548,600,93.3333,93.3333,0.9273,0.6444,0.369,100.0,96.6667,487,H200 NVL,0.04,original,bank_20260917/bite_0.75s/sdssvep_S10_seed2027
+bank,bite_0.75s,sdssvep,1,2025,within,0.75,0.0,bite,14548,600,75.0,75.0,0.7273,1.0491,0.3414,100.0,81.6667,311,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S1_seed2025
+bank,bite_0.75s,sdssvep,1,2026,within,0.75,0.0,bite,14548,600,83.3333,83.3333,0.8182,1.0115,0.4018,100.0,88.3333,178,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S1_seed2026
+bank,bite_0.75s,sdssvep,1,2027,within,0.75,0.0,bite,14548,600,88.3333,88.3333,0.8727,1.0661,0.4842,100.0,88.3333,308,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S1_seed2027
+bank,bite_0.75s,sdssvep,2,2025,within,0.75,0.0,bite,14548,600,71.6667,71.6667,0.6909,1.0063,0.3148,100.0,81.6667,239,H200 NVL,0.06,original,bank_20260917/bite_0.75s/sdssvep_S2_seed2025
+bank,bite_0.75s,sdssvep,2,2026,within,0.75,0.0,bite,14548,600,78.3333,78.3333,0.7636,0.9739,0.3303,100.0,81.6667,215,H200 NVL,0.061,original,bank_20260917/bite_0.75s/sdssvep_S2_seed2026
+bank,bite_0.75s,sdssvep,2,2027,within,0.75,0.0,bite,14548,600,78.3333,78.3333,0.7636,0.9597,0.3109,100.0,83.3333,168,H200 NVL,0.062,original,bank_20260917/bite_0.75s/sdssvep_S2_seed2027
+bank,bite_0.75s,sdssvep,3,2025,within,0.75,0.0,bite,14548,600,66.6667,66.6667,0.6364,1.4212,0.3243,100.0,71.6667,408,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S3_seed2025
+bank,bite_0.75s,sdssvep,3,2026,within,0.75,0.0,bite,14548,600,61.6667,61.6667,0.5818,1.364,0.3037,100.0,68.3333,208,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S3_seed2026
+bank,bite_0.75s,sdssvep,3,2027,within,0.75,0.0,bite,14548,600,63.3333,63.3333,0.6,1.4137,0.2905,100.0,68.3333,349,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S3_seed2027
+bank,bite_0.75s,sdssvep,4,2025,within,0.75,0.0,bite,14548,600,81.6667,81.6667,0.8,0.9008,0.3283,100.0,86.6667,414,H200 NVL,0.06,original,bank_20260917/bite_0.75s/sdssvep_S4_seed2025
+bank,bite_0.75s,sdssvep,4,2026,within,0.75,0.0,bite,14548,600,85.0,85.0,0.8364,0.9381,0.3744,100.0,86.6667,388,H200 NVL,0.058,original,bank_20260917/bite_0.75s/sdssvep_S4_seed2026
+bank,bite_0.75s,sdssvep,4,2027,within,0.75,0.0,bite,14548,600,86.6667,86.6667,0.8545,0.8647,0.3856,100.0,88.3333,307,H200 NVL,0.059,original,bank_20260917/bite_0.75s/sdssvep_S4_seed2027
+bank,bite_0.75s,sdssvep,5,2025,within,0.75,0.0,bite,14548,600,100.0,100.0,1.0,0.4618,0.3394,100.0,100.0,333,H200 NVL,0.047,original,bank_20260917/bite_0.75s/sdssvep_S5_seed2025
+bank,bite_0.75s,sdssvep,5,2026,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.4417,0.2979,100.0,98.3333,61,H200 NVL,0.047,original,bank_20260917/bite_0.75s/sdssvep_S5_seed2026
+bank,bite_0.75s,sdssvep,5,2027,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.465,0.3258,100.0,100.0,52,H200 NVL,0.048,original,bank_20260917/bite_0.75s/sdssvep_S5_seed2027
+bank,bite_0.75s,sdssvep,6,2025,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.313,0.2385,100.0,100.0,132,H200 NVL,0.053,original,bank_20260917/bite_0.75s/sdssvep_S6_seed2025
+bank,bite_0.75s,sdssvep,6,2026,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.3049,0.2385,100.0,100.0,142,H200 NVL,0.049,original,bank_20260917/bite_0.75s/sdssvep_S6_seed2026
+bank,bite_0.75s,sdssvep,6,2027,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.3042,0.2333,100.0,100.0,430,H200 NVL,0.049,original,bank_20260917/bite_0.75s/sdssvep_S6_seed2027
+bank,bite_0.75s,sdssvep,7,2025,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.3824,0.2826,100.0,100.0,60,H200 NVL,0.047,original,bank_20260917/bite_0.75s/sdssvep_S7_seed2025
+bank,bite_0.75s,sdssvep,7,2026,within,0.75,0.0,bite,14548,600,98.3333,98.3333,0.9818,0.4302,0.3173,100.0,98.3333,113,H200 NVL,0.047,original,bank_20260917/bite_0.75s/sdssvep_S7_seed2026
+bank,bite_0.75s,sdssvep,7,2027,within,0.75,0.0,bite,14548,600,100.0,100.0,1.0,0.4184,0.3208,100.0,100.0,191,H200 NVL,0.048,original,bank_20260917/bite_0.75s/sdssvep_S7_seed2027
+bank,bite_0.75s,sdssvep,8,2025,within,0.75,0.0,bite,14548,600,100.0,100.0,1.0,0.5846,0.4135,100.0,100.0,130,H200 NVL,0.039,original,bank_20260917/bite_0.75s/sdssvep_S8_seed2025
+bank,bite_0.75s,sdssvep,8,2026,within,0.75,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.6085,0.3811,100.0,96.6667,181,H200 NVL,0.04,original,bank_20260917/bite_0.75s/sdssvep_S8_seed2026
+bank,bite_0.75s,sdssvep,8,2027,within,0.75,0.0,bite,14548,600,95.0,95.0,0.9455,0.6371,0.3877,100.0,98.3333,145,H200 NVL,0.04,original,bank_20260917/bite_0.75s/sdssvep_S8_seed2027
+bank,bite_0.75s,sdssvep,9,2025,within,0.75,0.0,bite,14548,600,95.0,95.0,0.9455,0.3954,0.2377,100.0,95.0,67,H200 NVL,0.03,original,bank_20260917/bite_0.75s/sdssvep_S9_seed2025
+bank,bite_0.75s,sdssvep,9,2026,within,0.75,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.4117,0.2632,100.0,98.3333,340,H200 NVL,0.032,original,bank_20260917/bite_0.75s/sdssvep_S9_seed2026
+bank,bite_0.75s,sdssvep,9,2027,within,0.75,0.0,bite,14548,600,95.0,95.0,0.9455,0.434,0.2589,100.0,95.0,124,H200 NVL,0.03,original,bank_20260917/bite_0.75s/sdssvep_S9_seed2027
 bank,bite_1s,2a,1,2025,within,1.0,0.0,bite,16294,600,79.5139,79.5139,0.7269,0.6534,0.1145,100.0,80.9028,427,H100 NVL MIG 3g.47gb,0.223,mig_pending,bank_20260915/bite_1s/2a_S1_seed2025
 bank,bite_1s,2a,1,2026,within,1.0,0.0,bite,16294,600,74.3056,74.3056,0.6574,0.6892,0.0794,100.0,77.4306,231,H100 NVL MIG 3g.47gb,0.224,mig_pending,bank_20260915/bite_1s/2a_S1_seed2026
 bank,bite_1s,2a,1,2027,within,1.0,0.0,bite,16294,600,79.1667,79.1667,0.7222,0.6585,0.122,100.0,81.5972,411,H100 NVL MIG 3g.47gb,0.224,mig_pending,bank_20260915/bite_1s/2a_S1_seed2027
@@ -791,6 +965,96 @@ bank,bite_3s,2b,8,2027,within,3.0,0.0,bite,14738,600,92.1875,92.1875,0.8438,0.22
 bank,bite_3s,2b,9,2025,within,3.0,0.0,bite,14738,600,85.3125,85.3125,0.7063,0.3564,0.0603,99.75,90.3125,105,H100 80GB HBM3,0.052,original,bank_20260915/bite_3s/2b_S9_seed2025
 bank,bite_3s,2b,9,2026,within,3.0,0.0,bite,14738,600,84.375,84.375,0.6875,0.3501,0.0679,100.0,89.375,127,H100 NVL MIG 3g.47gb,0.058,mig_pending,bank_20260915/bite_3s/2b_S9_seed2026
 bank,bite_3s,2b,9,2027,within,3.0,0.0,bite,14738,600,84.6875,84.6875,0.6938,0.3545,0.0751,99.75,88.4375,124,H100 80GB HBM3,0.02,original,bank_20260915/bite_3s/2b_S9_seed2027
+bank,compact_0.25s,sdssvep,10,2025,within,0.25,0.0,compact,29292,600,50.0,50.0,0.4545,1.6939,0.2231,100.0,51.6667,221,H200 NVL,0.011,original,bank_20260917/compact_0.25s/sdssvep_S10_seed2025
+bank,compact_0.25s,sdssvep,10,2026,within,0.25,0.0,compact,29292,600,40.0,40.0,0.3455,1.8136,0.1746,100.0,50.0,102,H200 NVL,0.01,original,bank_20260917/compact_0.25s/sdssvep_S10_seed2026
+bank,compact_0.25s,sdssvep,10,2027,within,0.25,0.0,compact,29292,600,43.3333,43.3333,0.3818,1.7407,0.1525,100.0,50.0,32,H200 NVL,0.006,original,bank_20260917/compact_0.25s/sdssvep_S10_seed2027
+bank,compact_0.25s,sdssvep,1,2025,within,0.25,0.0,compact,29292,600,61.6667,61.6667,0.5818,1.2689,0.2022,100.0,65.0,155,H200 NVL,0.016,original,bank_20260917/compact_0.25s/sdssvep_S1_seed2025
+bank,compact_0.25s,sdssvep,1,2026,within,0.25,0.0,compact,29292,600,63.3333,63.3333,0.6,1.1503,0.2113,100.0,71.6667,375,H200 NVL,0.016,original,bank_20260917/compact_0.25s/sdssvep_S1_seed2026
+bank,compact_0.25s,sdssvep,1,2027,within,0.25,0.0,compact,29292,600,65.0,65.0,0.6182,1.2153,0.2418,100.0,73.3333,189,H200 NVL,0.016,original,bank_20260917/compact_0.25s/sdssvep_S1_seed2027
+bank,compact_0.25s,sdssvep,2,2025,within,0.25,0.0,compact,29292,600,46.6667,46.6667,0.4182,1.9444,0.2006,100.0,50.0,70,H200 NVL,0.015,original,bank_20260917/compact_0.25s/sdssvep_S2_seed2025
+bank,compact_0.25s,sdssvep,2,2026,within,0.25,0.0,compact,29292,600,36.6667,36.6667,0.3091,2.0527,0.1713,100.0,48.3333,100,H200 NVL,0.015,original,bank_20260917/compact_0.25s/sdssvep_S2_seed2026
+bank,compact_0.25s,sdssvep,2,2027,within,0.25,0.0,compact,29292,600,40.0,40.0,0.3455,1.9851,0.1546,100.0,46.6667,350,H200 NVL,0.015,original,bank_20260917/compact_0.25s/sdssvep_S2_seed2027
+bank,compact_0.25s,sdssvep,3,2025,within,0.25,0.0,compact,29292,600,41.6667,41.6667,0.3636,1.7337,0.1558,100.0,48.3333,131,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S3_seed2025
+bank,compact_0.25s,sdssvep,3,2026,within,0.25,0.0,compact,29292,600,41.6667,41.6667,0.3636,1.7503,0.0861,100.0,46.6667,237,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S3_seed2026
+bank,compact_0.25s,sdssvep,3,2027,within,0.25,0.0,compact,29292,600,38.3333,38.3333,0.3273,1.8422,0.0925,100.0,41.6667,401,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S3_seed2027
+bank,compact_0.25s,sdssvep,4,2025,within,0.25,0.0,compact,29292,600,76.6667,76.6667,0.7455,0.9731,0.2374,100.0,80.0,189,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S4_seed2025
+bank,compact_0.25s,sdssvep,4,2026,within,0.25,0.0,compact,29292,600,76.6667,76.6667,0.7455,0.9986,0.2986,100.0,80.0,87,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S4_seed2026
+bank,compact_0.25s,sdssvep,4,2027,within,0.25,0.0,compact,29292,600,78.3333,78.3333,0.7636,0.9356,0.2766,100.0,81.6667,241,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S4_seed2027
+bank,compact_0.25s,sdssvep,5,2025,within,0.25,0.0,compact,29292,600,81.6667,81.6667,0.8,0.7572,0.2677,100.0,90.0,54,H200 NVL,0.016,original,bank_20260917/compact_0.25s/sdssvep_S5_seed2025
+bank,compact_0.25s,sdssvep,5,2026,within,0.25,0.0,compact,29292,600,83.3333,83.3333,0.8182,0.748,0.2547,100.0,90.0,303,H200 NVL,0.016,original,bank_20260917/compact_0.25s/sdssvep_S5_seed2026
+bank,compact_0.25s,sdssvep,5,2027,within,0.25,0.0,compact,29292,600,86.6667,86.6667,0.8545,0.7104,0.3063,100.0,91.6667,190,H200 NVL,0.015,original,bank_20260917/compact_0.25s/sdssvep_S5_seed2027
+bank,compact_0.25s,sdssvep,6,2025,within,0.25,0.0,compact,29292,600,75.0,75.0,0.7273,0.9377,0.1922,100.0,76.6667,107,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S6_seed2025
+bank,compact_0.25s,sdssvep,6,2026,within,0.25,0.0,compact,29292,600,80.0,80.0,0.7818,0.8759,0.296,100.0,83.3333,177,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S6_seed2026
+bank,compact_0.25s,sdssvep,6,2027,within,0.25,0.0,compact,29292,600,75.0,75.0,0.7273,0.9087,0.2223,100.0,83.3333,190,H200 NVL,0.017,original,bank_20260917/compact_0.25s/sdssvep_S6_seed2027
+bank,compact_0.25s,sdssvep,7,2025,within,0.25,0.0,compact,29292,600,88.3333,88.3333,0.8727,0.6696,0.3043,100.0,91.6667,35,H200 NVL,0.01,original,bank_20260917/compact_0.25s/sdssvep_S7_seed2025
+bank,compact_0.25s,sdssvep,7,2026,within,0.25,0.0,compact,29292,600,88.3333,88.3333,0.8727,0.6748,0.33,100.0,91.6667,91,H200 NVL,0.01,original,bank_20260917/compact_0.25s/sdssvep_S7_seed2026
+bank,compact_0.25s,sdssvep,7,2027,within,0.25,0.0,compact,29292,600,91.6667,91.6667,0.9091,0.6749,0.3616,100.0,95.0,378,H200 NVL,0.009,original,bank_20260917/compact_0.25s/sdssvep_S7_seed2027
+bank,compact_0.25s,sdssvep,8,2025,within,0.25,0.0,compact,29292,600,95.0,95.0,0.9455,0.7294,0.4183,100.0,95.0,39,H200 NVL,0.012,original,bank_20260917/compact_0.25s/sdssvep_S8_seed2025
+bank,compact_0.25s,sdssvep,8,2026,within,0.25,0.0,compact,29292,600,90.0,90.0,0.8909,0.7523,0.3589,100.0,95.0,42,H200 NVL,0.011,original,bank_20260917/compact_0.25s/sdssvep_S8_seed2026
+bank,compact_0.25s,sdssvep,8,2027,within,0.25,0.0,compact,29292,600,91.6667,91.6667,0.9091,0.7851,0.4025,100.0,95.0,77,H200 NVL,0.009,original,bank_20260917/compact_0.25s/sdssvep_S8_seed2027
+bank,compact_0.25s,sdssvep,9,2025,within,0.25,0.0,compact,29292,600,63.3333,63.3333,0.6,1.2204,0.1805,100.0,70.0,66,H200 NVL,0.009,original,bank_20260917/compact_0.25s/sdssvep_S9_seed2025
+bank,compact_0.25s,sdssvep,9,2026,within,0.25,0.0,compact,29292,600,63.3333,63.3333,0.6,1.2533,0.1974,100.0,70.0,101,H200 NVL,0.008,original,bank_20260917/compact_0.25s/sdssvep_S9_seed2026
+bank,compact_0.25s,sdssvep,9,2027,within,0.25,0.0,compact,29292,600,61.6667,61.6667,0.5818,1.2105,0.1517,100.0,70.0,150,H200 NVL,0.007,original,bank_20260917/compact_0.25s/sdssvep_S9_seed2027
+bank,compact_0.5s,sdssvep,10,2025,within,0.5,0.0,compact,29292,600,85.0,85.0,0.8364,0.7757,0.2856,100.0,91.6667,233,H200 NVL,0.012,original,bank_20260917/compact_0.5s/sdssvep_S10_seed2025
+bank,compact_0.5s,sdssvep,10,2026,within,0.5,0.0,compact,29292,600,86.6667,86.6667,0.8545,0.7977,0.2909,100.0,88.3333,75,H200 NVL,0.01,original,bank_20260917/compact_0.5s/sdssvep_S10_seed2026
+bank,compact_0.5s,sdssvep,10,2027,within,0.5,0.0,compact,29292,600,83.3333,83.3333,0.8182,0.833,0.3028,100.0,85.0,108,H200 NVL,0.011,original,bank_20260917/compact_0.5s/sdssvep_S10_seed2027
+bank,compact_0.5s,sdssvep,1,2025,within,0.5,0.0,compact,29292,600,90.0,90.0,0.8909,0.9516,0.4604,100.0,91.6667,436,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S1_seed2025
+bank,compact_0.5s,sdssvep,1,2026,within,0.5,0.0,compact,29292,600,86.6667,86.6667,0.8545,0.9363,0.4294,100.0,88.3333,154,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S1_seed2026
+bank,compact_0.5s,sdssvep,1,2027,within,0.5,0.0,compact,29292,600,85.0,85.0,0.8364,0.9643,0.3974,100.0,86.6667,513,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S1_seed2027
+bank,compact_0.5s,sdssvep,2,2025,within,0.5,0.0,compact,29292,600,65.0,65.0,0.6182,1.3001,0.2285,100.0,70.0,102,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S2_seed2025
+bank,compact_0.5s,sdssvep,2,2026,within,0.5,0.0,compact,29292,600,61.6667,61.6667,0.5818,1.3735,0.1933,100.0,65.0,66,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S2_seed2026
+bank,compact_0.5s,sdssvep,2,2027,within,0.5,0.0,compact,29292,600,63.3333,63.3333,0.6,1.5362,0.2288,100.0,65.0,186,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S2_seed2027
+bank,compact_0.5s,sdssvep,3,2025,within,0.5,0.0,compact,29292,600,58.3333,58.3333,0.5455,1.4373,0.2014,100.0,66.6667,315,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S3_seed2025
+bank,compact_0.5s,sdssvep,3,2026,within,0.5,0.0,compact,29292,600,63.3333,63.3333,0.6,1.3508,0.2573,100.0,66.6667,328,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S3_seed2026
+bank,compact_0.5s,sdssvep,3,2027,within,0.5,0.0,compact,29292,600,61.6667,61.6667,0.5818,1.4035,0.2506,100.0,66.6667,205,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S3_seed2027
+bank,compact_0.5s,sdssvep,4,2025,within,0.5,0.0,compact,29292,600,96.6667,96.6667,0.9636,0.6797,0.4057,100.0,98.3333,295,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S4_seed2025
+bank,compact_0.5s,sdssvep,4,2026,within,0.5,0.0,compact,29292,600,90.0,90.0,0.8909,0.7169,0.3485,100.0,91.6667,281,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S4_seed2026
+bank,compact_0.5s,sdssvep,4,2027,within,0.5,0.0,compact,29292,600,95.0,95.0,0.9455,0.7026,0.3997,100.0,95.0,472,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S4_seed2027
+bank,compact_0.5s,sdssvep,5,2025,within,0.5,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.503,0.3339,100.0,100.0,151,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S5_seed2025
+bank,compact_0.5s,sdssvep,5,2026,within,0.5,0.0,compact,29292,600,95.0,95.0,0.9455,0.489,0.2991,100.0,98.3333,338,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S5_seed2026
+bank,compact_0.5s,sdssvep,5,2027,within,0.5,0.0,compact,29292,600,95.0,95.0,0.9455,0.4994,0.2952,100.0,96.6667,172,H200 NVL,0.021,original,bank_20260917/compact_0.5s/sdssvep_S5_seed2027
+bank,compact_0.5s,sdssvep,6,2025,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.3304,0.2629,100.0,100.0,55,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S6_seed2025
+bank,compact_0.5s,sdssvep,6,2026,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.3334,0.2669,100.0,100.0,91,H200 NVL,0.02,original,bank_20260917/compact_0.5s/sdssvep_S6_seed2026
+bank,compact_0.5s,sdssvep,6,2027,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.2884,0.2371,100.0,100.0,81,H200 NVL,0.019,original,bank_20260917/compact_0.5s/sdssvep_S6_seed2027
+bank,compact_0.5s,sdssvep,7,2025,within,0.5,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.4614,0.32,100.0,100.0,209,H200 NVL,0.013,original,bank_20260917/compact_0.5s/sdssvep_S7_seed2025
+bank,compact_0.5s,sdssvep,7,2026,within,0.5,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.5141,0.3473,100.0,98.3333,130,H200 NVL,0.012,original,bank_20260917/compact_0.5s/sdssvep_S7_seed2026
+bank,compact_0.5s,sdssvep,7,2027,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.4716,0.3514,100.0,100.0,53,H200 NVL,0.011,original,bank_20260917/compact_0.5s/sdssvep_S7_seed2027
+bank,compact_0.5s,sdssvep,8,2025,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.5515,0.3941,100.0,100.0,39,H200 NVL,0.012,original,bank_20260917/compact_0.5s/sdssvep_S8_seed2025
+bank,compact_0.5s,sdssvep,8,2026,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.4965,0.3689,100.0,100.0,43,H200 NVL,0.01,original,bank_20260917/compact_0.5s/sdssvep_S8_seed2026
+bank,compact_0.5s,sdssvep,8,2027,within,0.5,0.0,compact,29292,600,100.0,100.0,1.0,0.5161,0.3769,100.0,100.0,83,H200 NVL,0.01,original,bank_20260917/compact_0.5s/sdssvep_S8_seed2027
+bank,compact_0.5s,sdssvep,9,2025,within,0.5,0.0,compact,29292,600,90.0,90.0,0.8909,0.6043,0.2662,100.0,90.0,126,H200 NVL,0.014,original,bank_20260917/compact_0.5s/sdssvep_S9_seed2025
+bank,compact_0.5s,sdssvep,9,2026,within,0.5,0.0,compact,29292,600,90.0,90.0,0.8909,0.5897,0.2588,100.0,91.6667,183,H200 NVL,0.013,original,bank_20260917/compact_0.5s/sdssvep_S9_seed2026
+bank,compact_0.5s,sdssvep,9,2027,within,0.5,0.0,compact,29292,600,90.0,90.0,0.8909,0.6093,0.2495,100.0,91.6667,52,H200 NVL,0.013,original,bank_20260917/compact_0.5s/sdssvep_S9_seed2027
+bank,compact_0.75s,sdssvep,10,2025,within,0.75,0.0,compact,29292,600,93.3333,93.3333,0.9273,0.51,0.2807,100.0,100.0,327,H200 NVL,0.016,original,bank_20260917/compact_0.75s/sdssvep_S10_seed2025
+bank,compact_0.75s,sdssvep,10,2026,within,0.75,0.0,compact,29292,600,93.3333,93.3333,0.9273,0.4882,0.2928,100.0,98.3333,198,H200 NVL,0.016,original,bank_20260917/compact_0.75s/sdssvep_S10_seed2026
+bank,compact_0.75s,sdssvep,10,2027,within,0.75,0.0,compact,29292,600,95.0,95.0,0.9455,0.5327,0.309,100.0,96.6667,62,H200 NVL,0.017,original,bank_20260917/compact_0.75s/sdssvep_S10_seed2027
+bank,compact_0.75s,sdssvep,1,2025,within,0.75,0.0,compact,29292,600,95.0,95.0,0.9455,0.871,0.4885,100.0,95.0,298,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S1_seed2025
+bank,compact_0.75s,sdssvep,1,2026,within,0.75,0.0,compact,29292,600,93.3333,93.3333,0.9273,0.9413,0.5036,100.0,95.0,314,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S1_seed2026
+bank,compact_0.75s,sdssvep,1,2027,within,0.75,0.0,compact,29292,600,91.6667,91.6667,0.9091,0.9058,0.4757,100.0,93.3333,418,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S1_seed2027
+bank,compact_0.75s,sdssvep,2,2025,within,0.75,0.0,compact,29292,600,76.6667,76.6667,0.7455,0.9203,0.2972,100.0,81.6667,264,H200 NVL,0.017,original,bank_20260917/compact_0.75s/sdssvep_S2_seed2025
+bank,compact_0.75s,sdssvep,2,2026,within,0.75,0.0,compact,29292,600,81.6667,81.6667,0.8,0.9274,0.3516,100.0,85.0,334,H200 NVL,0.017,original,bank_20260917/compact_0.75s/sdssvep_S2_seed2026
+bank,compact_0.75s,sdssvep,2,2027,within,0.75,0.0,compact,29292,600,78.3333,78.3333,0.7636,0.9481,0.3249,100.0,83.3333,419,H200 NVL,0.016,original,bank_20260917/compact_0.75s/sdssvep_S2_seed2027
+bank,compact_0.75s,sdssvep,3,2025,within,0.75,0.0,compact,29292,600,70.0,70.0,0.6727,1.3846,0.3492,100.0,70.0,88,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S3_seed2025
+bank,compact_0.75s,sdssvep,3,2026,within,0.75,0.0,compact,29292,600,66.6667,66.6667,0.6364,1.3777,0.3218,100.0,73.3333,253,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S3_seed2026
+bank,compact_0.75s,sdssvep,3,2027,within,0.75,0.0,compact,29292,600,66.6667,66.6667,0.6364,1.4442,0.3304,100.0,68.3333,382,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S3_seed2027
+bank,compact_0.75s,sdssvep,4,2025,within,0.75,0.0,compact,29292,600,90.0,90.0,0.8909,0.7762,0.3831,100.0,91.6667,289,H200 NVL,0.013,original,bank_20260917/compact_0.75s/sdssvep_S4_seed2025
+bank,compact_0.75s,sdssvep,4,2026,within,0.75,0.0,compact,29292,600,93.3333,93.3333,0.9273,0.7702,0.4291,100.0,93.3333,316,H200 NVL,0.014,original,bank_20260917/compact_0.75s/sdssvep_S4_seed2026
+bank,compact_0.75s,sdssvep,4,2027,within,0.75,0.0,compact,29292,600,90.0,90.0,0.8909,0.7483,0.3576,100.0,91.6667,244,H200 NVL,0.014,original,bank_20260917/compact_0.75s/sdssvep_S4_seed2027
+bank,compact_0.75s,sdssvep,5,2025,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.4135,0.314,100.0,100.0,52,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S5_seed2025
+bank,compact_0.75s,sdssvep,5,2026,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.4197,0.3182,100.0,100.0,166,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S5_seed2026
+bank,compact_0.75s,sdssvep,5,2027,within,0.75,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.4518,0.3102,100.0,98.3333,58,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S5_seed2027
+bank,compact_0.75s,sdssvep,6,2025,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.2381,0.2007,100.0,100.0,46,H200 NVL,0.011,original,bank_20260917/compact_0.75s/sdssvep_S6_seed2025
+bank,compact_0.75s,sdssvep,6,2026,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.2556,0.215,100.0,100.0,47,H200 NVL,0.012,original,bank_20260917/compact_0.75s/sdssvep_S6_seed2026
+bank,compact_0.75s,sdssvep,6,2027,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.2391,0.201,100.0,100.0,49,H200 NVL,0.014,original,bank_20260917/compact_0.75s/sdssvep_S6_seed2027
+bank,compact_0.75s,sdssvep,7,2025,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.4556,0.337,100.0,100.0,232,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S7_seed2025
+bank,compact_0.75s,sdssvep,7,2026,within,0.75,0.0,compact,29292,600,100.0,100.0,1.0,0.4404,0.3239,100.0,100.0,130,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S7_seed2026
+bank,compact_0.75s,sdssvep,7,2027,within,0.75,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.4346,0.3042,100.0,100.0,296,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S7_seed2027
+bank,compact_0.75s,sdssvep,8,2025,within,0.75,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.4871,0.3422,100.0,100.0,221,H200 NVL,0.016,original,bank_20260917/compact_0.75s/sdssvep_S8_seed2025
+bank,compact_0.75s,sdssvep,8,2026,within,0.75,0.0,compact,29292,600,96.6667,96.6667,0.9636,0.5793,0.3692,100.0,98.3333,55,H200 NVL,0.016,original,bank_20260917/compact_0.75s/sdssvep_S8_seed2026
+bank,compact_0.75s,sdssvep,8,2027,within,0.75,0.0,compact,29292,600,98.3333,98.3333,0.9818,0.4975,0.3464,100.0,100.0,44,H200 NVL,0.017,original,bank_20260917/compact_0.75s/sdssvep_S8_seed2027
+bank,compact_0.75s,sdssvep,9,2025,within,0.75,0.0,compact,29292,600,95.0,95.0,0.9455,0.4019,0.2327,100.0,96.6667,78,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S9_seed2025
+bank,compact_0.75s,sdssvep,9,2026,within,0.75,0.0,compact,29292,600,95.0,95.0,0.9455,0.3981,0.2313,100.0,96.6667,128,H200 NVL,0.02,original,bank_20260917/compact_0.75s/sdssvep_S9_seed2026
+bank,compact_0.75s,sdssvep,9,2027,within,0.75,0.0,compact,29292,600,96.6667,96.6667,0.9636,0.3744,0.2428,100.0,98.3333,373,H200 NVL,0.019,original,bank_20260917/compact_0.75s/sdssvep_S9_seed2027
 bank,compact_1s,2a,1,2025,within,1.0,0.0,compact,17828,600,76.3889,76.3889,0.6852,0.6775,0.0909,100.0,78.125,413,H200 NVL,0.045,original,bank_20260915/compact_1s/2a_S1_seed2025
 bank,compact_1s,2a,1,2026,within,1.0,0.0,compact,17828,600,76.7361,76.7361,0.6898,0.7038,0.1078,100.0,78.4722,254,H100 80GB HBM3,0.119,original,bank_20260915/compact_1s/2a_S1_seed2026
 bank,compact_1s,2a,1,2027,within,1.0,0.0,compact,17828,600,72.9167,72.9167,0.6389,0.7038,0.0817,100.0,77.0833,280,H100 80GB HBM3,0.119,original,bank_20260915/compact_1s/2a_S1_seed2027
@@ -982,6 +1246,7 @@ zoo,ATCNet,2b,8,2027,within,,0.0,zoo_ATCNet,112794,600,91.5625,91.5625,0.8313,0.
 zoo,ATCNet,2b,9,2025,within,,0.0,zoo_ATCNet,112794,600,82.1875,82.1875,0.6438,0.3915,0.067,100.0,88.4375,81,H200 NVL,0.356,original,zoo_20260916/ATCNet/2b_S9_seed2025
 zoo,ATCNet,2b,9,2026,within,,0.0,zoo_ATCNet,112794,600,83.75,83.75,0.675,0.3902,0.0186,100.0,87.8125,134,H200 NVL,0.364,original,zoo_20260916/ATCNet/2b_S9_seed2026
 zoo,ATCNet,2b,9,2027,within,,0.0,zoo_ATCNet,112794,600,83.125,83.125,0.6625,0.3812,0.054,100.0,88.125,294,H200 NVL,0.355,original,zoo_20260916/ATCNet/2b_S9_seed2027
+zoo,ATCNet,hgd,10,2025,within,,0.0,zoo_ATCNet,114436,600,93.75,93.646,0.9164,0.2293,0.0822,100.0,96.0227,282,H200 NVL,1.194,original,zoo_20260916/ATCNet/hgd_S10_seed2025
 zoo,ATCNet,hgd,1,2025,within,,0.0,zoo_ATCNet,114436,600,98.4375,98.8636,0.9787,0.2342,0.1729,100.0,100.0,181,H200 NVL,0.438,original,zoo_20260916/ATCNet/hgd_S1_seed2025
 zoo,ATCNet,hgd,2,2025,within,,0.0,zoo_ATCNet,114436,600,95.092,95.0848,0.9344,0.2566,0.1567,100.0,97.546,173,H200 NVL,1.11,original,zoo_20260916/ATCNet/hgd_S2_seed2025
 zoo,ATCNet,hgd,3,2025,within,,0.0,zoo_ATCNet,114436,600,97.1591,97.1171,0.962,0.1758,0.1161,100.0,99.4318,216,H200 NVL,1.21,original,zoo_20260916/ATCNet/hgd_S3_seed2025
@@ -990,6 +1255,7 @@ zoo,ATCNet,hgd,5,2025,within,,0.0,zoo_ATCNet,114436,600,98.6111,98.7492,0.9814,0
 zoo,ATCNet,hgd,6,2025,within,,0.0,zoo_ATCNet,114436,600,95.4545,95.5476,0.9392,0.2823,0.1537,100.0,97.1591,333,H200 NVL,1.213,original,zoo_20260916/ATCNet/hgd_S6_seed2025
 zoo,ATCNet,hgd,7,2025,within,,0.0,zoo_ATCNet,114436,600,93.75,93.5116,0.9165,0.2526,0.1193,100.0,96.0227,53,H200 NVL,1.21,original,zoo_20260916/ATCNet/hgd_S7_seed2025
 zoo,ATCNet,hgd,8,2025,within,,0.0,zoo_ATCNet,114436,600,96.1832,96.2884,0.949,0.2339,0.1215,100.0,96.9466,455,H200 NVL,0.905,original,zoo_20260916/ATCNet/hgd_S8_seed2025
+zoo,ATCNet,hgd,9,2025,within,,0.0,zoo_ATCNet,114436,600,97.1591,97.2294,0.962,0.1747,0.1145,100.0,98.8636,175,H200 NVL,1.213,original,zoo_20260916/ATCNet/hgd_S9_seed2025
 zoo,ATCNet,sdssvep,10,2025,within,,0.0,zoo_ATCNet,114604,600,90.0,90.0,0.8909,0.4679,0.2239,100.0,95.0,347,H200 NVL,0.141,original,zoo_20260916/ATCNet/sdssvep_S10_seed2025
 zoo,ATCNet,sdssvep,10,2026,within,,0.0,zoo_ATCNet,114604,600,91.6667,91.6667,0.9091,0.4518,0.2321,100.0,93.3333,386,H200 NVL,0.09,original,zoo_20260916/ATCNet/sdssvep_S10_seed2026
 zoo,ATCNet,sdssvep,10,2027,within,,0.0,zoo_ATCNet,114604,600,96.6667,96.6667,0.9636,0.3669,0.2225,100.0,96.6667,335,H200 NVL,0.142,original,zoo_20260916/ATCNet/sdssvep_S10_seed2027
@@ -1074,6 +1340,7 @@ zoo,DMSANet,2b,8,2027,within,,0.0,zoo_DMSANet,18722,600,92.1875,92.1875,0.8438,0
 zoo,DMSANet,2b,9,2025,within,,0.0,zoo_DMSANet,18722,600,84.6875,84.6875,0.6938,0.3301,0.0908,100.0,87.5,107,H200 NVL,0.072,original,zoo_20260916/DMSANet/2b_S9_seed2025
 zoo,DMSANet,2b,9,2026,within,,0.0,zoo_DMSANet,18722,600,88.125,88.125,0.7625,0.3248,0.0911,100.0,89.0625,299,H200 NVL,0.081,original,zoo_20260916/DMSANet/2b_S9_seed2026
 zoo,DMSANet,2b,9,2027,within,,0.0,zoo_DMSANet,18722,600,86.5625,86.5625,0.7312,0.3448,0.0811,100.0,87.8125,141,H200 NVL,0.074,original,zoo_20260916/DMSANet/2b_S9_seed2027
+zoo,DMSANet,hgd,10,2025,within,,0.0,zoo_DMSANet,38524,600,96.0227,95.6387,0.9468,0.2745,0.1456,100.0,98.2955,155,H200 NVL,0.771,original,zoo_20260916/DMSANet/hgd_S10_seed2025
 zoo,DMSANet,hgd,1,2025,within,,0.0,zoo_DMSANet,38524,600,95.3125,94.6678,0.9358,0.3075,0.1972,100.0,100.0,106,H200 NVL,0.282,original,zoo_20260916/DMSANet/hgd_S1_seed2025
 zoo,DMSANet,hgd,2,2025,within,,0.0,zoo_DMSANet,38524,600,90.1841,90.1112,0.8689,0.389,0.1451,100.0,92.638,348,H200 NVL,0.713,original,zoo_20260916/DMSANet/hgd_S2_seed2025
 zoo,DMSANet,hgd,3,2025,within,,0.0,zoo_DMSANet,38524,600,96.5909,96.5583,0.9544,0.2454,0.1558,100.0,99.4318,165,H200 NVL,0.772,original,zoo_20260916/DMSANet/hgd_S3_seed2025
@@ -1082,6 +1349,7 @@ zoo,DMSANet,hgd,5,2025,within,,0.0,zoo_DMSANet,38524,600,99.3056,99.3902,0.9907,
 zoo,DMSANet,hgd,6,2025,within,,0.0,zoo_DMSANet,38524,600,96.0227,96.0079,0.9468,0.332,0.1952,100.0,96.5909,90,H200 NVL,0.77,original,zoo_20260916/DMSANet/hgd_S6_seed2025
 zoo,DMSANet,hgd,7,2025,within,,0.0,zoo_DMSANet,38524,600,95.4545,95.343,0.9393,0.2835,0.1613,100.0,95.4545,210,H200 NVL,0.773,original,zoo_20260916/DMSANet/hgd_S7_seed2025
 zoo,DMSANet,hgd,8,2025,within,,0.0,zoo_DMSANet,38524,600,93.1298,93.3597,0.9083,0.338,0.167,100.0,96.1832,232,H200 NVL,0.574,original,zoo_20260916/DMSANet/hgd_S8_seed2025
+zoo,DMSANet,hgd,9,2025,within,,0.0,zoo_DMSANet,38524,600,100.0,100.0,1.0,0.1805,0.1561,100.0,100.0,73,H200 NVL,0.768,original,zoo_20260916/DMSANet/hgd_S9_seed2025
 zoo,DMSANet,sdssvep,10,2025,within,,0.0,zoo_DMSANet,21732,600,56.6667,56.6667,0.5273,1.4228,0.2424,100.0,71.6667,108,H200 NVL,0.022,original,zoo_20260916/DMSANet/sdssvep_S10_seed2025
 zoo,DMSANet,sdssvep,10,2026,within,,0.0,zoo_DMSANet,21732,600,56.6667,56.6667,0.5273,1.536,0.2072,100.0,61.6667,280,H200 NVL,0.018,original,zoo_20260916/DMSANet/sdssvep_S10_seed2026
 zoo,DMSANet,sdssvep,10,2027,within,,0.0,zoo_DMSANet,21732,600,61.6667,61.6667,0.5818,1.3927,0.282,100.0,65.0,179,H200 NVL,0.023,original,zoo_20260916/DMSANet/sdssvep_S10_seed2027
@@ -1167,6 +1435,7 @@ zoo,DeepConvNet,2b,9,2025,within,,0.0,zoo_DeepConvNet,86052,600,86.25,86.25,0.72
 zoo,DeepConvNet,2b,9,2026,within,,0.0,zoo_DeepConvNet,86052,600,86.5625,86.5625,0.7312,0.3437,0.0893,100.0,89.0625,456,H200 NVL,0.071,original,zoo_20260916/DeepConvNet/2b_S9_seed2026
 zoo,DeepConvNet,2b,9,2027,within,,0.0,zoo_DeepConvNet,86052,600,85.9375,85.9375,0.7188,0.3529,0.0859,100.0,89.0625,120,H200 NVL,0.065,original,zoo_20260916/DeepConvNet/2b_S9_seed2027
 zoo,DeepConvNet,hgd,10,2025,within,,0.0,zoo_DeepConvNet,116079,600,90.9091,90.4977,0.8782,0.3213,0.1126,99.858,94.8864,361,H200 NVL,0.257,original,zoo_20260916/DeepConvNet/hgd_S10_seed2025
+zoo,DeepConvNet,hgd,11,2025,within,,0.0,zoo_DeepConvNet,116079,600,97.7273,97.4628,0.9696,0.2026,0.1428,100.0,99.4318,360,H200 NVL,0.256,original,zoo_20260916/DeepConvNet/hgd_S11_seed2025
 zoo,DeepConvNet,hgd,1,2025,within,,0.0,zoo_DeepConvNet,116079,600,93.75,91.6084,0.9141,0.308,0.1705,100.0,100.0,305,H200 NVL,0.097,original,zoo_20260916/DeepConvNet/hgd_S1_seed2025
 zoo,DeepConvNet,hgd,2,2025,within,,0.0,zoo_DeepConvNet,116079,600,87.1166,87.6885,0.8287,0.4333,0.1113,99.8462,91.411,186,H200 NVL,0.247,original,zoo_20260916/DeepConvNet/hgd_S2_seed2025
 zoo,DeepConvNet,hgd,3,2025,within,,0.0,zoo_DeepConvNet,116079,600,96.0227,95.7827,0.9467,0.2393,0.1391,100.0,97.1591,118,H200 NVL,0.257,original,zoo_20260916/DeepConvNet/hgd_S3_seed2025
@@ -1179,6 +1448,7 @@ zoo,DeepConvNet,hgd,9,2025,within,,0.0,zoo_DeepConvNet,116079,600,95.4545,95.292
 zoo,DeepConvNet,sdssvep,10,2025,within,,0.0,zoo_DeepConvNet,46262,600,98.3333,98.3333,0.9818,0.4188,0.3083,100.0,100.0,319,H200 NVL,0.022,original,zoo_20260916/DeepConvNet/sdssvep_S10_seed2025
 zoo,DeepConvNet,sdssvep,10,2026,within,,0.0,zoo_DeepConvNet,46262,600,100.0,100.0,1.0,0.3972,0.306,100.0,100.0,100,H200 NVL,0.018,original,zoo_20260916/DeepConvNet/sdssvep_S10_seed2026
 zoo,DeepConvNet,sdssvep,10,2027,within,,0.0,zoo_DeepConvNet,46262,600,98.3333,98.3333,0.9818,0.3957,0.2939,100.0,98.3333,104,H200 NVL,0.023,original,zoo_20260916/DeepConvNet/sdssvep_S10_seed2027
+zoo,DeepConvNet,sdssvep,1,2025,within,,0.0,zoo_DeepConvNet,46262,600,98.3333,98.3333,0.9818,0.7264,0.4699,100.0,100.0,225,H200 NVL,0.01,original,zoo_20260916/DeepConvNet/sdssvep_S1_seed2025
 zoo,DeepConvNet,sdssvep,1,2026,within,,0.0,zoo_DeepConvNet,46262,600,100.0,100.0,1.0,0.7189,0.4815,100.0,100.0,118,H200 NVL,0.027,original,zoo_20260916/DeepConvNet/sdssvep_S1_seed2026
 zoo,DeepConvNet,sdssvep,1,2027,within,,0.0,zoo_DeepConvNet,46262,600,100.0,100.0,1.0,0.6969,0.4739,100.0,100.0,35,H200 NVL,0.023,original,zoo_20260916/DeepConvNet/sdssvep_S1_seed2027
 zoo,DeepConvNet,sdssvep,2,2025,within,,0.0,zoo_DeepConvNet,46262,600,96.6667,96.6667,0.9636,0.7276,0.4283,100.0,98.3333,349,H200 NVL,0.016,original,zoo_20260916/DeepConvNet/sdssvep_S2_seed2025
@@ -1259,6 +1529,7 @@ zoo,EEGNeX,2b,8,2027,within,,0.0,zoo_EEGNeX,54738,600,88.4375,88.4375,0.7688,0.2
 zoo,EEGNeX,2b,9,2025,within,,0.0,zoo_EEGNeX,54738,600,80.625,80.625,0.6125,0.4214,0.0245,100.0,85.0,320,H200 NVL,0.124,original,zoo_20260916/EEGNeX/2b_S9_seed2025
 zoo,EEGNeX,2b,9,2026,within,,0.0,zoo_EEGNeX,54738,600,80.625,80.625,0.6125,0.4335,0.0308,100.0,86.5625,47,H200 NVL,0.142,original,zoo_20260916/EEGNeX/2b_S9_seed2026
 zoo,EEGNeX,2b,9,2027,within,,0.0,zoo_EEGNeX,54738,600,80.9375,80.9375,0.6187,0.4164,0.0272,100.0,86.5625,36,H200 NVL,0.127,original,zoo_20260916/EEGNeX/2b_S9_seed2027
+zoo,EEGNeX,hgd,10,2025,within,,0.0,zoo_EEGNeX,57860,600,91.4773,91.3367,0.886,0.3672,0.1391,100.0,94.8864,231,H200 NVL,0.879,original,zoo_20260916/EEGNeX/hgd_S10_seed2025
 zoo,EEGNeX,hgd,1,2025,within,,0.0,zoo_EEGNeX,57860,600,98.4375,98.0769,0.9786,0.2596,0.2019,100.0,100.0,53,H200 NVL,0.324,original,zoo_20260916/EEGNeX/hgd_S1_seed2025
 zoo,EEGNeX,hgd,2,2025,within,,0.0,zoo_EEGNeX,57860,600,91.411,91.5231,0.8854,0.3738,0.1561,100.0,93.865,334,H200 NVL,0.81,original,zoo_20260916/EEGNeX/hgd_S2_seed2025
 zoo,EEGNeX,hgd,3,2025,within,,0.0,zoo_EEGNeX,57860,600,97.1591,97.0355,0.962,0.2467,0.1644,100.0,98.2955,216,H200 NVL,0.88,original,zoo_20260916/EEGNeX/hgd_S3_seed2025
@@ -1267,9 +1538,11 @@ zoo,EEGNeX,hgd,5,2025,within,,0.0,zoo_EEGNeX,57860,600,97.2222,97.218,0.9628,0.2
 zoo,EEGNeX,hgd,6,2025,within,,0.0,zoo_EEGNeX,57860,600,90.9091,91.1148,0.8785,0.3838,0.177,100.0,94.8864,174,H200 NVL,0.879,original,zoo_20260916/EEGNeX/hgd_S6_seed2025
 zoo,EEGNeX,hgd,7,2025,within,,0.0,zoo_EEGNeX,57860,600,88.0682,87.6105,0.8404,0.3372,0.1041,99.858,94.8864,112,H200 NVL,0.881,original,zoo_20260916/EEGNeX/hgd_S7_seed2025
 zoo,EEGNeX,hgd,8,2025,within,,0.0,zoo_EEGNeX,57860,600,92.3664,92.727,0.8981,0.3232,0.1399,100.0,94.6565,130,H200 NVL,0.652,original,zoo_20260916/EEGNeX/hgd_S8_seed2025
+zoo,EEGNeX,hgd,9,2025,within,,0.0,zoo_EEGNeX,57860,600,96.5909,96.611,0.9544,0.2232,0.1385,100.0,98.8636,52,H200 NVL,0.886,original,zoo_20260916/EEGNeX/hgd_S9_seed2025
 zoo,EEGNeX,sdssvep,10,2025,within,,0.0,zoo_EEGNeX,55340,600,76.6667,76.6667,0.7455,1.1667,0.3651,100.0,83.3333,345,H200 NVL,0.036,original,zoo_20260916/EEGNeX/sdssvep_S10_seed2025
 zoo,EEGNeX,sdssvep,10,2026,within,,0.0,zoo_EEGNeX,55340,600,63.3333,63.3333,0.6,1.4002,0.2999,100.0,68.3333,307,H200 NVL,0.026,original,zoo_20260916/EEGNeX/sdssvep_S10_seed2026
 zoo,EEGNeX,sdssvep,10,2027,within,,0.0,zoo_EEGNeX,55340,600,63.3333,63.3333,0.6,1.4286,0.2985,100.0,68.3333,319,H200 NVL,0.038,original,zoo_20260916/EEGNeX/sdssvep_S10_seed2027
+zoo,EEGNeX,sdssvep,1,2025,within,,0.0,zoo_EEGNeX,55340,600,28.3333,28.3333,0.2182,2.0258,0.1421,100.0,36.6667,236,H200 NVL,0.018,original,zoo_20260916/EEGNeX/sdssvep_S1_seed2025
 zoo,EEGNeX,sdssvep,1,2026,within,,0.0,zoo_EEGNeX,55340,600,35.0,35.0,0.2909,2.0682,0.1,100.0,40.0,229,H200 NVL,0.043,original,zoo_20260916/EEGNeX/sdssvep_S1_seed2026
 zoo,EEGNeX,sdssvep,1,2027,within,,0.0,zoo_EEGNeX,55340,600,35.0,35.0,0.2909,1.9631,0.0895,100.0,38.3333,266,H200 NVL,0.032,original,zoo_20260916/EEGNeX/sdssvep_S1_seed2027
 zoo,EEGNeX,sdssvep,2,2025,within,,0.0,zoo_EEGNeX,55340,600,65.0,65.0,0.6182,1.3861,0.2696,100.0,70.0,325,H200 NVL,0.033,original,zoo_20260916/EEGNeX/sdssvep_S2_seed2025
@@ -1350,6 +1623,7 @@ zoo,EEGNet,2b,8,2027,within,,0.0,zoo_EEGNet,2146,600,93.4375,93.4375,0.8687,0.19
 zoo,EEGNet,2b,9,2025,within,,0.0,zoo_EEGNet,2146,600,88.125,88.125,0.7625,0.346,0.1263,91.5,90.3125,267,H200 NVL,0.063,original,zoo_20260916/EEGNet/2b_S9_seed2025
 zoo,EEGNet,2b,9,2026,within,,0.0,zoo_EEGNet,2146,600,84.0625,84.0625,0.6812,0.3768,0.089,91.25,87.8125,154,H200 NVL,0.089,original,zoo_20260916/EEGNet/2b_S9_seed2026
 zoo,EEGNet,2b,9,2027,within,,0.0,zoo_EEGNet,2146,600,87.1875,87.1875,0.7437,0.3425,0.1424,91.5,91.25,118,H200 NVL,0.065,original,zoo_20260916/EEGNet/2b_S9_seed2027
+zoo,EEGNet,hgd,10,2025,within,,0.0,zoo_EEGNet,3796,600,91.4773,90.963,0.8859,0.2795,0.1121,99.858,94.3182,136,H200 NVL,0.509,original,zoo_20260916/EEGNet/hgd_S10_seed2025
 zoo,EEGNet,hgd,1,2025,within,,0.0,zoo_EEGNet,3796,600,98.4375,98.8636,0.9787,0.2149,0.1396,100.0,98.4375,58,H200 NVL,0.187,original,zoo_20260916/EEGNet/hgd_S1_seed2025
 zoo,EEGNet,hgd,2,2025,within,,0.0,zoo_EEGNet,3796,600,88.9571,89.1084,0.8527,0.3771,0.127,99.2308,92.638,312,H200 NVL,0.471,original,zoo_20260916/EEGNet/hgd_S2_seed2025
 zoo,EEGNet,hgd,3,2025,within,,0.0,zoo_EEGNet,3796,600,93.75,93.6604,0.9165,0.2823,0.1246,99.858,95.4545,82,H200 NVL,0.508,original,zoo_20260916/EEGNet/hgd_S3_seed2025
@@ -1443,6 +1717,7 @@ zoo,EEGTCNet,2b,8,2027,within,,0.0,zoo_EEGTCNet,3766,600,92.1875,92.1875,0.8438,
 zoo,EEGTCNet,2b,9,2025,within,,0.0,zoo_EEGTCNet,3766,600,88.4375,88.4375,0.7688,0.3278,0.0537,100.0,89.0625,67,H200 NVL,0.122,original,zoo_20260916/EEGTCNet/2b_S9_seed2025
 zoo,EEGTCNet,2b,9,2026,within,,0.0,zoo_EEGTCNet,3766,600,83.75,83.75,0.675,0.376,0.0479,100.0,86.875,76,H200 NVL,0.179,original,zoo_20260916/EEGTCNet/2b_S9_seed2026
 zoo,EEGTCNet,2b,9,2027,within,,0.0,zoo_EEGTCNet,3766,600,83.125,83.125,0.6625,0.4027,0.0285,100.0,87.8125,67,H200 NVL,0.125,original,zoo_20260916/EEGTCNet/2b_S9_seed2027
+zoo,EEGTCNet,hgd,10,2025,within,,0.0,zoo_EEGTCNet,4448,600,92.0455,91.5247,0.8935,0.3033,0.0959,100.0,93.75,167,H200 NVL,0.664,original,zoo_20260916/EEGTCNet/hgd_S10_seed2025
 zoo,EEGTCNet,hgd,1,2025,within,,0.0,zoo_EEGTCNet,4448,600,98.4375,97.7273,0.9786,0.2118,0.1619,100.0,100.0,220,H200 NVL,0.244,original,zoo_20260916/EEGTCNet/hgd_S1_seed2025
 zoo,EEGTCNet,hgd,2,2025,within,,0.0,zoo_EEGTCNet,4448,600,92.0245,92.0715,0.8935,0.2877,0.107,99.6923,94.4785,204,H200 NVL,0.614,original,zoo_20260916/EEGTCNet/hgd_S2_seed2025
 zoo,EEGTCNet,hgd,3,2025,within,,0.0,zoo_EEGTCNet,4448,600,97.1591,97.1351,0.962,0.1839,0.1098,100.0,97.7273,193,H200 NVL,0.664,original,zoo_20260916/EEGTCNet/hgd_S3_seed2025
@@ -1451,9 +1726,11 @@ zoo,EEGTCNet,hgd,5,2025,within,,0.0,zoo_EEGTCNet,4448,600,98.6111,98.7805,0.9814
 zoo,EEGTCNet,hgd,6,2025,within,,0.0,zoo_EEGTCNet,4448,600,90.3409,90.5812,0.8709,0.3291,0.127,100.0,93.1818,309,H200 NVL,0.666,original,zoo_20260916/EEGTCNet/hgd_S6_seed2025
 zoo,EEGTCNet,hgd,7,2025,within,,0.0,zoo_EEGTCNet,4448,600,94.3182,94.2994,0.9241,0.2113,0.1049,100.0,96.0227,232,H200 NVL,0.667,original,zoo_20260916/EEGTCNet/hgd_S7_seed2025
 zoo,EEGTCNet,hgd,8,2025,within,,0.0,zoo_EEGTCNet,4448,600,95.4198,95.6053,0.9388,0.2245,0.0942,99.8088,96.9466,185,H200 NVL,0.494,original,zoo_20260916/EEGTCNet/hgd_S8_seed2025
+zoo,EEGTCNet,hgd,9,2025,within,,0.0,zoo_EEGTCNet,4448,600,99.4318,99.4565,0.9924,0.1521,0.1233,99.7159,100.0,64,H200 NVL,0.664,original,zoo_20260916/EEGTCNet/hgd_S9_seed2025
 zoo,EEGTCNet,sdssvep,10,2025,within,,0.0,zoo_EEGTCNet,3976,600,76.6667,76.6667,0.7455,0.8968,0.301,100.0,78.3333,384,H200 NVL,0.046,original,zoo_20260916/EEGTCNet/sdssvep_S10_seed2025
 zoo,EEGTCNet,sdssvep,10,2026,within,,0.0,zoo_EEGTCNet,3976,600,75.0,75.0,0.7273,1.0381,0.3114,100.0,76.6667,425,H200 NVL,0.032,original,zoo_20260916/EEGTCNet/sdssvep_S10_seed2026
 zoo,EEGTCNet,sdssvep,10,2027,within,,0.0,zoo_EEGTCNet,3976,600,83.3333,83.3333,0.8182,1.0088,0.3809,100.0,85.0,537,H200 NVL,0.048,original,zoo_20260916/EEGTCNet/sdssvep_S10_seed2027
+zoo,EEGTCNet,sdssvep,1,2025,within,,0.0,zoo_EEGTCNet,3976,600,43.3333,43.3333,0.3818,1.6529,0.2014,100.0,46.6667,348,H200 NVL,0.022,original,zoo_20260916/EEGTCNet/sdssvep_S1_seed2025
 zoo,EEGTCNet,sdssvep,1,2026,within,,0.0,zoo_EEGTCNet,3976,600,45.0,45.0,0.4,1.711,0.131,100.0,48.3333,336,H200 NVL,0.054,original,zoo_20260916/EEGTCNet/sdssvep_S1_seed2026
 zoo,EEGTCNet,sdssvep,1,2027,within,,0.0,zoo_EEGTCNet,3976,600,48.3333,48.3333,0.4364,1.6639,0.1752,100.0,50.0,430,H200 NVL,0.039,original,zoo_20260916/EEGTCNet/sdssvep_S1_seed2027
 zoo,EEGTCNet,sdssvep,2,2025,within,,0.0,zoo_EEGTCNet,3976,600,58.3333,58.3333,0.5455,1.2931,0.1987,100.0,65.0,442,H200 NVL,0.04,original,zoo_20260916/EEGTCNet/sdssvep_S2_seed2025
@@ -1534,6 +1811,7 @@ zoo,EISATC,2b,8,2027,within,,0.0,zoo_EISATC,24683,600,90.625,90.625,0.8125,0.397
 zoo,EISATC,2b,9,2025,within,,0.0,zoo_EISATC,24683,600,79.375,79.375,0.5875,0.512,0.1161,100.0,83.75,129,H200 NVL,0.12,original,zoo_20260916/EISATC/2b_S9_seed2025
 zoo,EISATC,2b,9,2026,within,,0.0,zoo_EISATC,24683,600,82.8125,82.8125,0.6562,0.4876,0.142,100.0,85.0,277,H200 NVL,0.176,original,zoo_20260916/EISATC/2b_S9_seed2026
 zoo,EISATC,2b,9,2027,within,,0.0,zoo_EISATC,24683,600,79.0625,79.0625,0.5813,0.5077,0.1194,100.0,86.25,109,H200 NVL,0.122,original,zoo_20260916/EISATC/2b_S9_seed2027
+zoo,EISATC,hgd,10,2025,within,,0.0,zoo_EISATC,27087,600,91.4773,91.2779,0.8861,0.8305,0.458,100.0,94.8864,206,H200 NVL,0.666,original,zoo_20260916/EISATC/hgd_S10_seed2025
 zoo,EISATC,hgd,1,2025,within,,0.0,zoo_EISATC,27087,600,92.1875,92.1426,0.8934,0.8163,0.4768,100.0,100.0,15,H200 NVL,0.244,original,zoo_20260916/EISATC/hgd_S1_seed2025
 zoo,EISATC,hgd,2,2025,within,,0.0,zoo_EISATC,27087,600,90.7975,90.6695,0.8771,0.8344,0.4528,99.8462,93.865,407,H200 NVL,0.623,original,zoo_20260916/EISATC/hgd_S2_seed2025
 zoo,EISATC,hgd,3,2025,within,,0.0,zoo_EISATC,27087,600,97.7273,97.6453,0.9696,0.7736,0.5105,100.0,99.4318,173,H200 NVL,0.667,original,zoo_20260916/EISATC/hgd_S3_seed2025
@@ -1542,6 +1820,7 @@ zoo,EISATC,hgd,5,2025,within,,0.0,zoo_EISATC,27087,600,97.2222,97.3582,0.9629,0.
 zoo,EISATC,hgd,6,2025,within,,0.0,zoo_EISATC,27087,600,88.6364,89.1349,0.8483,0.8565,0.4266,100.0,92.6136,113,H200 NVL,0.666,original,zoo_20260916/EISATC/hgd_S6_seed2025
 zoo,EISATC,hgd,7,2025,within,,0.0,zoo_EISATC,27087,600,90.9091,90.7238,0.8787,0.84,0.4504,100.0,95.4545,178,H200 NVL,0.667,original,zoo_20260916/EISATC/hgd_S7_seed2025
 zoo,EISATC,hgd,8,2025,within,,0.0,zoo_EISATC,27087,600,93.8931,93.9907,0.9183,0.8158,0.4731,99.8088,95.4198,129,H200 NVL,0.505,original,zoo_20260916/EISATC/hgd_S8_seed2025
+zoo,EISATC,hgd,9,2025,within,,0.0,zoo_EISATC,27087,600,98.2955,98.3316,0.9772,0.7676,0.5173,99.858,99.4318,249,H200 NVL,0.664,original,zoo_20260916/EISATC/hgd_S9_seed2025
 zoo,EISATC,sdssvep,10,2025,within,,0.0,zoo_EISATC,26057,600,76.6667,76.6667,0.7455,1.924,0.611,100.0,83.3333,486,H200 NVL,0.044,original,zoo_20260916/EISATC/sdssvep_S10_seed2025
 zoo,EISATC,sdssvep,10,2026,within,,0.0,zoo_EISATC,26057,600,68.3333,68.3333,0.6545,1.9988,0.5309,100.0,73.3333,395,H200 NVL,0.031,original,zoo_20260916/EISATC/sdssvep_S10_seed2026
 zoo,EISATC,sdssvep,10,2027,within,,0.0,zoo_EISATC,26057,600,71.6667,71.6667,0.6909,1.9853,0.5601,100.0,75.0,344,H200 NVL,0.046,original,zoo_20260916/EISATC/sdssvep_S10_seed2027
@@ -1626,6 +1905,7 @@ zoo,FACTNet,2b,8,2027,within,,0.0,zoo_FACTNet,4620,600,93.4375,93.4375,0.8687,0.
 zoo,FACTNet,2b,9,2025,within,,0.0,zoo_FACTNet,4620,600,87.1875,87.1875,0.7437,0.4484,0.1896,94.0,89.6875,37,H200 NVL,0.158,original,zoo_20260916/FACTNet/2b_S9_seed2025
 zoo,FACTNet,2b,9,2026,within,,0.0,zoo_FACTNet,4620,600,87.5,87.5,0.75,0.4344,0.2047,94.5,90.0,206,H200 NVL,0.221,original,zoo_20260916/FACTNet/2b_S9_seed2026
 zoo,FACTNet,2b,9,2027,within,,0.0,zoo_FACTNet,4620,600,84.6875,84.6875,0.6938,0.4641,0.1742,95.75,89.6875,80,H200 NVL,0.157,original,zoo_20260916/FACTNet/2b_S9_seed2027
+zoo,FACTNet,hgd,10,2025,within,,0.0,zoo_FACTNet,5758,600,92.0455,91.5728,0.8934,0.8248,0.4626,99.2898,94.3182,272,H200 NVL,0.89,original,zoo_20260916/FACTNet/hgd_S10_seed2025
 zoo,FACTNet,hgd,1,2025,within,,0.0,zoo_FACTNet,5758,600,92.1875,92.1426,0.8935,0.8323,0.468,100.0,96.875,256,H200 NVL,0.325,original,zoo_20260916/FACTNet/hgd_S1_seed2025
 zoo,FACTNet,hgd,2,2025,within,,0.0,zoo_FACTNet,5758,600,92.638,92.6195,0.9016,0.8269,0.4688,99.0769,95.7055,195,H200 NVL,0.833,original,zoo_20260916/FACTNet/hgd_S2_seed2025
 zoo,FACTNet,hgd,3,2025,within,,0.0,zoo_FACTNet,5758,600,95.4545,95.0915,0.9392,0.8024,0.496,99.858,97.7273,112,H200 NVL,0.888,original,zoo_20260916/FACTNet/hgd_S3_seed2025
@@ -1634,6 +1914,7 @@ zoo,FACTNet,hgd,5,2025,within,,0.0,zoo_FACTNet,5758,600,96.5278,96.4367,0.9535,0
 zoo,FACTNet,hgd,6,2025,within,,0.0,zoo_FACTNet,5758,600,88.6364,88.9383,0.8483,0.869,0.4399,98.8636,91.4773,198,H200 NVL,0.886,original,zoo_20260916/FACTNet/hgd_S6_seed2025
 zoo,FACTNet,hgd,7,2025,within,,0.0,zoo_FACTNet,5758,600,90.9091,90.561,0.8786,0.846,0.4543,99.4318,93.1818,95,H200 NVL,0.892,original,zoo_20260916/FACTNet/hgd_S7_seed2025
 zoo,FACTNet,hgd,8,2025,within,,0.0,zoo_FACTNet,5758,600,88.5496,88.9825,0.8471,0.8469,0.4376,99.6176,93.8931,216,H200 NVL,0.668,original,zoo_20260916/FACTNet/hgd_S8_seed2025
+zoo,FACTNet,hgd,9,2025,within,,0.0,zoo_FACTNet,5758,600,96.5909,96.648,0.9544,0.7868,0.5011,99.0057,97.7273,163,H200 NVL,0.894,original,zoo_20260916/FACTNet/hgd_S9_seed2025
 zoo,MBCNNEATCFNet,2a,1,2025,within,,0.0,zoo_MBCNNEATCFNet,29520,600,82.2917,82.2917,0.7639,1.0578,0.4636,99.3056,85.0694,286,H200 NVL,0.441,original,zoo_20260916/MBCNNEATCFNet/2a_S1_seed2025
 zoo,MBCNNEATCFNet,2a,1,2026,within,,0.0,zoo_MBCNNEATCFNet,29520,600,82.9861,82.9861,0.7731,1.0669,0.47,99.3056,84.375,317,H200 NVL,0.351,original,zoo_20260916/MBCNNEATCFNet/2a_S1_seed2026
 zoo,MBCNNEATCFNet,2a,1,2027,within,,0.0,zoo_MBCNNEATCFNet,29520,600,82.6389,82.6389,0.7685,1.0538,0.4601,99.3056,84.7222,283,H200 NVL,0.442,original,zoo_20260916/MBCNNEATCFNet/2a_S1_seed2027
@@ -1688,6 +1969,7 @@ zoo,MBCNNEATCFNet,2b,8,2027,within,,0.0,zoo_MBCNNEATCFNet,25098,600,94.375,94.37
 zoo,MBCNNEATCFNet,2b,9,2025,within,,0.0,zoo_MBCNNEATCFNet,25098,600,82.8125,82.8125,0.6562,0.5509,0.2271,98.5,87.5,71,H200 NVL,0.227,original,zoo_20260916/MBCNNEATCFNet/2b_S9_seed2025
 zoo,MBCNNEATCFNet,2b,9,2026,within,,0.0,zoo_MBCNNEATCFNet,25098,600,84.375,84.375,0.6875,0.5438,0.2409,98.0,87.1875,133,H200 NVL,0.274,original,zoo_20260916/MBCNNEATCFNet/2b_S9_seed2026
 zoo,MBCNNEATCFNet,2b,9,2027,within,,0.0,zoo_MBCNNEATCFNet,25098,600,85.0,85.0,0.7,0.5473,0.2508,97.75,87.1875,383,H200 NVL,0.231,original,zoo_20260916/MBCNNEATCFNet/2b_S9_seed2027
+zoo,MBCNNEATCFNet,hgd,10,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,92.0455,91.3256,0.8934,0.9547,0.5262,96.875,93.75,141,H200 NVL,1.12,original,zoo_20260916/MBCNNEATCFNet/hgd_S10_seed2025
 zoo,MBCNNEATCFNet,hgd,1,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,100.0,100.0,1.0,0.8961,0.5894,100.0,100.0,19,H200 NVL,0.41,original,zoo_20260916/MBCNNEATCFNet/hgd_S1_seed2025
 zoo,MBCNNEATCFNet,hgd,2,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,90.7975,90.7202,0.8771,0.9782,0.5247,97.2308,93.2515,503,H200 NVL,1.05,original,zoo_20260916/MBCNNEATCFNet/hgd_S2_seed2025
 zoo,MBCNNEATCFNet,hgd,3,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,98.2955,98.3546,0.9772,0.9244,0.5808,99.2898,98.2955,490,H200 NVL,1.125,original,zoo_20260916/MBCNNEATCFNet/hgd_S3_seed2025
@@ -1696,6 +1978,7 @@ zoo,MBCNNEATCFNet,hgd,5,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,97.2222,97.
 zoo,MBCNNEATCFNet,hgd,6,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,86.9318,87.1661,0.8255,1.0144,0.4937,96.4489,90.9091,80,H200 NVL,1.12,original,zoo_20260916/MBCNNEATCFNet/hgd_S6_seed2025
 zoo,MBCNNEATCFNet,hgd,7,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,90.9091,90.5552,0.8786,0.944,0.5081,97.017,93.75,25,H200 NVL,1.123,original,zoo_20260916/MBCNNEATCFNet/hgd_S7_seed2025
 zoo,MBCNNEATCFNet,hgd,8,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,93.1298,93.0609,0.9081,0.9244,0.5225,98.6616,94.6565,79,H200 NVL,0.848,original,zoo_20260916/MBCNNEATCFNet/hgd_S8_seed2025
+zoo,MBCNNEATCFNet,hgd,9,2025,within,,0.0,zoo_MBCNNEATCFNet,33744,600,94.8864,95.0781,0.9317,0.9278,0.5465,97.5852,97.1591,17,H200 NVL,1.124,original,zoo_20260916/MBCNNEATCFNet/hgd_S9_seed2025
 zoo,MBCNNEATCFNet,sdssvep,10,2025,within,,0.0,zoo_MBCNNEATCFNet,29928,600,96.6667,96.6667,0.9636,2.0264,0.8328,100.0,100.0,287,H200 NVL,0.099,original,zoo_20260916/MBCNNEATCFNet/sdssvep_S10_seed2025
 zoo,MBCNNEATCFNet,sdssvep,10,2026,within,,0.0,zoo_MBCNNEATCFNet,29928,600,95.0,95.0,0.9455,2.0279,0.8159,100.0,98.3333,163,H200 NVL,0.055,original,zoo_20260916/MBCNNEATCFNet/sdssvep_S10_seed2026
 zoo,MBCNNEATCFNet,sdssvep,10,2027,within,,0.0,zoo_MBCNNEATCFNet,29928,600,96.6667,96.6667,0.9636,2.0321,0.833,100.0,96.6667,123,H200 NVL,0.102,original,zoo_20260916/MBCNNEATCFNet/sdssvep_S10_seed2027
@@ -1781,6 +2064,7 @@ zoo,ShallowConvNet,2b,9,2025,within,,0.0,zoo_ShallowConvNet,10802,600,86.25,86.2
 zoo,ShallowConvNet,2b,9,2026,within,,0.0,zoo_ShallowConvNet,10802,600,86.875,86.875,0.7375,0.346,0.0607,100.0,89.6875,197,H200 NVL,0.089,original,zoo_20260916/ShallowConvNet/2b_S9_seed2026
 zoo,ShallowConvNet,2b,9,2027,within,,0.0,zoo_ShallowConvNet,10802,600,85.0,85.0,0.7,0.345,0.0445,100.0,88.4375,204,H200 NVL,0.065,original,zoo_20260916/ShallowConvNet/2b_S9_seed2027
 zoo,ShallowConvNet,hgd,10,2025,within,,0.0,zoo_ShallowConvNet,81284,600,93.1818,92.3492,0.9086,0.3286,0.1444,100.0,93.75,172,H200 NVL,0.288,original,zoo_20260916/ShallowConvNet/hgd_S10_seed2025
+zoo,ShallowConvNet,hgd,11,2025,within,,0.0,zoo_ShallowConvNet,81284,600,95.4545,95.5865,0.9392,0.3034,0.1781,100.0,96.0227,501,H200 NVL,0.287,original,zoo_20260916/ShallowConvNet/hgd_S11_seed2025
 zoo,ShallowConvNet,hgd,1,2025,within,,0.0,zoo_ShallowConvNet,81284,600,100.0,100.0,1.0,0.243,0.2064,100.0,100.0,80,H200 NVL,0.108,original,zoo_20260916/ShallowConvNet/hgd_S1_seed2025
 zoo,ShallowConvNet,hgd,2,2025,within,,0.0,zoo_ShallowConvNet,81284,600,88.3436,88.1348,0.8442,0.427,0.1487,100.0,90.1841,449,H200 NVL,0.275,original,zoo_20260916/ShallowConvNet/hgd_S2_seed2025
 zoo,ShallowConvNet,hgd,3,2025,within,,0.0,zoo_ShallowConvNet,81284,600,99.4318,99.375,0.9924,0.2101,0.1699,100.0,100.0,282,H200 NVL,0.288,original,zoo_20260916/ShallowConvNet/hgd_S3_seed2025
@@ -1848,3 +2132,31 @@ superseded,loso_bite_clip5,sdssvep,6,2025,loso,,0.0,bite,14548,600,87.2222,87.22
 superseded,loso_bite_clip5,sdssvep,7,2025,loso,,0.0,bite,14548,600,96.6667,96.6667,0.9636,0.4851,0.3041,95.3704,98.3333,28,H100 80GB HBM3,0.163,original,loso_20260915/bite/sdssvep_S7_seed2025
 superseded,loso_bite_clip5,sdssvep,8,2025,loso,,0.0,bite,14548,600,91.1111,91.1111,0.903,0.6588,0.3442,95.6173,93.8889,281,H100 80GB HBM3,0.163,original,loso_20260915/bite/sdssvep_S8_seed2025
 superseded,loso_bite_clip5,sdssvep,9,2025,loso,,0.0,bite,14548,600,93.8889,93.8889,0.9333,0.4313,0.2333,95.8642,96.1111,141,H100 80GB HBM3,0.163,original,loso_20260915/bite/sdssvep_S9_seed2025
+mig,cohort/bite,2a,1,2025,within,,0.0,bite,16294,600,89.2361,89.2361,0.8565,0.4325,0.176,100.0,91.3194,192,H100 NVL MIG 3g.47gb,0.376,MIG original (replaced in the record),
+mig,cohort/bite,2a,1,2026,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4318,0.161,100.0,90.2778,145,H100 NVL MIG 3g.47gb,0.375,MIG original (replaced in the record),
+mig,cohort/bite,2a,1,2027,within,,0.0,bite,16294,600,88.8889,88.8889,0.8519,0.4402,0.1787,100.0,90.625,342,H100 NVL MIG 3g.47gb,0.376,MIG original (replaced in the record),
+mig,cohort/bite,2a,2,2025,within,,0.0,bite,16294,600,71.5278,71.5278,0.6204,0.745,0.0645,100.0,75.3472,215,H100 NVL MIG 3g.47gb,0.375,MIG original (replaced in the record),
+mig,cohort/bite,2a,2,2026,within,,0.0,bite,16294,600,68.75,68.75,0.5833,0.9443,0.0915,100.0,74.3056,274,H100 NVL MIG 3g.47gb,0.375,MIG original (replaced in the record),
+mig,cohort/bite,2a,2,2027,within,,0.0,bite,16294,600,73.9583,73.9583,0.6528,0.712,0.1111,100.0,76.3889,331,H100 NVL MIG 3g.47gb,0.377,MIG original (replaced in the record),
+mig,cohort/bite,2a,3,2025,within,,0.0,bite,16294,600,95.8333,95.8333,0.9444,0.2808,0.163,100.0,97.9167,221,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,3,2026,within,,0.0,bite,16294,600,96.875,96.875,0.9583,0.2623,0.166,100.0,98.2639,386,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,3,2027,within,,0.0,bite,16294,600,96.5278,96.5278,0.9537,0.2799,0.1613,100.0,96.875,356,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,4,2025,within,,0.0,bite,16294,600,81.5972,81.5972,0.7546,0.5498,0.1303,100.0,84.0278,387,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,4,2026,within,,0.0,bite,16294,600,83.3333,83.3333,0.7778,0.5289,0.1266,100.0,85.7639,296,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,4,2027,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4757,0.1631,100.0,87.8472,438,H100 NVL MIG 3g.47gb,0.37,MIG original (replaced in the record),
+mig,cohort/bite,2a,5,2025,within,,0.0,bite,16294,600,77.0833,77.0833,0.6944,0.5958,0.0888,100.0,79.8611,199,H100 NVL MIG 3g.47gb,0.361,MIG original (replaced in the record),
+mig,cohort/bite,2a,5,2026,within,,0.0,bite,16294,600,79.1667,79.1667,0.7222,0.6007,0.1006,100.0,83.3333,188,H100 NVL MIG 3g.47gb,0.358,MIG original (replaced in the record),
+mig,cohort/bite,2a,5,2027,within,,0.0,bite,16294,600,79.5139,79.5139,0.7269,0.5752,0.0993,100.0,83.3333,328,H100 NVL MIG 3g.47gb,0.358,MIG original (replaced in the record),
+mig,cohort/bite,2a,6,2025,within,,0.0,bite,16294,600,76.3889,76.3889,0.6852,0.7233,0.1082,100.0,78.8194,455,H100 NVL MIG 3g.47gb,0.363,MIG original (replaced in the record),
+mig,cohort/bite,2a,6,2026,within,,0.0,bite,16294,600,73.6111,73.6111,0.6481,0.7253,0.1084,100.0,78.125,242,H100 NVL MIG 3g.47gb,0.362,MIG original (replaced in the record),
+mig,cohort/bite,2a,6,2027,within,,0.0,bite,16294,600,72.9167,72.9167,0.6389,0.7336,0.1023,100.0,76.0417,131,H100 NVL MIG 3g.47gb,0.299,MIG original (replaced in the record),
+mig,cohort/bite,2a,7,2025,within,,0.0,bite,16294,600,92.7083,92.7083,0.9028,0.3575,0.1666,100.0,95.4861,429,H100 NVL MIG 3g.47gb,0.319,MIG original (replaced in the record),
+mig,cohort/bite,2a,7,2026,within,,0.0,bite,16294,600,91.6667,91.6667,0.8889,0.3783,0.1735,100.0,94.4444,408,H100 NVL MIG 3g.47gb,0.319,MIG original (replaced in the record),
+mig,cohort/bite,2a,7,2027,within,,0.0,bite,16294,600,91.3194,91.3194,0.8843,0.3676,0.17,100.0,94.4444,457,H100 NVL MIG 3g.47gb,0.32,MIG original (replaced in the record),
+mig,cohort/bite,2a,8,2025,within,,0.0,bite,16294,600,84.0278,84.0278,0.787,0.5096,0.161,100.0,87.5,345,H100 NVL MIG 3g.47gb,0.335,MIG original (replaced in the record),
+mig,cohort/bite,2a,8,2026,within,,0.0,bite,16294,600,84.0278,84.0278,0.787,0.5238,0.1575,100.0,87.1528,356,H100 NVL MIG 3g.47gb,0.258,MIG original (replaced in the record),
+mig,cohort/bite,2a,8,2027,within,,0.0,bite,16294,600,85.4167,85.4167,0.8056,0.5194,0.1615,100.0,87.1528,427,H100 NVL MIG 3g.47gb,0.258,MIG original (replaced in the record),
+mig,cohort/bite,2a,9,2025,within,,0.0,bite,16294,600,87.5,87.5,0.8333,0.4569,0.1345,100.0,89.2361,112,H100 NVL MIG 3g.47gb,0.312,MIG original (replaced in the record),
+mig,cohort/bite,2a,9,2026,within,,0.0,bite,16294,600,87.1528,87.1528,0.8287,0.4622,0.1509,100.0,88.8889,432,H100 NVL MIG 3g.47gb,0.312,MIG original (replaced in the record),
+mig,cohort/bite,2a,9,2027,within,,0.0,bite,16294,600,86.4583,86.4583,0.8194,0.4734,0.1494,100.0,90.2778,379,H100 NVL MIG 3g.47gb,0.278,MIG original (replaced in the record),
+mig,cohort/bite,hgd,1,2027,within,,0.0,bite,17922,600,100.0,100.0,1.0,0.1917,0.1629,100.0,100.0,40,H100 NVL MIG 3g.47gb,0.371,MIG original (replaced in the record),

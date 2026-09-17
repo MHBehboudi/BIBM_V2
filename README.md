@@ -1,9 +1,11 @@
 # Prefix-bidirectional reading for anytime EEG decoding
 
-One model that emits a legal decision every 128 ms. Endpoint-trained, it holds 70-82% of its accuracy on
-2a at 1-3 s where the same forward-only parent checkpoint collapses to 31-50% (same checkpoints, exact
-truncated input). Trained with prefix supervision, it beats the strongest bank of separately retrained
-per-deadline specialists at every deadline on 2a (+2.01 at 1 s, +1.80 at 2 s, +0.76 at 3 s).
+One model that emits a legal decision at every token boundary. Given only part of each trial, endpoint-trained
+READER holds 70-82% accuracy on 2a at 1-3 s where the same forward-only parent checkpoint collapses to 31-50% (same
+checkpoints, exact truncated input), and the advantage survives giving both models the identical prefix loss
+(+19.2 points at 1 s on 2a, +22.2 at 0.25 s on SD-SSVEP). Against a bank of separately retrained per-deadline
+specialists, one prefix-supervised READER wins on 2a (+2.01 at 1 s, +1.80 at 2 s) but not on 2b (a flat −1.5, the
+endpoint gap) or SD-SSVEP (−3.3 at 0.5 s against retrained Compact specialists).
 
 Bidirectional context in EEG decoders is bought at the cost of deployability. BiTE's BiTCN obtains
 backward context by reversing the **complete trial** — its backward branch's last step corresponds
@@ -34,17 +36,18 @@ subjects. Strongest re-run baselines shown; all eleven are in `results/MAIN_TABL
 |---|---:|---:|---:|---:|---:|
 | ATCNet (re-run) | 113.7K | 81.29 ± 8.46 | 84.07 ± 8.81 | pending | 85.33 ± 17.57 |
 | MBCNNEATCFNet (re-run) | 29.5K | 81.76 ± 7.87 | 84.40 ± 7.91 | pending | 94.22 ± 7.29 |
-| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | pending | 96.56 ± 7.80 (29/30 runs) |
-| BiTE (re-run) | 16.3K | 84.08 ± 8.13 | **87.33** ± 7.14 | 95.57 ± 3.40 | 94.22 ± 8.69 |
+| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | pending | **96.50** ± 7.77 |
+| BiTE (re-run) | 16.3K | 84.10 ± 8.04 | **87.33** ± 7.14 | 95.57 ± 3.40 | 94.22 ± 8.69 |
 | BiTE (published, 1 seed) | 14.5K | 85.34 | 88.37 | 95.93 | 94.16 |
 | Compact (READER without the reversed branch) | 17.8K | 82.33 ± 10.06 | 85.32 ± 8.06 | 95.69 ± 2.73 | 94.11 ± 11.13 |
 | **READER** | 21.0K | **84.71** ± 8.27 | 86.41 ± 7.30 | **96.30** ± 2.79 | 96.17 ± 7.89 |
 
-READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.63 [−0.80, +2.01], 2b −0.92 [−1.88, +0.08],
+READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.60 [−0.80, +1.94], 2b −0.92 [−1.88, +0.08],
 HGD +0.73 [−0.02, +1.59], SD-SSVEP +1.94 [+0.72, +3.39]. **At the endpoint READER is at parity with BiTE on motor
-imagery and ahead on SD-SSVEP**; it is above every other re-run baseline on 2a and 2b. Against the published
-single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). The HGD zoo wave and three
-SD-SSVEP zoo runs are still training; `scripts/rebuild_results.sh` fills them in.
+imagery and ahead of it on SD-SSVEP**; it is above every other re-run baseline on 2a and 2b, and level with the
+re-run DeepConvNet on SD-SSVEP (READER − DeepConvNet −0.33 [−1.56, +0.67], 3/4/3 subjects). Against the published
+single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). The HGD zoo wave is still
+training; `scripts/rebuild_results.sh` fills it in.
 
 ### Cross-subject (`results/CROSS_SUBJECT.md`)
 
@@ -61,7 +64,7 @@ cross-subject runs were found to use gradient clip 5 (our trainer's default) whe
 all three BiTE seeds are being re-run at `--clip 0` and the clip-5 numbers (61.11 / 76.08 / 79.44) are marked
 superseded.
 
-### Anytime: one model against retrained per-deadline specialists (`results/anytime_2a.md`)
+### Anytime: one model against retrained per-deadline specialists (`results/anytime_*.md`)
 
 **One** READER read at each deadline vs a **bank of separately retrained** specialists (one model per deadline,
 trained from scratch on truncated trials). Subject-level difference against the strongest bank at each deadline,
@@ -75,9 +78,22 @@ trained from scratch on truncated trials). Subject-level difference against the 
 | 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 [+0.01, +1.63] 6/1/2 |
 
 With 9 subjects, Holm over the three early deadlines gives p = .082 / .082 / .53: the 1 s and 2 s intervals exclude
-zero but do not survive correction. The SD-SSVEP bank (0.25 / 0.5 / 0.75 s, second paradigm) is training
-(`results/anytime_sdssvep.md`). An earlier version of this table headlined the delta against the *weaker* bank
+zero but do not survive correction. An earlier version of this table headlined the delta against the *weaker* bank
 (+2.57 / +1.88 / +1.17).
+
+**It does not replicate on the other two corpora.** SD-SSVEP (second paradigm, 10 subjects × 3 seeds,
+`results/anytime_sdssvep.md`):
+
+| deadline | READER (1 model) | BiTE bank | Compact bank | READER − strongest bank [95% CI], W/T/L, Holm p |
+|---|---:|---:|---:|---|
+| 0.25 s | 65.33 | 66.11 | 67.17 | −1.83 [−5.17, +2.06] 2/0/8, .28 |
+| 0.5 s | 84.28 | 84.11 | 87.56 | **−3.28** [−4.89, −1.83] 0/0/10, .006 |
+| 0.75 s | 88.00 | 89.00 | 91.72 | −3.72 [−6.44, −1.06] 2/2/6, .094 |
+| 1.0 s | 94.33 | 94.22 | 94.11 | +0.11 [−1.33, +1.56] 5/3/2 |
+
+READER is level with BiTE's SSVEP bank but Compact models retrained at each deadline beat it. On 2b READER trails
+BiTE's bank by a flat −1.50 / −1.62 / −1.44 / −1.59 at 1 / 2 / 3 / 4 s, which is BiTE's endpoint lead
+(`results/anytime_2b.md`). **One READER replacing the bank without losing accuracy is therefore a 2a result.**
 
 ### Ablations (`results/ABLATION.md`)
 
@@ -92,8 +108,18 @@ zero but do not survive correction. The SD-SSVEP bank (0.25 / 0.5 / 0.75 s, seco
 | + prefix supervision (loss) | +0.13 | −0.67 | −1.83 | +6.73 | +30.72 |
 
 Early columns are the same checkpoints given only the first quarter of each trial. CIs, W/T/L and HGD are in
-`results/ABLATION.md`, which also holds the matched-loss ablation (Compact retrained with the same prefix loss,
-training now) that separates the architecture from the loss.
+`results/ABLATION.md`.
+
+**Same loss, different architecture.** Prefix supervision is a loss change, so Compact was retrained with the
+identical prefix loss. READER+PS minus Compact+PS on the same truncated inputs, subject-level [95% CI]:
+
+| | 2a 1 s | 2a 2 s | 2b 1 s | 2b 2 s | SD-SSVEP 0.25 s | SD-SSVEP 0.5 s |
+|---|---:|---:|---:|---:|---:|---:|
+| early decision | **+19.20** [+15.74, +23.30] 9/0/0 | **+10.12** [+6.31, +14.99] 9/0/0 | +3.89 [+0.08, +7.10] 7/0/2 | +1.42 [−2.11, +5.02] 5/0/4 | **+22.22** [+16.89, +28.11] 10/0/0 | **+13.11** [+6.78, +19.94] 9/0/1 |
+
+At the full trial the same comparison is 2a +2.74 [−0.08, +6.46], 2b −0.75 [−1.42, −0.17], SD-SSVEP +0.22
+[−1.67, +2.44]. The prefix-reversed branch, not the loss, carries the early-decision advantage of a single model;
+what it does not do is match specialists retrained for each deadline on 2b and SD-SSVEP (section above).
 
 ### Efficiency (`results/EFFICIENCY.md`)
 
@@ -117,9 +143,10 @@ Three limits, all of them load-bearing:
    of that number; `reader/anytime.py --reader` selects it and the generated tables name it.
 2. **It is a 2a claim.** On 2b the same comparison is **−1.50 / −1.62 / −1.44 / −1.59** at
    1/2/3/4 s (`results/anytime_2b.md`) — a flat offset, statistically indistinguishable across
-   deadlines and equal to BiTE's standing 2b *endpoint* advantage. That is an endpoint deficit
-   showing up at every deadline, not an anytime effect in either direction.
-3. **No bank exists on HGD or SD-SSVEP**, so no comparison is available there.
+   deadlines and equal to BiTE's standing 2b *endpoint* advantage. On SD-SSVEP, Compact specialists
+   retrained at each deadline beat the single READER at 0.5 s (−3.28, Holm p .006) and 0.75 s (−3.72)
+   (`results/anytime_sdssvep.md`).
+3. **No bank exists on HGD**, so no comparison is available there.
 
 ### Ablation: does supervising the intermediate decisions help? (`results/ablation_prefix_supervision.md`)
 
@@ -390,10 +417,11 @@ training, each with the same ridge protocol (fit on the training role, score the
 
 - 2a (−0.63) and 2b (−1.96) remain below the published bars; only HGD and SD-SSVEP clear them. Against BiTE
   re-run with 3 seeds READER is at parity on motor imagery (2b leans to BiTE, −0.92 [−1.88, +0.08]).
-- DeepConvNet re-run on SD-SSVEP currently reads 96.56 (29/30 runs), above READER's 96.17.
-- The anytime advantage over retrained banks is a 2a result so far (2b is a flat −1.5, the endpoint gap); it needs
-  prefix supervision, which costs −0.67 (2b) and −1.83 (SD-SSVEP) at the endpoint; with 9 subjects the 1 s and 2 s
-  intervals exclude zero but do not survive Holm correction.
+- DeepConvNet re-run on SD-SSVEP (96.50) is level with READER (96.17): −0.33 [−1.56, +0.67].
+- The advantage of one READER over retrained per-deadline banks holds on 2a only: 2b is a flat −1.5 (the endpoint
+  gap) and on SD-SSVEP retrained Compact specialists win at 0.5 s and 0.75 s. It needs prefix supervision, which costs
+  −0.67 (2b) and −1.83 (SD-SSVEP) at the endpoint; with 9 subjects the 2a 1 s and 2 s intervals exclude zero but do
+  not survive Holm correction.
 - The fusion gate does not learn (it stays at 0.5 and pinning it is free); the fusion is a fixed average.
 - Cross-subject is parity rather than a win outside SD-SSVEP; seeds 2026-2027 are still training.
 - READER is 1.3–2.2× BiTE's parameter count, so no efficiency claim is made.

@@ -12,20 +12,20 @@ is complete for what exists and marks the rest as pending).
 
 | paper element | file | produced by | status |
 |---|---|---|---|
-| Main within-subject table: READER vs every baseline re-run with 3 seeds, kappa, published bars | `MAIN_TABLE.md`, `main_table.json` | `scripts/paper_tables.py` | final on 2a / 2b; HGD zoo wave and 3 SD-SSVEP zoo runs PENDING |
+| Main within-subject table: READER vs every baseline re-run with 3 seeds, kappa, published bars | `MAIN_TABLE.md`, `main_table.json` | `scripts/paper_tables.py` | final on 2a / 2b / SD-SSVEP; HGD zoo wave PENDING |
 | Per-subject model zoo, READER minus each model (Holm within corpus) | `model_zoo/MODEL_ZOO.md`, `model_zoo.json` | `reader/zoo_report.py` | as above |
-| READER / Compact / BiTE paired means (legacy summary) | `within_subject.json` | `scripts/score.py` | final (BiTE 2a/2b/HGD MIG re-runs PENDING) |
+| READER / Compact / BiTE paired means (legacy summary) | `within_subject.json` | `scripts/score.py` | final (BiTE 2a replaced by full-GPU re-runs; 2b / HGD MIG re-runs PENDING) |
 | Cross-subject (LOSO), 3 seeds | `CROSS_SUBJECT.md`, `cross_subject.json` | `scripts/paper_tables.py` | seed 2025 for READER / Compact; seeds 2026-27 and all BiTE seeds (`--clip 0`) PENDING |
-| Anytime: one READER vs retrained per-deadline specialists | `anytime_2a.md`, `anytime_2b.md`, `anytime_sdssvep.md` (+ `.json`) | `reader/anytime.py` | 2a / 2b final; SD-SSVEP bank PENDING |
+| Anytime: one READER vs retrained per-deadline specialists | `anytime_2a.md`, `anytime_2b.md`, `anytime_sdssvep.md` (+ `.json`) | `reader/anytime.py` | 2a / 2b / SD-SSVEP final (MIG re-runs of 2a / 2b bank and READER runs PENDING) |
 | Anytime with the endpoint-trained READER (not the headline arm) | `anytime_2a_endpoint_supervised.md` | `reader/anytime.py --reader runs/cohort/reader` | final |
-| Ablations: architecture (A), inference interventions (B), loss (C), matched-loss | `ABLATION.md`, `ablation.json` | `scripts/ablation_table.py` | A, B, C1 final; C2 and READER+PS − Compact+PS PENDING |
+| Ablations: architecture (A), inference interventions (B), loss (C), matched-loss | `ABLATION.md`, `ablation.json` | `scripts/ablation_table.py` | final (MIG re-runs of 22 READER+PS runs PENDING) |
 | Prefix supervision on READER, token-grid detail | `ablation_prefix_supervision.md` | `reader/ablation.py` | final |
 | Gate interventions (fusion load-bearing, gate learning absorbable) | `gate_intervention.md` | `reader/gate_intervention.py` | final |
 | Subject-level statistics: 12 endpoint + 12 prefix tests, Holm, exact-duration curves | `subject_stats/SUBJECT_STATS.md` | `reader/subject_stats.py` | final |
 | Same-checkpoint accuracy on truncated input + causality on trained weights | `exact_duration.json` | `reader/exact_duration.py` + `scripts/collect_exact_duration.py` | final (BiTE 2a recomputed when its re-runs land) |
 | Parameters and CPU latency per decision; bank size | `EFFICIENCY.md`, `efficiency.json` | `scripts/efficiency.py` (timing: run on an idle CPU) | parameters final; latency PROVISIONAL (shared-node timings varied up to 3×) |
 | Screen subjects vs fresh subjects (test-informed development) | `DEVELOPMENT_DISCLOSURE.md` | `scripts/paper_tables.py` | final |
-| GPU per run, MIG vs full-GPU re-runs, peak-to-final decay | `REPRODUCIBILITY.md` | `scripts/paper_tables.py` | MIG comparison PENDING |
+| GPU per run, MIG vs full-GPU re-runs, peak-to-final decay | `REPRODUCIBILITY.md` | `scripts/paper_tables.py` | MIG comparison: 28 BiTE pairs done, 119 PENDING |
 
 ## Figures (`figures/`, PDF + PNG)
 

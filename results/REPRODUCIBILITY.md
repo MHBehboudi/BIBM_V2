@@ -6,10 +6,14 @@ H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45 identical READER 
 
 | runs | arm | GPU | runs | record status |
 |---|---|---|---:|---|
+| anytime | compact_anytime | H200 NVL | 84 | original |
 | anytime | reader_anytime | H100 80GB HBM3 | 16 | original |
 | anytime | reader_anytime | H100 NVL | 19 | original |
 | anytime | reader_anytime | H100 NVL MIG 3g.47gb | 22 | mig_pending |
 | anytime | reader_anytime | H200 NVL | 27 | original |
+| bank | bite_0.25s | H200 NVL | 30 | original |
+| bank | bite_0.5s | H200 NVL | 30 | original |
+| bank | bite_0.75s | H200 NVL | 30 | original |
 | bank | bite_1s | H100 80GB HBM3 | 9 | original |
 | bank | bite_1s | H100 NVL | 4 | original |
 | bank | bite_1s | H100 NVL MIG 3g.47gb | 23 | mig_pending |
@@ -22,6 +26,9 @@ H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45 identical READER 
 | bank | bite_3s | H100 NVL | 3 | original |
 | bank | bite_3s | H100 NVL MIG 3g.47gb | 23 | mig_pending |
 | bank | bite_3s | H200 NVL | 19 | original |
+| bank | compact_0.25s | H200 NVL | 30 | original |
+| bank | compact_0.5s | H200 NVL | 30 | original |
+| bank | compact_0.75s | H200 NVL | 30 | original |
 | bank | compact_1s | H100 80GB HBM3 | 13 | original |
 | bank | compact_1s | H200 NVL | 14 | original |
 | bank | compact_2s | H100 80GB HBM3 | 14 | original |
@@ -30,7 +37,8 @@ H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45 identical READER 
 | bank | compact_3s | H200 NVL | 13 | original |
 | cohort | bite | H100 80GB HBM3 | 6 | original |
 | cohort | bite | H100 NVL | 24 | original |
-| cohort | bite | H100 NVL MIG 3g.47gb | 48 | mig_pending |
+| cohort | bite | H100 NVL MIG 3g.47gb | 20 | mig_pending |
+| cohort | bite | H200 NVL | 28 | full-GPU re-run replaces MIG original |
 | cohort | bite | H200 NVL | 48 | original |
 | cohort | compact | H100 80GB HBM3 | 102 | original |
 | cohort | compact | H100 NVL | 24 | original |
@@ -48,7 +56,11 @@ H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45 identical READER 
 
 ## MIG original minus full-GPU re-run (identical arguments)
 
-Pending: 147 MIG runs are queued for full-GPU re-runs (jobs 409509/409510).
+| runs | arm | pairs | mean (MIG − full) | se | pairs that differ | mean abs difference |
+|---|---|---:|---:|---:|---:|---:|
+| cohort | bite | 28 | -0.02 | 0.07 | 13 | 0.22 |
+
+119 MIG runs are still waiting for their re-runs.
 
 ## Test-curve peak minus reported final epoch (diagnostic; never used for selection)
 
@@ -58,16 +70,16 @@ BiTE's protocol trains 600 epochs and reports the final epoch with no validation
 |---|---|---:|---:|---:|
 | cohort | reader | 126 | 1.89 | 0.15 |
 | cohort | compact | 126 | 2.04 | 0.13 |
-| cohort | bite | 126 | 2.06 | 0.14 |
-| zoo | EEGTCNet | 91 | 2.20 | 0.15 |
+| cohort | bite | 126 | 2.08 | 0.14 |
+| zoo | EEGTCNet | 94 | 2.19 | 0.15 |
 | controls | ff_control | 84 | 2.32 | 0.20 |
-| zoo | DeepConvNet | 93 | 2.71 | 0.43 |
-| zoo | ATCNet | 92 | 3.05 | 0.23 |
-| zoo | EEGNet | 93 | 3.19 | 0.26 |
-| zoo | EISATC | 92 | 3.31 | 0.17 |
-| zoo | MBCNNEATCFNet | 92 | 3.43 | 0.32 |
-| zoo | FACTNet | 62 | 3.53 | 0.21 |
-| zoo | DMSANet | 92 | 4.53 | 0.43 |
-| zoo | ShallowConvNet | 94 | 4.53 | 0.37 |
-| zoo | EEGNeX | 91 | 4.54 | 0.26 |
+| zoo | DeepConvNet | 95 | 2.69 | 0.42 |
+| zoo | ATCNet | 94 | 3.03 | 0.22 |
+| zoo | EEGNet | 94 | 3.18 | 0.26 |
+| zoo | EISATC | 94 | 3.29 | 0.17 |
+| zoo | MBCNNEATCFNet | 94 | 3.40 | 0.31 |
+| zoo | FACTNet | 64 | 3.47 | 0.21 |
+| zoo | DMSANet | 94 | 4.46 | 0.43 |
+| zoo | ShallowConvNet | 95 | 4.49 | 0.37 |
+| zoo | EEGNeX | 94 | 4.55 | 0.25 |
 | controls | compact_mean | 84 | 6.10 | 0.63 |

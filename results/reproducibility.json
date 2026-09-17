@@ -1,6 +1,13 @@
 {
- "mig_pending_runs": 147,
- "mig_vs_full": {},
+ "mig_pending_runs": 119,
+ "mig_vs_full": {
+  "cohort/bite": {
+   "pairs": 28,
+   "mean": -0.02480357142857161,
+   "se": 0.0690049661739682,
+   "differ": 13
+  }
+ },
  "peak_minus_final": {
   "cohort/reader": {
    "runs": 126,
@@ -12,51 +19,51 @@
   },
   "cohort/bite": {
    "runs": 126,
-   "mean": 2.0647579365079363
+   "mean": 2.081294444444444
   },
   "zoo/EEGTCNet": {
-   "runs": 91,
-   "mean": 2.204965934065934
+   "runs": 94,
+   "mean": 2.1942340425531914
   },
   "controls/ff_control": {
    "runs": 84,
    "mean": 2.3241476190476194
   },
   "zoo/DeepConvNet": {
-   "runs": 93,
-   "mean": 2.7070720430107524
+   "runs": 95,
+   "mean": 2.685567368421052
   },
   "zoo/ATCNet": {
-   "runs": 92,
-   "mean": 3.0487989130434783
+   "runs": 94,
+   "mean": 3.026241489361703
   },
   "zoo/EEGNet": {
-   "runs": 93,
-   "mean": 3.1859344086021513
+   "runs": 94,
+   "mean": 3.182263829787234
   },
   "zoo/EISATC": {
-   "runs": 92,
-   "mean": 3.3089043478260862
+   "runs": 94,
+   "mean": 3.2868574468085097
   },
   "zoo/MBCNNEATCFNet": {
-   "runs": 92,
-   "mean": 3.4348065217391306
+   "runs": 94,
+   "mean": 3.4040361702127657
   },
   "zoo/FACTNet": {
-   "runs": 62,
-   "mean": 3.5281225806451624
+   "runs": 64,
+   "mean": 3.4711359375000006
   },
   "zoo/DMSANet": {
-   "runs": 92,
-   "mean": 4.531332608695652
+   "runs": 94,
+   "mean": 4.4591
   },
   "zoo/ShallowConvNet": {
-   "runs": 94,
-   "mean": 4.53351170212766
+   "runs": 95,
+   "mean": 4.491771578947368
   },
   "zoo/EEGNeX": {
-   "runs": 91,
-   "mean": 4.541132967032966
+   "runs": 94,
+   "mean": 4.545301063829785
   },
   "controls/compact_mean": {
    "runs": 84,
