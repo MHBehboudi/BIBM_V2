@@ -29,19 +29,28 @@ for c in 2a 2b sdssvep; do
   cat runs/manifests/_part.txt >> runs/manifests/anytime.txt
 done
 
-# --- the specialist bank ----------------------------------------------------------------------
-# compact is banked on 2a only; on 2b the published BiTE endpoint is the reference that matters.
-: > runs/manifests/bank.txt
-for d in 1 2 3; do
-  for m in bite compact; do
-    python scripts/make_manifest.py --arm "${m}_${d}s:${m}:--window-seconds,${d}" \
-      --study bank --cells 2a --seeds 2025,2026,2027 --output runs/manifests/_part.txt
-    cat runs/manifests/_part.txt >> runs/manifests/bank.txt
-  done
-  python scripts/make_manifest.py --arm "bite_${d}s:bite:--window-seconds,${d}" \
-    --study bank --cells 2b --seeds 2025,2026,2027 --output runs/manifests/_part.txt
-  cat runs/manifests/_part.txt >> runs/manifests/bank.txt
+# --- the matched-loss control -----------------------------------------------------------------
+# compact_anytime: the forward-only parent trained with the IDENTICAL prefix loss. reader_anytime minus
+# compact_anytime isolates the architecture from the loss (results/ABLATION.md, section C).
+for c in 2a 2b sdssvep; do
+  python scripts/make_manifest.py --arm 'compact_anytime:compact:--prefix-weight,0.3' \
+    --study anytime --cells "$c" --seeds 2025,2026,2027 --output runs/manifests/_part.txt
+  cat runs/manifests/_part.txt >> runs/manifests/anytime.txt
 done
+
+# --- the specialist bank ----------------------------------------------------------------------
+# Motor imagery (4 s trials): 1, 2, 3 s. SSVEP (1 s trials): 0.25, 0.5, 0.75 s. The full-trial row of every
+# bank is the within-subject cohort run. compact is not banked on 2b: BiTE is the stronger 2b family.
+# BiTE runs with --clip 0 (its release does not clip gradients).
+: > runs/manifests/bank.txt
+add_bank() {  # family corpus seconds
+  local extra=""; [ "$1" = bite ] && extra=",--clip,0"
+  python scripts/make_manifest.py --arm "${1}_${3}s:${1}:--window-seconds,${3}${extra}" \
+    --study bank --cells "$2" --seeds 2025,2026,2027 --output runs/manifests/_part.txt
+  cat runs/manifests/_part.txt >> runs/manifests/bank.txt
+}
+for d in 1 2 3; do add_bank bite 2a $d; add_bank compact 2a $d; add_bank bite 2b $d; done
+for d in 0.25 0.5 0.75; do add_bank bite sdssvep $d; add_bank compact sdssvep $d; done
 rm -f runs/manifests/_part.txt
 
 READER_LINES=$(wc -l < runs/manifests/anytime.txt)
@@ -50,11 +59,13 @@ sbatch --array=0-11 scripts/slurm/pack.sbatch runs/manifests/anytime.txt $(( (RE
 sbatch --array=0-11 scripts/slurm/pack.sbatch runs/manifests/bank.txt    $(( (BANK_LINES + 11) / 12 )) 4
 
 cat <<'EOF'
-when complete, regenerate both shipped tables:
+when complete, regenerate everything with scripts/rebuild_results.sh, or the anytime tables alone:
   python reader/anytime.py --dataset 2a --cohort runs/cohort --bank runs/bank \
          --reader runs/anytime/reader_anytime --out results/anytime_2a.md
   python reader/anytime.py --dataset 2b --cohort runs/cohort --bank runs/bank \
          --reader runs/anytime/reader_anytime --out results/anytime_2b.md
+  python reader/anytime.py --dataset sdssvep --cohort runs/cohort --bank runs/bank \
+         --reader runs/anytime/reader_anytime --out results/anytime_sdssvep.md
 and the prefix-supervision loss ablation (endpoint-only arm is the within-subject cohort):
   python reader/ablation.py --endpoint runs/cohort/reader --prefix runs/anytime/reader_anytime
 the 4 s row is read from runs/cohort, so scripts/reproduce_within.sh must have finished first.

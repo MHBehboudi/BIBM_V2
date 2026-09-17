@@ -7,9 +7,15 @@ cd "$(dirname "$0")/.."
 mkdir -p runs/manifests runs/slurm
 : "${READER_DATA:?set READER_DATA to the prepared-data directory (see docs/DATA.md)}"
 export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+# 3 arms x 28 subjects x 3 seeds = 252 runs, ~120 GPU-hours. BiTE runs with --clip 0 (its release does not clip).
 python scripts/make_manifest.py \
   --arm reader:reader:--protocol,loso --arm compact:compact:--protocol,loso \
-  --arm bite:bite:--protocol,loso \
-  --study loso --cells all_no_hgd --seeds 2025 \
+  --arm bite:bite:--protocol,loso,--clip,0 \
+  --study loso --cells all_no_hgd --seeds 2025,2026,2027 \
   --output runs/manifests/loso.txt
-sbatch --array=0-11 scripts/slurm/pack.sbatch runs/manifests/loso.txt 9 2
+sbatch --array=0-20 scripts/slurm/pack.sbatch runs/manifests/loso.txt 12 3
+
+cat <<'MSG'
+when complete:
+  python scripts/export_runs.py && python scripts/paper_tables.py     # -> results/CROSS_SUBJECT.md
+MSG
