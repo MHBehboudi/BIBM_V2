@@ -7,6 +7,6 @@ READER was selected among eight architecture arms on an 8-cell screen scored on 
 | READER − compact | screen (8) | +2.78 / +0.83 / +0.47 / +3.61 | +1.92 |
 | READER − compact | fresh (34) | +2.27 / +1.17 / +0.63 / +1.67 | +1.43 |
 | READER − bite | screen (8) | +1.68 / -1.93 / +0.95 / +1.94 | +0.66 |
-| READER − bite | fresh (34) | +0.30 / -0.64 / +0.69 / +1.94 | +0.57 |
+| READER − bite | fresh (34) | +0.30 / -0.59 / +0.74 / +1.94 | +0.60 |
 
 If the gain were created by selecting on the screen subjects, it would vanish on the fresh ones.

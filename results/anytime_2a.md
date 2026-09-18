@@ -8,7 +8,7 @@ The comparison of record is against the STRONGEST bank at each deadline (the mos
 
 | deadline | reader (1 model) | bite bank | compact bank | reader minus STRONGEST bank, subject-level | vs bite (runs) | vs compact (runs) |
 |---|---|---|---|---|---|---|
-| 1 s | 76.84 (27) | 74.27 (27) | 74.83 (27) | compact: +2.01 [+0.76, +3.09]  7/0/2  p 0.027 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.082 | +2.57 | +2.01 |
-| 2 s | 83.37 (27) | 81.49 (27) | 81.57 (27) | compact: +1.80 [+0.48, +2.89]  7/1/1  p 0.039 (exact sign-flip (mid-ranks), zeros 1), Holm p 0.082 | +1.88 | +1.80 |
-| 3 s | 84.10 (27) | 82.93 (27) | 83.35 (27) | compact: +0.76 [-0.72, +2.42]  5/1/3  p 0.531 (exact sign-flip (mid-ranks), zeros 1), Holm p 0.531 | +1.17 | +0.76 |
-| 4 s (full trial) | 84.84 (27) | 84.10 (27) | 82.33 (27) | bite: +0.73 [+0.03, +1.59]  6/1/2  p 0.109 (exact sign-flip (mid-ranks), zeros 1) | +0.73 | +2.51 |
+| 1 s | 77.58 (27) | 74.42 (27) | 74.83 (27) | compact: +2.75 [+1.35, +3.95]  8/0/1  p 0.020 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.039 | +3.16 | +2.75 |
+| 2 s | 83.68 (27) | 81.37 (27) | 81.57 (27) | compact: +2.11 [+1.02, +3.00]  8/0/1  p 0.012 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.035 | +2.31 | +2.11 |
+| 3 s | 82.82 (27) | 83.02 (27) | 83.35 (27) | compact: -0.53 [-4.53, +2.35]  5/0/4  p 0.652 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.652 | -0.21 | -0.53 |
+| 4 s (full trial) | 83.50 (27) | 84.10 (27) | 82.33 (27) | bite: -0.60 [-3.45, +1.34]  6/0/3  p 0.652 (exact sign-flip (mid-ranks), zeros 0) | -0.60 | +1.17 |

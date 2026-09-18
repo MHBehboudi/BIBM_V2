@@ -1,11 +1,41 @@
 {
- "mig_pending_runs": 119,
+ "mig_pending_runs": 0,
  "mig_vs_full": {
+  "anytime/reader_anytime": {
+   "pairs": 22,
+   "mean": 1.82606818181818,
+   "se": 1.3548665392075872,
+   "differ": 21
+  },
+  "bank/bite_1s": {
+   "pairs": 23,
+   "mean": -0.1268130434782605,
+   "se": 0.215791004448662,
+   "differ": 17
+  },
+  "bank/bite_2s": {
+   "pairs": 23,
+   "mean": 0.25966521739130327,
+   "se": 0.15590681741270548,
+   "differ": 17
+  },
+  "bank/bite_3s": {
+   "pairs": 23,
+   "mean": -0.022213043478261772,
+   "se": 0.11863920732205648,
+   "differ": 16
+  },
   "cohort/bite": {
-   "pairs": 28,
-   "mean": -0.02480357142857161,
-   "se": 0.0690049661739682,
-   "differ": 13
+   "pairs": 48,
+   "mean": 0.041502083333333495,
+   "se": 0.055837219682377044,
+   "differ": 19
+  },
+  "loso/compact": {
+   "pairs": 8,
+   "mean": -0.004762499999999115,
+   "se": 0.41221596582092573,
+   "differ": 8
   }
  },
  "peak_minus_final": {
@@ -13,57 +43,57 @@
    "runs": 126,
    "mean": 1.8930896825396824
   },
+  "zoo/EEGTCNet": {
+   "runs": 126,
+   "mean": 2.0338841269841272
+  },
   "cohort/compact": {
    "runs": 126,
    "mean": 2.040011111111111
   },
   "cohort/bite": {
    "runs": 126,
-   "mean": 2.081294444444444
-  },
-  "zoo/EEGTCNet": {
-   "runs": 94,
-   "mean": 2.1942340425531914
+   "mean": 2.1029714285714283
   },
   "controls/ff_control": {
    "runs": 84,
    "mean": 2.3241476190476194
   },
-  "zoo/DeepConvNet": {
-   "runs": 95,
-   "mean": 2.685567368421052
-  },
   "zoo/ATCNet": {
-   "runs": 94,
-   "mean": 3.026241489361703
+   "runs": 126,
+   "mean": 2.7289833333333333
+  },
+  "zoo/DeepConvNet": {
+   "runs": 126,
+   "mean": 2.7724325396825393
   },
   "zoo/EEGNet": {
-   "runs": 94,
-   "mean": 3.182263829787234
-  },
-  "zoo/EISATC": {
-   "runs": 94,
-   "mean": 3.2868574468085097
+   "runs": 126,
+   "mean": 2.8151849206349207
   },
   "zoo/MBCNNEATCFNet": {
-   "runs": 94,
-   "mean": 3.4040361702127657
+   "runs": 126,
+   "mean": 3.0220960317460315
   },
   "zoo/FACTNet": {
-   "runs": 64,
-   "mean": 3.4711359375000006
+   "runs": 96,
+   "mean": 3.081140625000001
+  },
+  "zoo/EISATC": {
+   "runs": 126,
+   "mean": 3.1629761904761895
   },
   "zoo/DMSANet": {
-   "runs": 94,
-   "mean": 4.4591
+   "runs": 126,
+   "mean": 3.72871746031746
   },
   "zoo/ShallowConvNet": {
-   "runs": 95,
-   "mean": 4.491771578947368
+   "runs": 126,
+   "mean": 3.745552380952381
   },
   "zoo/EEGNeX": {
-   "runs": 94,
-   "mean": 4.545301063829785
+   "runs": 126,
+   "mean": 4.188269841269841
   },
   "controls/compact_mean": {
    "runs": 84,

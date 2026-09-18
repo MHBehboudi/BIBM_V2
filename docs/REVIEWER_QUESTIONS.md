@@ -1,9 +1,10 @@
 # Questions a reviewer will ask, and where the answer is
 
 Each entry states the concern, what was done about it, the evidence file, and what remains open. Numbers are
-subject-level (seeds averaged per subject) with 95% paired bootstrap CIs unless marked otherwise. Entries marked
-**PENDING** depend on runs launched 2026-09-17 (declared analyses fixed in advance:
-`docs/RUN_CARD_PAPER_COMPLETION.md`); `scripts/rebuild_results.sh` regenerates every file once they land.
+subject-level (seeds averaged per subject) with 95% paired bootstrap CIs unless marked otherwise. The runs launched 2026-09-17 under
+`docs/RUN_CARD_PAPER_COMPLETION.md` (HGD baseline zoo, cross-subject seeds 2026-27, BiTE at `--clip 0`, and the
+full-GPU re-run of every cell that had run on a MIG slice) have all landed and every file below is rebuilt from
+its complete record. What remains open is marked **Open** and is open for a stated reason, not for a missing run.
 
 ## 1. Does READER beat the state of the art?
 
@@ -13,15 +14,17 @@ comparison is paired rather than against single-seed published numbers. Our seed
 published seed-2025 table closely (mean absolute gap about 1 pp), so the harness does not handicap the baselines.
 Evidence: `results/MAIN_TABLE.md`, `results/model_zoo/MODEL_ZOO.md`, `results/figures/fig_reader_vs_zoo.pdf`.
 
-**Answer, stated as it is.** READER minus BiTE (re-run): 2a +0.60 [−0.80, +1.94], 2b −0.92 [−1.88, +0.08],
-HGD +0.73 [−0.02, +1.59], SD-SSVEP +1.94 [+0.72, +3.39]. At the endpoint READER is at **parity with BiTE on motor
+**Answer, stated as it is.** READER minus BiTE (re-run): 2a +0.60 [−0.80, +1.94], 2b −0.89 [−1.84, +0.10],
+HGD +0.77 [+0.03, +1.60], SD-SSVEP +1.94 [+0.72, +3.39]. At the endpoint READER is at **parity with BiTE on motor
 imagery** (both intervals span zero, 2b leans to BiTE) and ahead of BiTE on SD-SSVEP (Holm p .047 over the eleven
 SD-SSVEP comparisons). It beats every other re-run baseline on 2a and 2b, and is level with DeepConvNet on SD-SSVEP
-(−0.33 [−1.56, +0.67]). Against the published single-seed bars it is −0.63 (2a), −1.96 (2b), +0.37 (HGD), +0.67
+(−0.33 [−1.61, +0.67]). READER ranks 1 of 12 on 2a and HGD and 2 of 12 on 2b and
+SD-SSVEP, and is first on the corpus-balanced mean (90.90 vs BiTE 90.29). Against the published single-seed bars it is −0.63 (2a), −1.96 (2b), +0.37 (HGD), +0.67
 (SD-SSVEP). The paper's claim is therefore not "higher endpoint accuracy everywhere" but endpoint parity or
 better **plus** a legal decision at every deadline from one model (sections 5–6).
 
-**Open.** The HGD zoo wave is PENDING.
+**Open.** On HGD the strongest re-run baseline is DMSANet (96.11), not BiTE, and READER − DMSANet is
++0.19 [−1.69, +1.79], 8/0/6 — rank 1 on HGD is not a significant margin and is not claimed as one.
 
 ## 2. Is the gain just extra parameters or a second branch?
 
@@ -94,18 +97,31 @@ Evidence: `results/DEVELOPMENT_DISCLOSURE.md`.
 
 ## 9. Cross-subject evaluation is a single seed
 
-**PENDING (3 seeds).** Seeds 2026 and 2027 for READER and Compact, and all three seeds for BiTE. A defect was
-found and fixed while doing this: the first BiTE cross-subject seed was trained with gradient clip 5 (our trainer's
-default), while BiTE's release does not clip and every within-subject BiTE run uses `--clip 0`. The clip-5 runs
-are kept in the table in italics as superseded. Seed-2025 state: parity, SD-SSVEP READER − Compact +1.11
-[+0.06, +2.11]. Evidence: `results/CROSS_SUBJECT.md`.
+**Done, 3 seeds.** A defect was found and fixed while doing this: the first BiTE cross-subject seed was trained
+with gradient clip 5 (our trainer's default), while BiTE's release does not clip and every within-subject BiTE run
+uses `--clip 0`. All three BiTE seeds were re-run at `--clip 0`; the clip-5 runs stay in the table in italics as
+superseded. Result over 3 seeds: READER − BiTE is −0.23 [−2.58, +2.01] on 2a, −0.32 [−1.53, +1.02] on 2b and
++1.63 [−0.15, +3.50] on SD-SSVEP — **parity, every interval spanning zero**. READER − Compact is +0.98
+[+0.20, +1.70] on 2a and +0.93 [−0.46, +2.46] on SD-SSVEP. The prefix-reversed branch is a within-subject result
+and is not claimed to transfer across subjects. Evidence: `results/CROSS_SUBJECT.md`.
+
+**Open.** BiTE's ten baselines were not run cross-subject. A LOSO run costs 1.15 GPU-h against 0.32 within-subject,
+so that zoo is about 965 GPU-h against the 290 already spent; the cross-subject table is presented as a
+three-model comparison rather than implied to be a zoo.
 
 ## 10. GPU nondeterminism
 
-**Measured; re-runs in progress.** H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45). MIG-partitioned
-slices do not (one READER 2a run moved 5.56 pp). 147 runs of comparisons of record ran on MIG slices; each is re-run
-on H200 and the re-run becomes the record. So far 28 BiTE pairs (all 27 within-subject 2a runs and one more): MIG
-minus full GPU −0.02 pp (se 0.07), 13 pairs identical, i.e. noise without bias. 119 re-runs are PENDING. Evidence: `results/REPRODUCIBILITY.md`,
+**Done, all 147 pairs.** H100 80GB and H200 NVL reproduce each other bit-for-bit (45/45). MIG-partitioned slices do
+not. Every one of the 147 runs of a comparison of record that had run on a MIG slice was re-run on an H200 and the
+re-run is now the record; the MIG original is kept under `runs/mig/` so the pair can be compared. MIG minus full
+GPU, by arm: within-subject BiTE +0.04 pp (se 0.06, 48 pairs), BiTE anytime banks −0.13 / +0.26 / −0.02 (se ≤ 0.22,
+23 pairs each), LOSO Compact −0.00 (se 0.41, 8 pairs) — **noise without bias**.
+
+**The exception, stated plainly:** READER's prefix-supervised anytime arm moved +1.83 pp (se 1.35) over its 22
+pairs, with 21 of 22 differing and a mean absolute difference of 3.08 pp. READER's 2a training is the least
+reproducible thing in this repository (see also the seed spread in `results/ERROR_ANALYSIS.md`: 1.91 pp SD across
+seeds against BiTE's 1.34). This is why the record uses the full-GPU re-runs and why the anytime intervals are
+reported with subject-level CIs rather than point estimates. Evidence: `results/REPRODUCIBILITY.md`,
 `results/raw/record_provenance.csv` (which GPU and which rule selected every run).
 
 ## 11. Final-epoch reporting without a validation set
@@ -141,6 +157,27 @@ trained with `--clip 0`. The seed-2025 re-runs track BiTE's published table with
 
 ## 15. HGD coverage
 
-HGD has the endpoint comparison (READER, Compact, BiTE, zoo PENDING) and the gate interventions, but no
+HGD has the full endpoint comparison (READER, Compact, BiTE and all ten baselines, 3 seeds) and the gate
+interventions, but no
 FF-Control, Compact-Mean, exact-duration, prefix-supervision or bank runs: its 14 subjects make each READER run
 about one GPU-hour. Stated as a limitation.
+
+## 16. Per-class behaviour, calibration, and are the errors even different?
+
+**Done, without a GPU.** Every run of record stores its final-epoch test logits, and those logits reproduce the
+accuracy in the run's `summary.json` exactly (checked for all 2,647 runs; a mismatch aborts the script). So the
+class-level and confidence-level analyses are the same runs at the same epoch as the main table, not a second
+measurement. Evidence: `results/ERROR_ANALYSIS.md`, `results/error_analysis.json`,
+`results/figures/fig_confusion.pdf`, `fig_complementarity.pdf`, `fig_calibration.pdf`.
+
+- **No collapsed class.** READER's per-class recall spread is 5.9 pp on 2a and 8.7 on SD-SSVEP, against BiTE's
+  6.6 and 17.3 (BiTE's twelfth SSVEP class falls to 81.3 where READER holds 90.7).
+- **Calibration.** Every arm, including the baselines, is **under**-confident on every corpus (READER 2a
+  −15.4 pp, SD-SSVEP −33.2). That is the expected direction for label smoothing 0.1 and grows with class count,
+  so it is a property of the shared recipe, not of the architecture. The consequence is real anyway: a confidence
+  threshold tuned on one corpus does not transfer, which matters for any deployment that stops early when sure.
+- **READER and BiTE fail on different trials.** On 2a they disagree on 13.2% of test trials (6.9 only READER,
+  6.3 only BiTE) and both miss only 9.0%. An oracle over the two is +6.30 pp [+4.19, +8.55] above READER, 9/9
+  subjects; averaging the two softmax outputs is +1.79 [+0.95, +2.80]. This is reported as a diagnostic and not
+  as a proposed system: it needs both models at inference, which is exactly the cost this paper removes. It does
+  say that the endpoint parity in section 1 is not two models making the same predictions.

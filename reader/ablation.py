@@ -46,10 +46,25 @@ def load_arm(arm_dir: Path):
     return out
 
 
+def _field(summary, key):
+    """The value of a matched field, normalised across harness versions.
+
+    `protocol` gained a descriptive `name` ("within" / "loso") after some of the runs of record were
+    trained, so the same protocol serialises two ways and a raw dict comparison fails on runs that
+    are identical in substance. The name is dropped here and nothing else is: the distinction it
+    carries is also carried by `train_role` and `test_role`, which stay in the comparison, so a
+    within-subject arm still cannot match a cross-subject one.
+    """
+    v = summary.get(key)
+    if key == "protocol" and isinstance(v, dict):
+        return {k: x for k, x in v.items() if k != "name"}
+    return v
+
+
 def _matched(a, b, keys):
     """The ablation is only an ablation if one thing differs. Verify it."""
     sa, sb = a[keys[0]][0], b[keys[0]][0]
-    diffs = {k: (sa.get(k), sb.get(k)) for k in MATCH_ON if sa.get(k) != sb.get(k)}
+    diffs = {k: (_field(sa, k), _field(sb, k)) for k in MATCH_ON if _field(sa, k) != _field(sb, k)}
     if diffs:
         raise SystemExit(f"arms differ in more than the loss: {diffs}")
     wa, wb = sa.get("prefix_weight"), sb.get("prefix_weight")

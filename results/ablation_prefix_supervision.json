@@ -11,43 +11,43 @@
      "token_ends_ms": 1024.0,
      "is_endpoint": false,
      "endpoint_only": 70.28034991688199,
-     "prefix_supervised": 76.83899226012053,
-     "paired_delta": 6.558642343238548,
-     "se": 0.9450797891679145,
-     "wins": 24,
-     "losses": 3
+     "prefix_supervised": 77.58487705831175,
+     "paired_delta": 7.30452714142976,
+     "se": 0.9142563890309422,
+     "wins": 26,
+     "losses": 1
     },
     "2": {
      "token_index": 15,
      "token_ends_ms": 2048.0,
      "is_endpoint": false,
      "endpoint_only": 82.16306589267872,
-     "prefix_supervised": 83.37191365383289,
-     "paired_delta": 1.2088477611541748,
-     "se": 0.4957004620024712,
-     "wins": 15,
-     "losses": 9
+     "prefix_supervised": 83.68055511403966,
+     "paired_delta": 1.5174892213609483,
+     "se": 0.4222789628014884,
+     "wins": 18,
+     "losses": 6
     },
     "3": {
      "token_index": 23,
      "token_ends_ms": 3072.0,
      "is_endpoint": false,
      "endpoint_only": 82.12448535142121,
-     "prefix_supervised": 84.10493819801896,
-     "paired_delta": 1.9804528465977422,
-     "se": 1.0668862315427596,
+     "prefix_supervised": 82.81892935434978,
+     "paired_delta": 0.6944440029285572,
+     "se": 0.9081342182325493,
      "wins": 16,
-     "losses": 9
+     "losses": 10
     },
     "4": {
      "token_index": 31,
      "token_ends_ms": 4096.0,
      "is_endpoint": true,
      "endpoint_only": 84.70936218897502,
-     "prefix_supervised": 84.83796296296296,
-     "paired_delta": 0.1286007739879467,
-     "se": 0.5419692298390272,
-     "wins": 9,
+     "prefix_supervised": 83.50051464857879,
+     "paired_delta": -1.208847540396231,
+     "se": 0.780685427837287,
+     "wins": 8,
      "losses": 15
     }
    }
@@ -61,31 +61,31 @@
      "token_ends_ms": 1024.0,
      "is_endpoint": false,
      "endpoint_only": 70.78538404570685,
-     "prefix_supervised": 75.920965274175,
-     "paired_delta": 5.135581228468153,
-     "se": 1.8096094096483282,
+     "prefix_supervised": 75.89781725848162,
+     "paired_delta": 5.112433212774771,
+     "se": 1.8190245125260296,
      "wins": 18,
-     "losses": 8
+     "losses": 9
     },
     "2": {
      "token_index": 15,
      "token_ends_ms": 2048.0,
      "is_endpoint": false,
      "endpoint_only": 82.67195710429439,
-     "prefix_supervised": 83.6226847436693,
-     "paired_delta": 0.9507276393749096,
-     "se": 0.5922200209116633,
-     "wins": 13,
-     "losses": 11
+     "prefix_supervised": 83.56481459405687,
+     "paired_delta": 0.8928574897624828,
+     "se": 0.6062071456291256,
+     "wins": 14,
+     "losses": 12
     },
     "3": {
      "token_index": 23,
      "token_ends_ms": 3072.0,
      "is_endpoint": false,
      "endpoint_only": 85.68948396929989,
-     "prefix_supervised": 85.4183194813905,
-     "paired_delta": -0.2711644879093877,
-     "se": 0.3499228428372036,
+     "prefix_supervised": 85.32572697710108,
+     "paired_delta": -0.3637569921988028,
+     "se": 0.3592881832669271,
      "wins": 8,
      "losses": 15
     },
@@ -94,11 +94,11 @@
      "token_ends_ms": 4096.0,
      "is_endpoint": true,
      "endpoint_only": 86.41038338343303,
-     "prefix_supervised": 85.7407408731955,
-     "paired_delta": -0.6696425102375172,
-     "se": 0.4168031178813954,
-     "wins": 7,
-     "losses": 18
+     "prefix_supervised": 85.59027799853573,
+     "paired_delta": -0.8201053848973027,
+     "se": 0.4268657377651332,
+     "wins": 6,
+     "losses": 19
     }
    }
   },

@@ -5,7 +5,7 @@
 | corpus | reader | compact | bite | ff_control | compact_mean |
 |---|---:|---:|---:|---:|---:|
 | 2a | 84.71 +/- 8.27 (n=9, runs=27) | 82.33 +/- 10.06 (n=9, runs=27) | 84.10 +/- 8.04 (n=9, runs=27) | 83.08 +/- 9.25 (n=9, runs=27) | 72.36 +/- 16.85 (n=9, runs=27) |
-| 2b | 86.41 +/- 7.30 (n=9, runs=27) | 85.32 +/- 8.06 (n=9, runs=27) | 87.33 +/- 7.14 (n=9, runs=27) | 85.15 +/- 8.19 (n=9, runs=27) | 85.05 +/- 9.31 (n=9, runs=27) |
+| 2b | 86.41 +/- 7.30 (n=9, runs=27) | 85.32 +/- 8.06 (n=9, runs=27) | 87.30 +/- 7.22 (n=9, runs=27) | 85.15 +/- 8.19 (n=9, runs=27) | 85.05 +/- 9.31 (n=9, runs=27) |
 | sdssvep | 96.17 +/- 7.89 (n=10, runs=30) | 94.11 +/- 11.13 (n=10, runs=30) | 94.22 +/- 8.69 (n=10, runs=30) | 94.17 +/- 11.11 (n=10, runs=30) | 66.44 +/- 23.62 (n=10, runs=30) |
 
 ## Endpoint: READER minus comparator, subject-level (family of 12, Holm applied)
@@ -15,7 +15,7 @@ mean d [95% bootstrap CI]  subject W/T/L  Wilcoxon p
 | corpus | vs compact | vs ff_control | vs compact_mean | vs bite |
 |---|---|---|---|---|
 | 2a | +2.38 [+0.23, +4.63]  6/0/3  p 0.098 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.488 | +1.63 [+0.27, +3.07]  6/0/3  p 0.105 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.488 | +12.35 [+6.94, +18.58]  9/0/0  p 0.004 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.043 | +0.60 [-0.81, +1.93]  6/0/3  p 0.426 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.852 |
-| 2b | +1.09 [+0.39, +1.79]  7/0/2  p 0.031 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.281 | +1.26 [+0.34, +2.19]  8/0/1  p 0.055 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.383 | +1.36 [-0.79, +3.57]  6/0/3  p 0.438 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.852 | -0.92 [-1.91, +0.06]  2/0/7  p 0.137 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.488 |
+| 2b | +1.09 [+0.39, +1.79]  7/0/2  p 0.031 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.281 | +1.26 [+0.34, +2.19]  8/0/1  p 0.055 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.383 | +1.36 [-0.79, +3.57]  6/0/3  p 0.438 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.852 | -0.89 [-1.86, +0.09]  2/0/7  p 0.137 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.488 |
 | sdssvep | +2.06 [+0.33, +4.39]  5/5/0  p 0.062 (exact sign-flip (mid-ranks), zeros 5), Holm p 0.383 | +2.00 [+0.50, +4.17]  6/4/0  p 0.031 (exact sign-flip (mid-ranks), zeros 4), Holm p 0.281 | +29.72 [+19.00, +41.06]  10/0/0  p 0.002 (exact sign-flip (mid-ranks), zeros 0), Holm p 0.023 | +1.94 [+0.78, +3.44]  7/3/0  p 0.016 (exact sign-flip (mid-ranks), zeros 3), Holm p 0.156 |
 
 ## Exact-duration, same-checkpoint accuracy: 2a (runs: READER 27, compact 27, ff_control 27, compact_mean 27, bite 27)
@@ -100,9 +100,9 @@ READER (one endpoint-trained checkpoint, exact duration) minus separately retrai
 
 | family | samples | specialist mean | READER - specialist |
 |---|---:|---:|---|
-| bite | 250 | 74.27 | -4.17 [-5.39, -2.62]  1/0/8  p 0.008 (exact sign-flip (mid-ranks), zeros 0) |
-| bite | 500 | 81.49 | +0.55 [-0.60, +1.74]  5/0/4  p 0.426 (exact sign-flip (mid-ranks), zeros 0) |
-| bite | 750 | 82.93 | -0.95 [-4.41, +1.13]  5/0/4  p 0.570 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 250 | 74.42 | -4.32 [-5.71, -2.66]  1/0/8  p 0.008 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 500 | 81.37 | +0.68 [-0.59, +1.98]  5/0/4  p 0.426 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 750 | 83.02 | -1.04 [-4.59, +1.13]  5/0/4  p 0.652 (exact sign-flip (mid-ranks), zeros 0) |
 | bite | 1000 | 84.10 | +0.60 [-0.80, +1.90]  6/0/3  p 0.426 (exact sign-flip (mid-ranks), zeros 0) |
 | compact | 250 | 74.83 | -4.73 [-7.19, -2.49]  0/0/9  p 0.004 (exact sign-flip (mid-ranks), zeros 0) |
 | compact | 500 | 81.57 | +0.48 [-0.82, +1.76]  5/0/4  p 0.477 (exact sign-flip (mid-ranks), zeros 0) |
@@ -113,14 +113,14 @@ READER (one endpoint-trained checkpoint, exact duration) minus separately retrai
 
 | samples | seconds | READER | compact | ff_control | compact_mean | bite |
 |---:|---:|---:|---:|---:|---:|---:|
-| 125 | 0.500 | 56.52 | 49.66 | 49.28 | 50.42 | 52.94 |
-| 250 | 1.000 | 70.86 | 54.33 | 54.57 | 62.67 | 68.05 |
-| 375 | 1.500 | 79.73 | 69.32 | 67.05 | 77.58 | 80.13 |
-| 500 | 2.000 | 82.99 | 71.55 | 70.11 | 81.74 | 83.17 |
-| 625 | 2.500 | 84.68 | 71.47 | 72.81 | 83.25 | 83.24 |
-| 750 | 3.000 | 85.41 | 73.82 | 75.73 | 84.19 | 82.28 |
-| 875 | 3.500 | 85.86 | 74.97 | 77.52 | 84.69 | 80.10 |
-| 1000 | 4.000 | 86.41 | 85.32 | 85.15 | 85.05 | 87.33 |
+| 125 | 0.500 | 56.52 | 49.66 | 49.28 | 50.42 | 53.08 |
+| 250 | 1.000 | 70.86 | 54.33 | 54.57 | 62.67 | 68.16 |
+| 375 | 1.500 | 79.73 | 69.32 | 67.05 | 77.58 | 80.25 |
+| 500 | 2.000 | 82.99 | 71.55 | 70.11 | 81.74 | 83.00 |
+| 625 | 2.500 | 84.68 | 71.47 | 72.81 | 83.25 | 83.19 |
+| 750 | 3.000 | 85.41 | 73.82 | 75.73 | 84.19 | 82.18 |
+| 875 | 3.500 | 85.86 | 74.97 | 77.52 | 84.69 | 80.18 |
+| 1000 | 4.000 | 86.41 | 85.32 | 85.15 | 85.05 | 87.30 |
 
 READER minus compact (same checkpoints, subject-level, pointwise 95% CI from whole-curve bootstrap):
 
@@ -165,14 +165,14 @@ READER minus bite (same checkpoints, subject-level, pointwise 95% CI from whole-
 
 | samples | mean d | 95% CI |
 |---:|---:|---|
-| 125 | +3.58 | [-0.38, +7.86] |
-| 250 | +2.81 | [-2.21, +7.68] |
-| 375 | -0.39 | [-3.09, +1.50] |
-| 500 | -0.18 | [-2.52, +2.03] |
-| 625 | +1.44 | [-0.18, +3.43] |
-| 750 | +3.13 | [+1.37, +5.00] |
-| 875 | +5.76 | [+2.31, +9.47] |
-| 1000 | -0.92 | [-1.91, +0.07] |
+| 125 | +3.45 | [-0.41, +7.71] |
+| 250 | +2.70 | [-2.35, +7.64] |
+| 375 | -0.52 | [-3.15, +1.30] |
+| 500 | -0.01 | [-2.37, +2.26] |
+| 625 | +1.49 | [-0.13, +3.46] |
+| 750 | +3.23 | [+1.46, +5.10] |
+| 875 | +5.68 | [+2.27, +9.38] |
+| 1000 | -0.89 | [-1.85, +0.09] |
 
 Gate interventions on trained READER (2b): accuracy at forced g minus learned-gate accuracy, subject-level mean [95% CI]
 
@@ -191,10 +191,10 @@ READER (one endpoint-trained checkpoint, exact duration) minus separately retrai
 
 | family | samples | specialist mean | READER - specialist |
 |---|---:|---:|---|
-| bite | 250 | 77.42 | -6.56 [-11.95, -2.50]  2/0/7  p 0.020 (exact sign-flip (mid-ranks), zeros 0) |
-| bite | 500 | 85.24 | -2.25 [-4.59, -0.54]  2/0/7  p 0.039 (exact sign-flip (mid-ranks), zeros 0) |
-| bite | 750 | 86.86 | -1.45 [-2.21, -0.59]  2/0/7  p 0.027 (exact sign-flip (mid-ranks), zeros 0) |
-| bite | 1000 | 87.33 | -0.92 [-1.91, +0.08]  2/0/7  p 0.137 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 250 | 77.37 | -6.51 [-11.86, -2.48]  2/0/7  p 0.020 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 500 | 85.15 | -2.16 [-4.55, -0.37]  2/0/7  p 0.059 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 750 | 86.79 | -1.38 [-2.08, -0.59]  2/0/7  p 0.020 (exact sign-flip (mid-ranks), zeros 0) |
+| bite | 1000 | 87.30 | -0.89 [-1.85, +0.11]  2/0/7  p 0.137 (exact sign-flip (mid-ranks), zeros 0) |
 
 ## Exact-duration, same-checkpoint accuracy: sdssvep (runs: READER 30, compact 30, ff_control 30, compact_mean 30, bite 30)
 

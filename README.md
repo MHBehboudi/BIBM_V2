@@ -21,6 +21,9 @@ reversed over the prefix is not.
 **Where everything is.** `results/README.md` maps every paper table and figure to its file and script;
 `docs/REVIEWER_QUESTIONS.md` answers the questions a reviewer will ask, with evidence and open items;
 `results/raw/runs.csv` holds every run so any number can be recomputed without a GPU.
+**`results/dashboard.html`** is a single self-contained page over all of it — open it in a browser, no server and
+no network: pick a corpus and see where READER sits among twelve models, which subjects the mean is made of, what
+it does before the trial ends, and which trials it gets wrong.
 
 ## Results
 
@@ -34,35 +37,44 @@ subjects. Strongest re-run baselines shown; all eleven are in `results/MAIN_TABL
 
 | model | params (2a) | 2a | 2b | HGD | SD-SSVEP |
 |---|---:|---:|---:|---:|---:|
-| ATCNet (re-run) | 113.7K | 81.29 ± 8.46 | 84.07 ± 8.81 | pending | 85.33 ± 17.57 |
-| MBCNNEATCFNet (re-run) | 29.5K | 81.76 ± 7.87 | 84.40 ± 7.91 | pending | 94.22 ± 7.29 |
-| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | pending | **96.50** ± 7.77 |
-| BiTE (re-run) | 16.3K | 84.10 ± 8.04 | **87.33** ± 7.14 | 95.57 ± 3.40 | 94.22 ± 8.69 |
+| ATCNet (re-run) | 113.7K | 81.29 ± 8.46 | 84.07 ± 8.81 | 95.67 ± 2.99 | 85.33 ± 17.57 |
+| MBCNNEATCFNet (re-run) | 29.5K | 81.76 ± 7.87 | 84.40 ± 7.91 | 93.72 ± 4.00 | 94.22 ± 7.29 |
+| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | 93.68 ± 3.23 | **96.50** ± 7.77 |
+| BiTE (re-run) | 16.3K | 84.10 ± 8.04 | **87.30** ± 7.14 | 95.53 ± 3.41 | 94.22 ± 8.69 |
 | BiTE (published, 1 seed) | 14.5K | 85.34 | 88.37 | 95.93 | 94.16 |
 | Compact (READER without the reversed branch) | 17.8K | 82.33 ± 10.06 | 85.32 ± 8.06 | 95.69 ± 2.73 | 94.11 ± 11.13 |
 | **READER** | 21.0K | **84.71** ± 8.27 | 86.41 ± 7.30 | **96.30** ± 2.79 | 96.17 ± 7.89 |
 
-READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.60 [−0.80, +1.94], 2b −0.92 [−1.88, +0.08],
-HGD +0.73 [−0.02, +1.59], SD-SSVEP +1.94 [+0.72, +3.39]. **At the endpoint READER is at parity with BiTE on motor
+READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.60 [−0.80, +1.94], 2b −0.89 [−1.84, +0.10],
+HGD +0.77 [+0.03, +1.60], SD-SSVEP +1.94 [+0.72, +3.39]. **At the endpoint READER is at parity with BiTE on motor
 imagery and ahead of it on SD-SSVEP**; it is above every other re-run baseline on 2a and 2b, and level with the
 re-run DeepConvNet on SD-SSVEP (READER − DeepConvNet −0.33 [−1.56, +0.67], 3/4/3 subjects). Against the published
-single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). The HGD zoo wave is still
-training; `scripts/rebuild_results.sh` fills it in.
+single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). **READER ranks 1 of 12 on 2a
+and HGD and 2 of 12 on 2b and SD-SSVEP, and is first on the corpus-balanced mean (90.90 against BiTE's 90.29).**
+On HGD the strongest re-run baseline is DMSANet (96.11), not BiTE, and READER − DMSANet is +0.19 [−1.69, +1.79]:
+rank 1 there is not a significant margin.
 
 ### Cross-subject (`results/CROSS_SUBJECT.md`)
 
-Leave-one-subject-out as BiTE defines it; BiTE publishes no HGD row. Seed 2025 so far:
+Leave-one-subject-out as BiTE defines it; BiTE publishes no HGD row. **Three seeds, complete**, BiTE trained at
+`--clip 0` as released:
 
 | model | 2a | 2b | SD-SSVEP |
 |---|---:|---:|---:|
-| BiTE (published) | **64.56** | 76.44 | 79.72 |
-| Compact | 59.66 | **76.65** | 80.11 |
-| **READER** | 60.36 | 75.83 | **81.22** |
+| BiTE (re-run, 3 seeds) | **61.32** ± 12.83 | 76.17 ± 6.29 | 78.94 ± 20.79 |
+| Compact | 60.11 ± 14.44 | **76.48** ± 6.48 | 79.65 ± 21.69 |
+| **READER** | 61.10 ± 14.36 | 75.86 ± 6.86 | **80.57** ± 21.41 |
+| BiTE (published, 1 seed) | 64.56 | 76.44 | 79.72 |
 
-Parity, with SD-SSVEP READER − Compact +1.11 [+0.06, +2.11]. Seeds 2026-2027 are training. The first BiTE
-cross-subject runs were found to use gradient clip 5 (our trainer's default) whereas BiTE's release does not clip;
-all three BiTE seeds are being re-run at `--clip 0` and the clip-5 numbers (61.11 / 76.08 / 79.44) are marked
-superseded.
+**Parity on all three, and none of the three architectures transfers across subjects the way it does within one.**
+READER − BiTE: 2a −0.23 [−2.58, +2.01], 2b −0.32 [−1.53, +1.02], SD-SSVEP +1.63 [−0.15, +3.50] — every CI spans
+zero. The prefix-reversed branch is a within-subject result; we do not claim a cross-subject one. The first BiTE
+seed was trained at gradient clip 5 (our trainer's default) whereas BiTE's release does not clip; all three seeds
+were re-run at `--clip 0` and the clip-5 numbers (61.11 / 76.08 / 79.44) are marked superseded in the table.
+
+The ten baselines were **not** run cross-subject: at the measured 1.15 GPU-h per LOSO run that zoo is ~965 GPU-h,
+against 290 for the three models above. The cross-subject comparison of record is therefore READER, Compact and
+BiTE only, and it is stated that way rather than implied to be a zoo.
 
 ### Anytime: one model against retrained per-deadline specialists (`results/anytime_*.md`)
 
@@ -94,6 +106,23 @@ zero but do not survive correction. An earlier version of this table headlined t
 READER is level with BiTE's SSVEP bank but Compact models retrained at each deadline beat it. On 2b READER trails
 BiTE's bank by a flat −1.50 / −1.62 / −1.44 / −1.59 at 1 / 2 / 3 / 4 s, which is BiTE's endpoint lead
 (`results/anytime_2b.md`). **One READER replacing the bank without losing accuracy is therefore a 2a result.**
+
+### Beyond accuracy: classes, confidence and whose errors (`results/ERROR_ANALYSIS.md`)
+
+Computed from the final-epoch test logits stored with every run, which reproduce each run's reported accuracy
+exactly — same runs, same epoch, no GPU.
+
+- **Per-class recall.** No arm has a collapsed class. READER's worst-to-best spread is 5.9 pp on 2a and 8.7 on
+  SD-SSVEP, against BiTE's 6.6 and 17.3; BiTE's twelfth SSVEP class falls to 81.3 where READER holds 90.7.
+- **Calibration.** Every arm is **under**-confident on every corpus (2a −15.4 pp, SD-SSVEP −33.2), the expected
+  direction for label smoothing 0.1 rather than a property of the architecture. A confidence threshold tuned on
+  one corpus will not transfer to another — which matters for any system that stops early when it is sure.
+- **READER and BiTE make different mistakes.** On 2a they disagree on 13.2% of trials (6.9 only READER, 6.3 only
+  BiTE) and both miss only 9.0%. The oracle over the two is +6.30 pp [+4.19, +8.55] above READER, 9/9 subjects;
+  averaging their softmax outputs is +1.79 [+0.95, +2.80]. That is reported as a diagnostic, not a system: it
+  needs both models at inference, which is the cost this paper set out to remove.
+- **Re-run noise.** READER's 2a accuracy moves 1.91 pp SD across seeds within a subject (max 5.54), against BiTE's
+  1.34. Every delta in this repository is a difference of numbers with that much spread underneath it.
 
 ### Ablations (`results/ABLATION.md`)
 
