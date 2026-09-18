@@ -6,7 +6,7 @@
 #     -> results/MAIN_TABLE.md, CROSS_SUBJECT.md, DEVELOPMENT_DISCLOSURE.md, REPRODUCIBILITY.md
 #     -> results/anytime_{2a,2b,sdssvep}.md    one model vs retrained per-deadline banks
 #     -> results/exact_duration.json, subject_stats/, ABLATION.md, ablation_prefix_supervision.md
-#     -> results/model_zoo/, gate_intervention.md, figures/
+#     -> results/model_zoo/, gate_intervention.md, ERROR_ANALYSIS.md, figures/, dashboard.html
 # EFFICIENCY.md is measured separately (scripts/efficiency.py): it times models, so run it on an idle CPU.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -44,5 +44,7 @@ done
 "$PY" reader/subject_stats.py
 "$PY" scripts/ablation_table.py
 "$PY" reader/zoo_report.py
+"$PY" reader/error_analysis.py
 "$PY" scripts/make_figures.py
+"$PY" scripts/make_dashboard.py          # reads the files above; must run last
 echo "results/ rebuilt"

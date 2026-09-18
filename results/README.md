@@ -5,27 +5,30 @@ Everything the paper reports, where it lives, and what produces it. All files ar
 `raw/runs.csv`, `raw/anytime_curves.csv`, `exact_duration.json` and `gate_intervention.json`, so every number
 can be checked without a GPU or the EEG data.
 
-Status legend: **final** = all runs present; **PENDING** = runs launched 2026-09-17 still training (the file
-is complete for what exists and marks the rest as pending).
+Status legend: **final** = all runs present. The runs launched 2026-09-17 (HGD baseline zoo, cross-subject
+seeds 2026-27, BiTE at `--clip 0`, and the full-GPU re-runs of every cell that had run on a MIG slice) have
+all landed, so every table below is now computed from its complete record.
 
 ## Paper tables
 
 | paper element | file | produced by | status |
 |---|---|---|---|
-| Main within-subject table: READER vs every baseline re-run with 3 seeds, kappa, published bars | `MAIN_TABLE.md`, `main_table.json` | `scripts/paper_tables.py` | final on 2a / 2b / SD-SSVEP; HGD zoo wave PENDING |
-| Per-subject model zoo, READER minus each model (Holm within corpus) | `model_zoo/MODEL_ZOO.md`, `model_zoo.json` | `reader/zoo_report.py` | as above |
-| READER / Compact / BiTE paired means (legacy summary) | `within_subject.json` | `scripts/score.py` | final (BiTE 2a replaced by full-GPU re-runs; 2b / HGD MIG re-runs PENDING) |
-| Cross-subject (LOSO), 3 seeds | `CROSS_SUBJECT.md`, `cross_subject.json` | `scripts/paper_tables.py` | seed 2025 for READER / Compact; seeds 2026-27 and all BiTE seeds (`--clip 0`) PENDING |
-| Anytime: one READER vs retrained per-deadline specialists | `anytime_2a.md`, `anytime_2b.md`, `anytime_sdssvep.md` (+ `.json`) | `reader/anytime.py` | 2a / 2b / SD-SSVEP final (MIG re-runs of 2a / 2b bank and READER runs PENDING) |
+| Main within-subject table: READER vs every baseline re-run with 3 seeds, kappa, published bars | `MAIN_TABLE.md`, `main_table.json` | `scripts/paper_tables.py` | final (all four corpora, 12 models) |
+| Per-subject model zoo, READER minus each model (Holm within corpus) | `model_zoo/MODEL_ZOO.md`, `model_zoo.json` | `reader/zoo_report.py` | final |
+| READER / Compact / BiTE paired means (legacy summary) | `within_subject.json` | `scripts/score.py` | final (every MIG cell replaced by its full-GPU re-run) |
+| Cross-subject (LOSO), 3 seeds | `CROSS_SUBJECT.md`, `cross_subject.json` | `scripts/paper_tables.py` | final (3 seeds; BiTE at `--clip 0`; the 10 baselines were not run cross-subject — see below) |
+| Anytime: one READER vs retrained per-deadline specialists | `anytime_2a.md`, `anytime_2b.md`, `anytime_sdssvep.md` (+ `.json`) | `reader/anytime.py` | final |
 | Anytime with the endpoint-trained READER (not the headline arm) | `anytime_2a_endpoint_supervised.md` | `reader/anytime.py --reader runs/cohort/reader` | final |
-| Ablations: architecture (A), inference interventions (B), loss (C), matched-loss | `ABLATION.md`, `ablation.json` | `scripts/ablation_table.py` | final (MIG re-runs of 22 READER+PS runs PENDING) |
+| Ablations: architecture (A), inference interventions (B), loss (C), matched-loss | `ABLATION.md`, `ablation.json` | `scripts/ablation_table.py` | final |
 | Prefix supervision on READER, token-grid detail | `ablation_prefix_supervision.md` | `reader/ablation.py` | final |
 | Gate interventions (fusion load-bearing, gate learning absorbable) | `gate_intervention.md` | `reader/gate_intervention.py` | final |
 | Subject-level statistics: 12 endpoint + 12 prefix tests, Holm, exact-duration curves | `subject_stats/SUBJECT_STATS.md` | `reader/subject_stats.py` | final |
-| Same-checkpoint accuracy on truncated input + causality on trained weights | `exact_duration.json` | `reader/exact_duration.py` + `scripts/collect_exact_duration.py` | final (BiTE 2a recomputed when its re-runs land) |
+| Same-checkpoint accuracy on truncated input + causality on trained weights | `exact_duration.json` | `reader/exact_duration.py` + `scripts/collect_exact_duration.py` | final (recomputed for every replaced run) |
 | Parameters and CPU latency per decision; bank size | `EFFICIENCY.md`, `efficiency.json` | `scripts/efficiency.py` (timing: run on an idle CPU) | parameters final; latency PROVISIONAL (shared-node timings varied up to 3×) |
 | Screen subjects vs fresh subjects (test-informed development) | `DEVELOPMENT_DISCLOSURE.md` | `scripts/paper_tables.py` | final |
-| GPU per run, MIG vs full-GPU re-runs, peak-to-final decay | `REPRODUCIBILITY.md` | `scripts/paper_tables.py` | MIG comparison: 28 BiTE pairs done, 119 PENDING |
+| GPU per run, MIG vs full-GPU re-runs, peak-to-final decay | `REPRODUCIBILITY.md` | `scripts/paper_tables.py` | final (all 147 MIG-vs-full-GPU pairs) |
+| Per-class recall, calibration, READER-vs-BiTE error overlap, seed noise | `ERROR_ANALYSIS.md`, `error_analysis.json` | `reader/error_analysis.py` | final |
+| Interactive page over every table above (self-contained, no server) | `dashboard.html` | `scripts/make_dashboard.py` | final |
 
 ## Figures (`figures/`, PDF + PNG)
 
@@ -53,3 +56,15 @@ is complete for what exists and marks the rest as pending).
 ## Which reviewer question each file answers
 
 See `docs/REVIEWER_QUESTIONS.md`.
+
+## Not measured
+
+| what | why |
+|---|---|
+| Cross-subject results for BiTE's ten baselines | A LOSO run costs 1.15 GPU-h against 0.32 within-subject, so that
+zoo is ~965 GPU-h (840 runs) against the 290 already spent on READER / Compact / BiTE. The cross-subject table is
+stated as a three-model comparison rather than implied to be a zoo. |
+| CPU latency | Timed on a shared node; repeats of one configuration differed up to 3x. Withdrawn until re-measured
+on an idle node (`scripts/efficiency.py`). Parameter counts are exact and stand. |
+| HGD anytime / exact-duration | HGD's 14 subjects make each READER run ~1 GPU-h; it carries the endpoint comparison
+and the gate interventions only. |
