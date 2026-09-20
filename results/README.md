@@ -21,6 +21,7 @@ all landed, so every table below is now computed from its complete record.
 | Anytime with the endpoint-trained READER (not the headline arm) | `anytime_2a_endpoint_supervised.md` | `reader/anytime.py --reader runs/cohort/reader` | final |
 | Ablations: architecture (A), inference interventions (B), loss (C), matched-loss | `ABLATION.md`, `ablation.json` | `scripts/ablation_table.py` | final |
 | Prefix supervision on READER, token-grid detail | `ablation_prefix_supervision.md` | `reader/ablation.py` | final |
+| Sensitivity of the READER-minus-control difference to the prefix weight and to the token resolution | `SENSITIVITY.md`, `SENSITIVITY.json`, `SENSITIVITY_FULL_RANGE.md`, `sensitivity_plan.json` | `scripts/sensitivity_collect.py` then `reader/sensitivity.py` (design: `docs/SENSITIVITY_ANALYSIS.md`) | see the file's own cell table |
 | Gate interventions (fusion load-bearing, gate learning absorbable) | `gate_intervention.md` | `reader/gate_intervention.py` | final |
 | Subject-level statistics: 12 endpoint + 12 prefix tests, Holm, exact-duration curves | `subject_stats/SUBJECT_STATS.md` | `reader/subject_stats.py` | final |
 | Same-checkpoint accuracy on truncated input + causality on trained weights | `exact_duration.json` | `reader/exact_duration.py` + `scripts/collect_exact_duration.py` | final (recomputed for every replaced run) |

@@ -1,0 +1,110 @@
+[
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/reader",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/compact",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/reader",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/compact",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/reader",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/cohort/compact",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_anytime",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_anytime",
+  "trained": 30
+ }
+]

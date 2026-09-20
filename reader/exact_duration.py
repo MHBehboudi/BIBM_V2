@@ -53,6 +53,11 @@ def main():
     ap.add_argument("--runs", type=Path, required=True, help="arm directory holding <ds>_S<sub>_seed<seed>/final.pt")
     ap.add_argument("--out", type=Path, default=ROOT / "runs/exact_duration")
     ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--option", action="append", default=[],
+                    help="key=value model option, as passed to the trainer (e.g. pool=16). The "
+                         "checkpoint decides the architecture, so this must match how it was trained.")
+    ap.add_argument("--label", default=None,
+                    help="name of the output directory under --out; defaults to the run directory's name")
     ap.add_argument("--accuracy-only", action="store_true",
                     help="skip the gate interventions and the trained-weight causality checks (already established "
                          "on every endpoint-trained checkpoint); used for the loss-ablation arms")
@@ -60,7 +65,14 @@ def main():
     torch.set_num_threads(args.threads)
     ds, spec = args.dataset, SPECS[args.dataset]
     grid = GRID[ds]
-    out_dir = args.out / ds / args.runs.name
+    options = {}
+    for item in args.option:
+        k, v = item.split("=", 1)
+        try:
+            options[k] = json.loads(v)
+        except json.JSONDecodeError:
+            options[k] = v
+    out_dir = args.out / ds / (args.label or args.runs.name)
     out_dir.mkdir(parents=True, exist_ok=True)
     for run in sorted(args.runs.glob(f"{ds}_S*_seed*")):
         target = out_dir / f"{run.name}.json"
@@ -78,7 +90,7 @@ def main():
         started = time.time()
         sub, seed = summary["subject"], summary["seed"]
         _, _, xte, yte = load_roles(ds, sub, "bite")
-        model, _, _, needs_spectral = registry.build(args.arm, ds)
+        model, _, _, needs_spectral = registry.build(args.arm, ds, **options)
         model.load_state_dict(torch.load(run / "final.pt", map_location="cpu", weights_only=True))
         model.eval()
         x = torch.from_numpy(xte)
@@ -93,7 +105,9 @@ def main():
 
         rec = {"dataset": ds, "subject": sub, "seed": seed, "arm": args.arm, "run": run.name,
                "device_trained": summary.get("device"), "final_test_acc_logged": summary["final_test"]["acc"],
-               "grid_samples": grid, "grid_seconds": [n / spec["fs"] for n in grid], "acc": {}, "gate": {}}
+               "grid_samples": grid, "grid_seconds": [n / spec["fs"] for n in grid], "acc": {}, "gate": {},
+               "options": options, "prefix_weight": summary.get("prefix_weight"),
+               "pool": int(getattr(model, "pool", spec["pool"]))}
         saved = {}
         for n in grid:
             lg = logits_of(model, tensors(n))
@@ -109,7 +123,7 @@ def main():
         rec["full_length_matches_logged"] = abs(rec["acc"].get(str(full), -1) - summary["final_test"]["acc"]) < 1e-9
 
         if hasattr(model, "anytime_logits") and not args.accuracy_only:
-            pool = spec["pool"]
+            pool = int(getattr(model, "pool", spec["pool"]))   # the CHECKPOINT's pool, not the default
             curve = curve_of(model, x)
             n_tokens = curve.shape[1]
             trunc = 0.0
@@ -132,7 +146,11 @@ def main():
                                     if isinstance(m, torch.nn.modules.batchnorm._BatchNorm))}
         rec["seconds"] = time.time() - started
         np.savez_compressed(out_dir / f"{run.name}.npz", labels=yte, **saved)
-        target.write_text(json.dumps(rec, indent=1))
+        # Write through a temp file: a reader of this directory must never see a partial record,
+        # and two evaluators racing on the same cell must not interleave bytes.
+        tmp = target.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(rec, indent=1))
+        tmp.replace(target)
         print(json.dumps({k: rec[k] for k in ("subject", "seed", "acc", "full_length_matches_logged")}),
               rec.get("causality"), f"{rec['seconds']:.0f}s", flush=True)
 

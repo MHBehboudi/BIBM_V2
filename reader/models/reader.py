@@ -40,7 +40,10 @@ from reader.models.compact import CausalTCN, CompactDecoder
 class ReaderDecoder(CompactDecoder):
     def __init__(self, dataset: str, reader: str = "bidir", input_mode: str = "bite", **kw):
         spec = SPECS[dataset]
-        super().__init__(spec["channels"], spec["classes"], pool=spec["pool"], **kw)
+        # `pool` is the corpus default unless overridden (token-resolution sensitivity). p sets the
+        # token duration 1000*p/fs ms and the token count ceil(T/p), so any wall-clock deadline must
+        # be converted with THIS model's pool, never with SPECS[dataset]["pool"].
+        super().__init__(spec["channels"], spec["classes"], pool=int(kw.pop("pool", spec["pool"])), **kw)
         self.dataset, self.input_mode, self.reader_mode = dataset, input_mode, reader
         embedding = self.proj.out_features
         if reader in ("bidir", "ff"):

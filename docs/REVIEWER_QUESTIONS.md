@@ -181,3 +181,39 @@ measurement. Evidence: `results/ERROR_ANALYSIS.md`, `results/error_analysis.json
   subjects; averaging the two softmax outputs is +1.79 [+0.95, +2.80]. This is reported as a diagnostic and not
   as a proposed system: it needs both models at inference, which is exactly the cost this paper removes. It does
   say that the endpoint parity in section 1 is not two models making the same predictions.
+
+## 17. Why that prefix weight, and why that pooling factor? Were they chosen to flatter READER?
+
+**Two sweeps, in progress, 1008 runs.** Design, values and reasoning: `docs/SENSITIVITY_ANALYSIS.md`;
+numbers as they land: `results/SENSITIVITY.md`; recipe: `scripts/reproduce_sensitivity.sh`.
+
+Both settings were declared, not tuned, and neither has ever been selected on a result — but "declared" is
+not evidence, so both are now swept with the forward-only control re-trained at **every** setting, because
+the quantity that matters is the paired difference and not either arm's level.
+
+- **Prefix-supervision weight.** λ ∈ {0, 0.1, 0.3, 1.0} at the default pooling factor. λ = 0 and λ = 0.3
+  are the paper's existing arms, so the sweep spans no supervision to strong supervision. Across the largest
+  change it already contains (λ = 0 → 0.3) the nAUC difference stays positive on all three corpora:
+  +30.72 / +11.06 / +42.43 at λ = 0 against +9.31 / +1.13 / +12.30 at λ = 0.3.
+- **Token resolution.** `p` giving ≈16 / 32 / 64 tokens on every corpus (2a/2b `p` ∈ {64, 32, 16};
+  SD-SSVEP `p` ∈ {16, 8, 4}), at λ = 0 and λ = 0.3. Every condition stays inside the reader's 71-token
+  receptive field, so a difference between them is about resolution and not about unreachable history.
+  `p` = 8 on SD-SSVEP is BiTE's own released setting; `p` = 16 there puts the 16 Hz token rate below twice
+  the 9.25–14.75 Hz carriers, so a loss at that point is a prediction of the sweep, not a surprise.
+
+A setting where the declared value is not the best cell is reported as such. **Nothing in the paper's main
+tables is re-selected from these runs**; the sweep can only tell you whether the reverse reader's advantage
+survives moving the knob.
+
+**One defect this exposed, reported rather than quietly fixed.** In the development harness, the forward-only
+arm's builder silently dropped unrecognised options, so a misspelt `--option pool=16` would have trained the
+corpus default and been reported as a pooling result. It now raises. No published number was affected: the
+defect was found in the pre-flight, before any sweep cell was trained.
+
+## 18. Which integration range do the nAUC numbers use?
+
+The nAUC values quoted in the paper (+9.31 / +1.13 / +12.30 for READER+PS − no-reverse+PS) integrate from
+**1.0 s** on 2a/2b and **0.25 s** on SD-SSVEP, not from the first evaluated point (0.5 s / 0.125 s). Over the
+full evaluated grid the same comparison is **+10.88 / +1.77 / +13.15**. Both are computed by
+`reader/sensitivity.py` (`--full-range` selects the second), and `results/SENSITIVITY_FULL_RANGE.md` carries
+the full-range table so the two can be compared directly.
