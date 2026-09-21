@@ -85,6 +85,27 @@ def complete(run_dir: Path, dataset: str):
     return sorted(p.parent for p in run_dir.glob(f"{dataset}_S*_seed*/summary.json"))
 
 
+def fresh(exact_dir: Path, run_dirs):
+    """Records that were computed from the run of record as it stands NOW.
+
+    A run can be replaced under the same name -- a MIG original by its full-GPU re-run -- which
+    leaves the record count unchanged. Counting files would then call the cell done and keep the
+    superseded numbers, so the record is matched against its run the same way
+    `reader/exact_duration.py` matches it before recomputing.
+    """
+    n = 0
+    for run in run_dirs:
+        target = exact_dir / f"{run.name}.json"
+        if not target.exists():
+            continue
+        rec = json.loads(target.read_text())
+        summary = json.loads((run / "summary.json").read_text())
+        if rec.get("device_trained") == summary.get("device") and \
+                abs(float(rec.get("final_test_acc_logged", -1)) - summary["final_test"]["acc"]) < 1e-9:
+            n += 1
+    return n
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--python", default=sys.executable)
@@ -107,7 +128,7 @@ def main():
     for ds, arm, lam, pool, run, label in cells():
         runs = complete(run, ds) if run.exists() else []
         exact_dir = EXACT / ds / label
-        done = len(list(exact_dir.glob(f"{ds}_S*_seed*.json"))) if exact_dir.exists() else 0
+        done = fresh(exact_dir, runs) if exact_dir.exists() else 0
         if not runs:
             missing.append((ds, arm, lam, pool, label, 0))
             continue

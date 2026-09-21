@@ -1,0 +1,781 @@
+{
+ "integration": "full",
+ "lambda_sweep": {
+  "2a": {
+   "0": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 77.67765264977852,
+    "control_nauc": 47.02564668718469,
+    "delta_nauc": 30.65200596259385,
+    "delta_nauc_ci": [
+     24.3612899710104,
+     36.104681059008556
+    ],
+    "wins": 9,
+    "losses": 0,
+    "reader_endpoint": 84.70936218897502,
+    "control_endpoint": 82.33024720792417,
+    "delta_endpoint": 2.379114981050844,
+    "delta_endpoint_ci": [
+     0.2829207204006321,
+     4.629629408871687
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "0.1": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 79.79038061288298,
+    "control_nauc": 62.056327216997346,
+    "delta_nauc": 17.734053395885635,
+    "delta_nauc_ci": [
+     12.60839194926635,
+     23.006779148327126
+    ],
+    "wins": 9,
+    "losses": 0,
+    "reader_endpoint": 84.38786003324721,
+    "control_endpoint": 82.7932099501292,
+    "delta_endpoint": 1.5946500831180148,
+    "delta_endpoint_ci": [
+     -0.16718044325157444,
+     3.317901613535705
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "0.3": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 80.01175769580104,
+    "control_nauc": 69.13304660843794,
+    "delta_nauc": 10.878711087363111,
+    "delta_nauc_ci": [
+     7.671314745293883,
+     14.711222350991594
+    ],
+    "wins": 9,
+    "losses": 0,
+    "reader_endpoint": 83.50051464857877,
+    "control_endpoint": 82.0987652849268,
+    "delta_endpoint": 1.4017493636519802,
+    "delta_endpoint_ci": [
+     -0.18004046546088412,
+     3.137859818008209
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "1": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 80.15781149031623,
+    "control_nauc": 69.78431806835549,
+    "delta_nauc": 10.37349342196076,
+    "delta_nauc_ci": [
+     6.534712773663973,
+     15.815375077306589
+    ],
+    "wins": 9,
+    "losses": 0,
+    "reader_endpoint": 83.66769574306629,
+    "control_endpoint": 77.39197567657187,
+    "delta_endpoint": 6.275720066494413,
+    "delta_endpoint_ci": [
+     1.5689304581394923,
+     13.220164080460869
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   }
+  },
+  "2b": {
+   "0": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 80.14479389108678,
+    "control_nauc": 68.99329203146475,
+    "delta_nauc": 11.151501859622027,
+    "delta_nauc_ci": [
+     6.68315923895943,
+     15.987867482952653
+    ],
+    "wins": 9,
+    "losses": 0,
+    "reader_endpoint": 86.41038338343303,
+    "control_endpoint": 85.31580699814691,
+    "delta_endpoint": 1.0945763852861192,
+    "delta_endpoint_ci": [
+     0.4050921510767075,
+     1.8055547221943147
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "0.1": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 81.2768094123356,
+    "control_nauc": 74.29315474613634,
+    "delta_nauc": 6.983654666199259,
+    "delta_nauc_ci": [
+     3.124173576869664,
+     11.241992581931367
+    ],
+    "wins": 7,
+    "losses": 2,
+    "reader_endpoint": 85.0677909674468,
+    "control_endpoint": 85.92096523002341,
+    "delta_endpoint": -0.853174262576633,
+    "delta_endpoint_ci": [
+     -1.9064146059530758,
+     0.16534395791865852
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "0.3": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 81.26098350400017,
+    "control_nauc": 79.48719764512683,
+    "delta_nauc": 1.7737858588733342,
+    "delta_nauc_ci": [
+     -1.1173677501618642,
+     4.729745589078426
+    ],
+    "wins": 5,
+    "losses": 4,
+    "reader_endpoint": 85.59027799853573,
+    "control_endpoint": 86.49305546725238,
+    "delta_endpoint": -0.9027774687166547,
+    "delta_endpoint_ci": [
+     -1.6203692665806497,
+     -0.25463015944869327
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   },
+   "1": {
+    "subjects": 9,
+    "runs": [
+     27,
+     27
+    ],
+    "reader_nauc": 81.07320013500396,
+    "control_nauc": 82.47378086917614,
+    "delta_nauc": -1.4005807341721868,
+    "delta_nauc_ci": [
+     -3.589734280550915,
+     0.2662041862175129
+    ],
+    "wins": 3,
+    "losses": 6,
+    "reader_endpoint": 85.55390216686106,
+    "control_endpoint": 86.58564841305767,
+    "delta_endpoint": -1.031746246196606,
+    "delta_endpoint_ci": [
+     -2.152778484203198,
+     0.0876322940543841
+    ],
+    "tokens": 32,
+    "token_ms": 128.0
+   }
+  },
+  "sdssvep": {
+   "0": {
+    "subjects": 10,
+    "runs": [
+     30,
+     30
+    ],
+    "reader_nauc": 59.08333326911643,
+    "control_nauc": 20.099206652847073,
+    "delta_nauc": 38.98412661626935,
+    "delta_nauc_ci": [
+     28.29761890390711,
+     48.496130598842036
+    ],
+    "wins": 10,
+    "losses": 0,
+    "reader_endpoint": 96.16666654745737,
+    "control_endpoint": 94.11111116409302,
+    "delta_endpoint": 2.055555383364357,
+    "delta_endpoint_ci": [
+     0.3333330154418931,
+     4.333332781990364
+    ],
+    "tokens": 64,
+    "token_ms": 15.625
+   },
+   "0.1": {
+    "subjects": 10,
+    "runs": [
+     30,
+     30
+    ],
+    "reader_nauc": 77.53174605912395,
+    "control_nauc": 28.801587482116055,
+    "delta_nauc": 48.730158577007906,
+    "delta_nauc_ci": [
+     41.59494040121458,
+     55.37718236051676
+    ],
+    "wins": 10,
+    "losses": 0,
+    "reader_endpoint": 96.44444445768991,
+    "control_endpoint": 94.27777787049611,
+    "delta_endpoint": 2.166666587193805,
+    "delta_endpoint_ci": [
+     -0.055555502573653825,
+     5.222222010294592
+    ],
+    "tokens": 64,
+    "token_ms": 15.625
+   },
+   "0.3": {
+    "subjects": 10,
+    "runs": [
+     30,
+     30
+    ],
+    "reader_nauc": 79.76587305821124,
+    "control_nauc": 66.61904774074044,
+    "delta_nauc": 13.146825317470796,
+    "delta_nauc_ci": [
+     8.218154773116105,
+     18.583333247163814
+    ],
+    "wins": 10,
+    "losses": 0,
+    "reader_endpoint": 94.33333337306976,
+    "control_endpoint": 94.11111116409303,
+    "delta_endpoint": 0.2222222089767456,
+    "delta_endpoint_ci": [
+     -1.722222566604613,
+     2.500000198682146
+    ],
+    "tokens": 64,
+    "token_ms": 15.625
+   },
+   "1": {
+    "subjects": 10,
+    "runs": [
+     30,
+     30
+    ],
+    "reader_nauc": 78.82539660270726,
+    "control_nauc": 72.51587273286921,
+    "delta_nauc": 6.309523869838031,
+    "delta_nauc_ci": [
+     2.464186679837957,
+     9.960416436195372
+    ],
+    "wins": 9,
+    "losses": 1,
+    "reader_endpoint": 89.7222218910853,
+    "control_endpoint": 90.49999992052713,
+    "delta_endpoint": -0.7777780294418342,
+    "delta_endpoint_ci": [
+     -5.944444740811983,
+     3.7777785460154205
+    ],
+    "tokens": 64,
+    "token_ms": 15.625
+   }
+  }
+ },
+ "pool_sweep": {
+  "2a": {
+   "0": {
+    "64": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 71.46347747751014,
+     "control_nauc": 44.93588312435403,
+     "delta_nauc": 26.527594353156115,
+     "delta_nauc_ci": [
+      21.49353808156712,
+      31.500794701376766
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 82.12448579293711,
+     "control_endpoint": 81.55864168096471,
+     "delta_endpoint": 0.5658441119723866,
+     "delta_endpoint_ci": [
+      -0.8744851306632692,
+      1.658950696388884
+     ],
+     "tokens": 16,
+     "token_ms": 256.0
+    },
+    "32": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 77.67765264977852,
+     "control_nauc": 47.02564668718469,
+     "delta_nauc": 30.65200596259385,
+     "delta_nauc_ci": [
+      24.3612899710104,
+      36.104681059008556
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 84.70936218897502,
+     "control_endpoint": 82.33024720792417,
+     "delta_endpoint": 2.379114981050844,
+     "delta_endpoint_ci": [
+      0.2829207204006321,
+      4.629629408871687
+     ],
+     "tokens": 32,
+     "token_ms": 128.0
+    },
+    "16": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 78.45293206985664,
+     "control_nauc": 43.64620056890306,
+     "delta_nauc": 34.80673150095359,
+     "delta_nauc_ci": [
+      28.928663846026488,
+      40.66909179879874
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 84.91512272093031,
+     "control_endpoint": 70.07458850189491,
+     "delta_endpoint": 14.840534219035394,
+     "delta_endpoint_ci": [
+      8.423353232167388,
+      21.463798334201172
+     ],
+     "tokens": 63,
+     "token_ms": 64.0
+    }
+   },
+   "0.3": {
+    "64": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 77.75205745110436,
+     "control_nauc": 68.66089805724128,
+     "delta_nauc": 9.091159393863073,
+     "delta_nauc_ci": [
+      5.790550142092989,
+      13.386472774245746
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 83.16615157657198,
+     "control_endpoint": 81.41718087372956,
+     "delta_endpoint": 1.7489707028424286,
+     "delta_endpoint_ci": [
+      -0.900205423434576,
+      5.3755137765849055
+     ],
+     "tokens": 16,
+     "token_ms": 256.0
+    },
+    "32": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 80.01175769580104,
+     "control_nauc": 69.13304660843794,
+     "delta_nauc": 10.878711087363111,
+     "delta_nauc_ci": [
+      7.671314745293883,
+      14.711222350991594
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 83.50051464857877,
+     "control_endpoint": 82.0987652849268,
+     "delta_endpoint": 1.4017493636519802,
+     "delta_endpoint_ci": [
+      -0.18004046546088412,
+      3.137859818008209
+     ],
+     "tokens": 32,
+     "token_ms": 128.0
+    },
+    "16": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 80.95789258442228,
+     "control_nauc": 64.47677815323154,
+     "delta_nauc": 16.48111443119074,
+     "delta_nauc_ci": [
+      10.300765376853402,
+      23.536040527085767
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 84.94084367045649,
+     "control_endpoint": 73.76543217235142,
+     "delta_endpoint": 11.175411498105083,
+     "delta_endpoint_ci": [
+      5.143710998473343,
+      18.06841514728687
+     ],
+     "tokens": 63,
+     "token_ms": 64.0
+    }
+   }
+  },
+  "2b": {
+   "0": {
+    "64": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 79.47834002435523,
+     "control_nauc": 68.04693411030466,
+     "delta_nauc": 11.431405914050575,
+     "delta_nauc_ci": [
+      7.497446326312262,
+      16.166908607655593
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 86.18882342621131,
+     "control_endpoint": 85.78207713586313,
+     "delta_endpoint": 0.40674629034819376,
+     "delta_endpoint_ci": [
+      -0.20337303479512692,
+      1.0782902880951168
+     ],
+     "tokens": 16,
+     "token_ms": 256.0
+    },
+    "32": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 80.14479389108678,
+     "control_nauc": 68.99329203146475,
+     "delta_nauc": 11.151501859622027,
+     "delta_nauc_ci": [
+      6.68315923895943,
+      15.987867482952653
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 86.41038338343303,
+     "control_endpoint": 85.31580699814691,
+     "delta_endpoint": 1.0945763852861192,
+     "delta_endpoint_ci": [
+      0.4050921510767075,
+      1.8055547221943147
+     ],
+     "tokens": 32,
+     "token_ms": 128.0
+    },
+    "16": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 79.91555649294425,
+     "control_nauc": 64.26197567156382,
+     "delta_nauc": 15.65358082138042,
+     "delta_nauc_ci": [
+      9.936814893175061,
+      21.554767331749048
+     ],
+     "wins": 9,
+     "losses": 0,
+     "reader_endpoint": 85.43650816988061,
+     "control_endpoint": 83.9037694312908,
+     "delta_endpoint": 1.5327387385898166,
+     "delta_endpoint_ci": [
+      0.3637578697116286,
+      2.6124760398158293
+     ],
+     "tokens": 63,
+     "token_ms": 64.0
+    }
+   },
+   "0.3": {
+    "64": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 81.80803557236987,
+     "control_nauc": 79.97082872365517,
+     "delta_nauc": 1.8372068487147177,
+     "delta_nauc_ci": [
+      0.11428782489722324,
+      3.5865453500596263
+     ],
+     "wins": 7,
+     "losses": 2,
+     "reader_endpoint": 86.10284372612281,
+     "control_endpoint": 86.63525117768181,
+     "delta_endpoint": -0.5324074515589956,
+     "delta_endpoint_ci": [
+      -1.5277776508419603,
+      0.231481266242488
+     ],
+     "tokens": 16,
+     "token_ms": 256.0
+    },
+    "32": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 81.26098350400017,
+     "control_nauc": 79.48719764512683,
+     "delta_nauc": 1.7737858588733342,
+     "delta_nauc_ci": [
+      -1.1173677501618642,
+      4.729745589078426
+     ],
+     "wins": 5,
+     "losses": 4,
+     "reader_endpoint": 85.59027799853573,
+     "control_endpoint": 86.49305546725238,
+     "delta_endpoint": -0.9027774687166547,
+     "delta_endpoint_ci": [
+      -1.6203692665806497,
+      -0.25463015944869327
+     ],
+     "tokens": 32,
+     "token_ms": 128.0
+    },
+    "16": {
+     "subjects": 9,
+     "runs": [
+      27,
+      27
+     ],
+     "reader_nauc": 81.43341344973398,
+     "control_nauc": 77.64290441911687,
+     "delta_nauc": 3.790509030617097,
+     "delta_nauc_ci": [
+      -0.24888420999838787,
+      7.984457232018626
+     ],
+     "wins": 6,
+     "losses": 3,
+     "reader_endpoint": 86.07969571042945,
+     "control_endpoint": 85.53240718664946,
+     "delta_endpoint": 0.5472885237799718,
+     "delta_endpoint_ci": [
+      -0.5787028206719325,
+      1.6584819113766662
+     ],
+     "tokens": 63,
+     "token_ms": 64.0
+    }
+   }
+  },
+  "sdssvep": {
+   "0": {
+    "16": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 53.44047628032664,
+     "control_nauc": 21.750000307247753,
+     "delta_nauc": 31.690475973078897,
+     "delta_nauc_ci": [
+      25.836904439387748,
+      36.97619012010373
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 87.27777739365897,
+     "control_endpoint": 84.44444437821706,
+     "delta_endpoint": 2.833333015441896,
+     "delta_endpoint_ci": [
+      0.8888888359069839,
+      4.777777791023256
+     ],
+     "tokens": 16,
+     "token_ms": 62.5
+    },
+    "8": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 59.269841209586176,
+     "control_nauc": 22.396825694789488,
+     "delta_nauc": 36.873015514796684,
+     "delta_nauc_ci": [
+      29.317360725386862,
+      43.89305520946869
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 94.72222208976744,
+     "control_endpoint": 94.11111136277518,
+     "delta_endpoint": 0.6111107269922897,
+     "delta_endpoint_ci": [
+      -0.8888896306355804,
+      2.055555383364356
+     ],
+     "tokens": 32,
+     "token_ms": 31.25
+    },
+    "4": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 59.08333326911643,
+     "control_nauc": 20.099206652847073,
+     "delta_nauc": 38.98412661626935,
+     "delta_nauc_ci": [
+      28.29761890390711,
+      48.496130598842036
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 96.16666654745737,
+     "control_endpoint": 94.11111116409302,
+     "delta_endpoint": 2.055555383364357,
+     "delta_endpoint_ci": [
+      0.3333330154418931,
+      4.333332781990364
+     ],
+     "tokens": 64,
+     "token_ms": 15.625
+    }
+   },
+   "0.3": {
+    "16": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 69.91269836734448,
+     "control_nauc": 56.82142861985735,
+     "delta_nauc": 13.091269747487132,
+     "delta_nauc_ci": [
+      10.452380759974135,
+      16.111110857466144
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 86.66666636864345,
+     "control_endpoint": 84.88888889551161,
+     "delta_endpoint": 1.7777774731318154,
+     "delta_endpoint_ci": [
+      -0.055554906527201096,
+      3.4444435437520333
+     ],
+     "tokens": 16,
+     "token_ms": 62.5
+    },
+    "8": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 76.64682528092749,
+     "control_nauc": 66.47222219212424,
+     "delta_nauc": 10.17460308880324,
+     "delta_nauc_ci": [
+      6.325396697036926,
+      14.230257765500857
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 93.16666622956593,
+     "control_endpoint": 94.27777787049611,
+     "delta_endpoint": -1.111111640930173,
+     "delta_endpoint_ci": [
+      -2.4999998013178457,
+      0.0555539180835088
+     ],
+     "tokens": 32,
+     "token_ms": 31.25
+    },
+    "4": {
+     "subjects": 10,
+     "runs": [
+      30,
+      30
+     ],
+     "reader_nauc": 79.76587305821124,
+     "control_nauc": 66.61904774074044,
+     "delta_nauc": 13.146825317470796,
+     "delta_nauc_ci": [
+      8.218154773116105,
+      18.583333247163814
+     ],
+     "wins": 10,
+     "losses": 0,
+     "reader_endpoint": 94.33333337306976,
+     "control_endpoint": 94.11111116409303,
+     "delta_endpoint": 0.2222222089767456,
+     "delta_endpoint_ci": [
+      -1.722222566604613,
+      2.500000198682146
+     ],
+     "tokens": 64,
+     "token_ms": 15.625
+    }
+   }
+  }
+ }
+}

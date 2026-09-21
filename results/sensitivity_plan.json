@@ -20,6 +20,60 @@
  {
   "dataset": "2a",
   "arm": "reader",
+  "lambda": 0.0,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p64_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p64_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p64_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p64_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p16_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p16_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.1,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p32_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p32_ps.1",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.1,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p32_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p32_ps.1",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
   "lambda": 0.3,
   "pool": 32,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
@@ -33,6 +87,60 @@
   "pool": 32,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
   "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p64_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p64_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p64_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p64_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p16_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p16_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "reader",
+  "lambda": 1.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p32_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/reader_p32_ps1",
+  "trained": 27
+ },
+ {
+  "dataset": "2a",
+  "arm": "compact",
+  "lambda": 1.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p32_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2a/compact_p32_ps1",
   "trained": 27
  },
  {
@@ -56,6 +164,60 @@
  {
   "dataset": "2b",
   "arm": "reader",
+  "lambda": 0.0,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p64_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p64_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p64_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p64_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p16_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p16_ps0",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.1,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p32_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p32_ps.1",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.1,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p32_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p32_ps.1",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
   "lambda": 0.3,
   "pool": 32,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
@@ -69,6 +231,60 @@
   "pool": 32,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
   "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_anytime",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p64_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p64_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 64,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p64_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p64_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p16_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p16_ps.3",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "reader",
+  "lambda": 1.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p32_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/reader_p32_ps1",
+  "trained": 27
+ },
+ {
+  "dataset": "2b",
+  "arm": "compact",
+  "lambda": 1.0,
+  "pool": 32,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p32_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/2b/compact_p32_ps1",
   "trained": 27
  },
  {
@@ -92,6 +308,60 @@
  {
   "dataset": "sdssvep",
   "arm": "reader",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p16_ps0",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p16_ps0",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.0,
+  "pool": 8,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p8_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p8_ps0",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.0,
+  "pool": 8,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p8_ps0",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p8_ps0",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.1,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p4_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p4_ps.1",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.1,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p4_ps.1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p4_ps.1",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
   "lambda": 0.3,
   "pool": 4,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/reader_anytime",
@@ -105,6 +375,60 @@
   "pool": 4,
   "runs": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/anytime/compact_anytime",
   "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_anytime",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p16_ps.3",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 16,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p16_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p16_ps.3",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 0.3,
+  "pool": 8,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p8_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p8_ps.3",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 0.3,
+  "pool": 8,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p8_ps.3",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p8_ps.3",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "reader",
+  "lambda": 1.0,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/reader_p4_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/reader_p4_ps1",
+  "trained": 30
+ },
+ {
+  "dataset": "sdssvep",
+  "arm": "compact",
+  "lambda": 1.0,
+  "pool": 4,
+  "runs": "/work/mxb190076/BIBM2026/bite_workshop/fusion/runs/sens_20260920/compact_p4_ps1",
+  "exact": "/work/mxb190076/BIBM2026/prefix-reader-eeg/runs/exact_duration/sdssvep/compact_p4_ps1",
   "trained": 30
  }
 ]
