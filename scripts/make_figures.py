@@ -26,6 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from matplotlib import transforms  # noqa: E402
+from matplotlib import patheffects  # noqa: E402
 from matplotlib.colors import LinearSegmentedColormap  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,29 +117,90 @@ def fig_anytime():
     save(fig, "fig_anytime")
 
 
+def subject_band(rows, draws=10000, seed=0):
+    """Mean over subjects of the seed mean, with a 95% percentile bootstrap interval over subjects.
+
+    Subjects are the unit, seeds are averaged inside a subject first -- the paper's convention
+    everywhere else, so the band here means what the intervals in the tables mean.
+    """
+    by = defaultdict(list)
+    for (sub, _), v in rows.items():
+        by[sub].append(v)
+    means = np.array([np.mean(v) for v in by.values()])
+    if len(means) < 2:
+        return float(means.mean()), float(means.mean()), float(means.mean())
+    draw = np.random.default_rng(seed).choice(means, (draws, len(means)), replace=True).mean(axis=1)
+    return float(means.mean()), float(np.percentile(draw, 2.5)), float(np.percentile(draw, 97.5))
+
+
+# The four arms this figure contrasts, drawn controls-first so READER lands on top, and named the way
+# the manuscript names them rather than the way the harness does.
+EXACT_ARMS = [("compact_mean", "Fwd mean", 1.2, "-"), ("ff_control", "Two forward", 1.2, (0, (3.5, 1.6))),
+              ("compact", "No reverse", 1.4, "-"), ("reader", "REACT", 2.5, "-")]
+HALO = [patheffects.withStroke(linewidth=2.2, foreground="white")]
+CHANCE = {"2a": 25.0, "2b": 50.0, "sdssvep": 100 / 12}
+NCLASS = {"2a": 4, "2b": 2, "sdssvep": 12}
+# The early deadline each corpus's headline number is quoted at; the gap is annotated there.
+DEADLINE = {"2a": 250, "2b": 250, "sdssvep": 64}
+
+
 def fig_exact_duration():
+    """One checkpoint per model, trained once at the full trial, then re-read on truncated input.
+
+    The endpoint is the right-hand end of every curve, so this figure and the endpoint table are the
+    same numbers from the same runs -- the last point of READER is its within-subject accuracy.
+    """
     recs = json.loads((RES / "exact_duration.json").read_text())["records"]
     acc = defaultdict(lambda: defaultdict(dict))           # (arm, ds) -> n -> {(sub, seed): acc}
     for r in recs:
         for n, a in r["acc"].items():
             acc[(r["arm"], r["dataset"])][int(n)][(int(r["subject"]), int(r["seed"]))] = 100 * float(a)
+
     corpora = ["2a", "2b", "sdssvep"]
-    fig, axes = plt.subplots(1, 3, figsize=(7.16, 2.2))
+    fig, axes = plt.subplots(1, 3, figsize=(7.16, 2.55), sharey=True)
     for ax, ds in zip(axes, corpora):
-        for arm in ("reader", "bite", "compact_mean", "ff_control", "compact"):
+        ax.axhline(CHANCE[ds], color=MUTED, lw=0.8, ls=(0, (1, 2.2)), zorder=1)
+        ax.annotate("chance", xy=(0.90, CHANCE[ds]), xycoords=("axes fraction", "data"),
+                    va="bottom", ha="right", fontsize=6, color=MUTED, zorder=3, path_effects=HALO)
+        for arm, label, lw, ls in EXACT_ARMS:
             c = acc.get((arm, ds))
             if not c:
                 continue
             ns = sorted(c)
-            ys = [subject_curve(c[n])[0] for n in ns]
-            ax.plot(np.array(ns) / FS[ds], ys, "-", color=COLOR[arm], lw=1.8 if arm == "reader" else 1.0,
-                    marker=MARKER[arm], ms=4, mec="white", mew=0.6, label=LABEL[arm], zorder=4 if arm == "reader" else 3)
-        ax.set_title(TITLE[ds])
-        ax.set_xlabel("observed part of the trial (s)")
+            xs = np.array(ns) / FS[ds]
+            band = [subject_band(c[n]) for n in ns]
+            ys, lo, hi = (np.array([b[i] for b in band]) for i in range(3))
+            lead = arm == "reader"
+            ax.fill_between(xs, lo, hi, color=COLOR[arm], alpha=0.18 if lead else 0.09, lw=0, zorder=2)
+            ax.plot(xs, ys, ls=ls, color=COLOR[arm], lw=lw, marker=MARKER[arm],
+                    ms=3.4 if lead else 2.6, mec="white", mew=0.5,
+                    label=label, zorder=6 if lead else 4, alpha=1.0 if lead else 0.85)
+
+        # The gap the paper quotes, drawn where it is quoted: READER against its matched control.
+        n = DEADLINE[ds]
+        top = subject_band(acc[("reader", ds)][n])[0]
+        bot = subject_band(acc[("compact", ds)][n])[0]
+        x = n / FS[ds]
+        ax.annotate("", xy=(x, top), xytext=(x, bot), zorder=7,
+                    arrowprops=dict(arrowstyle="<->", color=INK, lw=0.9, shrinkA=1.5, shrinkB=1.5))
+        ax.annotate(f"{top - bot:+.1f} pts\nat {x:g} s", xy=(x, (top + bot) / 2), xytext=(5, 0),
+                    textcoords="offset points", va="center", ha="left", fontsize=6.5, color=INK,
+                    zorder=8, path_effects=HALO)
+
+        ax.set_title(f"{TITLE[ds]}   ({NCLASS[ds]} classes)", pad=6)
         ax.set_ylim(0, 100)
+        grid = np.array(sorted(acc[("reader", ds)])) / FS[ds]
+        pad = 0.6 * (grid[1] - grid[0])
+        ax.set_xlim(grid[0] - pad, grid[-1] + pad)
+        ax.set_xticks([0.25, 0.5, 0.75, 1.0] if ds == "sdssvep" else [1, 2, 3, 4])
+        ax.tick_params(length=2)
     axes[0].set_ylabel("test accuracy (%)")
-    h, l = axes[0].get_legend_handles_labels()
-    fig.legend(h, l, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.5, 1.08))
+    h, l = axes[-1].get_legend_handles_labels()
+    order = [l.index(x) for x in ("REACT", "No reverse", "Two forward", "Fwd mean") if x in l]
+    fig.legend([h[i] for i in order], [l[i] for i in order], loc="upper center", ncol=4,
+               frameon=False, bbox_to_anchor=(0.5, 1.10), columnspacing=1.6, handlelength=1.9)
+    fig.supxlabel("EEG observed before the decision (s)", fontsize=8, color=INK, y=-0.04)
+    fig.subplots_adjust(wspace=0.09)
     save(fig, "fig_exact_duration")
 
 
@@ -530,7 +592,7 @@ Drawn by `scripts/make_figures.py` from committed files only. Every figure's num
 | figure | shows | numbers |
 |---|---|---|
 | `fig_anytime` | Accuracy at each decision deadline. Blue lines: ONE READER model read at every token boundary (solid: trained with prefix supervision; dashed: endpoint loss only). Markers: separately retrained specialists, one per deadline (BiTE aqua triangles, Compact orange squares), mean ± 1 SE across subjects; the full-trial marker is the within-subject cohort run. | `results/anytime_2a.md`, `anytime_2b.md`, `anytime_sdssvep.md` |
-| `fig_exact_duration` | The SAME endpoint-trained checkpoints given only the first part of every test trial (exact truncated input, partial last pooling window kept). | `results/subject_stats/SUBJECT_STATS.md`, `results/exact_duration.json` |
+| `fig_exact_duration` | The SAME endpoint-trained checkpoints given only the first part of every test trial (exact truncated input, partial last pooling window kept). READER against its three matched controls; line is the subject mean, band a 95% bootstrap interval over subjects, dotted line chance, arrow the READER-minus-Compact gap at the deadline the paper quotes. The right-hand end of each curve IS that model's endpoint accuracy in the within-subject table. | `results/subject_stats/SUBJECT_STATS.md`, `results/exact_duration.json` |
 | `fig_reader_vs_zoo` | READER minus every baseline re-run with 3 seeds under the same protocol: subject-level mean (dot) and 95% paired bootstrap CI (bar). Right of zero favours READER. "pending" = that baseline's runs are not complete. | `results/MAIN_TABLE.md`, `results/model_zoo/MODEL_ZOO.md` |
 | `fig_landscape` | Accuracy against parameter count, one panel per corpus. Hollow circles are BiTE's ten released baselines re-run here; READER, BiTE and Compact are filled and named. Up is more accurate, left is smaller. | `results/MAIN_TABLE.md`, `results/EFFICIENCY.md` |
 | `fig_subject_dumbbell` | One row per subject: BiTE's accuracy and READER's, joined by a line coloured by which of the two won. Shows who the mean is made of. | `results/subject_stats/SUBJECT_STATS.md` |
