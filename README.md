@@ -1,473 +1,522 @@
-# Prefix-bidirectional reading for anytime EEG decoding
-
-One model that emits a legal decision at every token boundary. Given only part of each trial, endpoint-trained
-READER holds 70-82% accuracy on 2a at 1-3 s where the same forward-only parent checkpoint collapses to 31-50% (same
-checkpoints, exact truncated input), and the advantage survives giving both models the identical prefix loss
-(+19.2 points at 1 s on 2a, +22.2 at 0.25 s on SD-SSVEP). Against a bank of separately retrained per-deadline
-specialists, one prefix-supervised READER wins on 2a (+2.01 at 1 s, +1.80 at 2 s) but not on 2b (a flat −1.5, the
-endpoint gap) or SD-SSVEP (−3.3 at 0.5 s against retrained Compact specialists).
-
-Bidirectional context in EEG decoders is bought at the cost of deployability. BiTE's BiTCN obtains
-backward context by reversing the **complete trial** — its backward branch's last step corresponds
-to the trial's first moment, and its STFT front end uses `center=True`, reading 128 ms into the
-future. No output exists until the trial ends, so a deployed system must train and hold a separate
-model per decision deadline.
-
-**READER** applies the backward branch to the **observed prefix** instead. At deadline *t* a second
-causal TCN reads tokens *t−1 … 0* and is averaged with the forward reading (a convex per-feature gate that
-stays at its equal-weight initialisation; pinning it there is free). Reversed over the trial is non-causal;
-reversed over the prefix is not.
-
-**Where everything is.** `results/README.md` maps every paper table and figure to its file and script;
-`docs/REVIEWER_QUESTIONS.md` answers the questions a reviewer will ask, with evidence and open items;
-`results/raw/runs.csv` holds every run so any number can be recomputed without a GPU.
-**`results/dashboard.html`** is a single self-contained page over all of it — open it in a browser, no server and
-no network: pick a corpus and see where READER sits among twelve models, which subjects the mean is made of, what
-it does before the trial ends, and which trials it gets wrong.
-
-## Results
-
-### Within-subject, against every baseline re-run with 3 seeds (`results/MAIN_TABLE.md`)
-
-Official roles (session 1 train, session 2 test), 600 epochs, fixed final epoch, no validation set, no model
-selection, seeds 2025-2027. BiTE and its ten released baselines were **re-run under the identical protocol**, so
-the comparison is paired and multi-seed; BiTE's published single-seed numbers are shown beside. Mean ± SD across
-subjects. Strongest re-run baselines shown; all eleven are in `results/MAIN_TABLE.md` and
-`results/model_zoo/MODEL_ZOO.md`.
-
-| model | params (2a) | 2a | 2b | HGD | SD-SSVEP |
-|---|---:|---:|---:|---:|---:|
-| ATCNet (re-run) | 113.7K | 81.29 ± 8.46 | 84.07 ± 8.81 | 95.67 ± 2.99 | 85.33 ± 17.57 |
-| MBCNNEATCFNet (re-run) | 29.5K | 81.76 ± 7.87 | 84.40 ± 7.91 | 93.72 ± 4.00 | 94.22 ± 7.29 |
-| DeepConvNet (re-run) | 102.3K | 71.26 ± 15.23 | 84.95 ± 9.84 | 93.68 ± 3.23 | **96.50** ± 7.77 |
-| BiTE (re-run) | 16.3K | 84.10 ± 8.04 | **87.30** ± 7.14 | 95.53 ± 3.41 | 94.22 ± 8.69 |
-| BiTE (published, 1 seed) | 14.5K | 85.34 | 88.37 | 95.93 | 94.16 |
-| Compact (READER without the reversed branch) | 17.8K | 82.33 ± 10.06 | 85.32 ± 8.06 | 95.69 ± 2.73 | 94.11 ± 11.13 |
-| **READER** | 21.0K | **84.71** ± 8.27 | 86.41 ± 7.30 | **96.30** ± 2.79 | 96.17 ± 7.89 |
-
-READER minus BiTE (re-run), subject-level with 95% bootstrap CI: 2a +0.60 [−0.80, +1.94], 2b −0.89 [−1.84, +0.10],
-HGD +0.77 [+0.03, +1.60], SD-SSVEP +1.94 [+0.72, +3.39]. **At the endpoint READER is at parity with BiTE on motor
-imagery and ahead of it on SD-SSVEP**; it is above every other re-run baseline on 2a and 2b, and level with the
-re-run DeepConvNet on SD-SSVEP (READER − DeepConvNet −0.33 [−1.56, +0.67], 3/4/3 subjects). Against the published
-single-seed bars: 2a −0.63, 2b −1.96, HGD +0.37, SD-SSVEP +0.67 (DeepConvNet's 95.50). **READER ranks 1 of 12 on 2a
-and HGD and 2 of 12 on 2b and SD-SSVEP, and is first on the corpus-balanced mean (90.90 against BiTE's 90.29).**
-On HGD the strongest re-run baseline is DMSANet (96.11), not BiTE, and READER − DMSANet is +0.19 [−1.69, +1.79]:
-rank 1 there is not a significant margin.
-
-### Cross-subject (`results/CROSS_SUBJECT.md`)
-
-Leave-one-subject-out as BiTE defines it; BiTE publishes no HGD row. **Three seeds, complete**, BiTE trained at
-`--clip 0` as released:
-
-| model | 2a | 2b | SD-SSVEP |
-|---|---:|---:|---:|
-| BiTE (re-run, 3 seeds) | **61.32** ± 12.83 | 76.17 ± 6.29 | 78.94 ± 20.79 |
-| Compact | 60.11 ± 14.44 | **76.48** ± 6.48 | 79.65 ± 21.69 |
-| **READER** | 61.10 ± 14.36 | 75.86 ± 6.86 | **80.57** ± 21.41 |
-| BiTE (published, 1 seed) | 64.56 | 76.44 | 79.72 |
-
-**Parity on all three, and none of the three architectures transfers across subjects the way it does within one.**
-READER − BiTE: 2a −0.23 [−2.58, +2.01], 2b −0.32 [−1.53, +1.02], SD-SSVEP +1.63 [−0.15, +3.50] — every CI spans
-zero. The prefix-reversed branch is a within-subject result; we do not claim a cross-subject one. The first BiTE
-seed was trained at gradient clip 5 (our trainer's default) whereas BiTE's release does not clip; all three seeds
-were re-run at `--clip 0` and the clip-5 numbers (61.11 / 76.08 / 79.44) are marked superseded in the table.
-
-The ten baselines were **not** run cross-subject: at the measured 1.15 GPU-h per LOSO run that zoo is ~965 GPU-h,
-against 290 for the three models above. The cross-subject comparison of record is therefore READER, Compact and
-BiTE only, and it is stated that way rather than implied to be a zoo.
-
-### Anytime: one model against retrained per-deadline specialists (`results/anytime_*.md`)
-
-**One** READER read at each deadline vs a **bank of separately retrained** specialists (one model per deadline,
-trained from scratch on truncated trials). Subject-level difference against the strongest bank at each deadline,
-9 subjects × 3 seeds:
-
-| deadline | READER (1 model) | BiTE bank | Compact bank | READER − strongest bank [95% CI], W/T/L |
-|---|---:|---:|---:|---|
-| 1.0 s | 76.84 | 74.27 | 74.83 | **+2.01** [+0.76, +3.09] 7/0/2 |
-| 2.0 s | 83.37 | 81.49 | 81.57 | **+1.80** [+0.48, +2.89] 7/1/1 |
-| 3.0 s | 84.10 | 82.93 | 83.35 | +0.76 [−0.72, +2.42] 5/1/3 |
-| 4.0 s | 84.84 | 84.08 | 82.33 | +0.76 [+0.01, +1.63] 6/1/2 |
-
-With 9 subjects, Holm over the three early deadlines gives p = .082 / .082 / .53: the 1 s and 2 s intervals exclude
-zero but do not survive correction. An earlier version of this table headlined the delta against the *weaker* bank
-(+2.57 / +1.88 / +1.17).
-
-**It does not replicate on the other two corpora.** SD-SSVEP (second paradigm, 10 subjects × 3 seeds,
-`results/anytime_sdssvep.md`):
-
-| deadline | READER (1 model) | BiTE bank | Compact bank | READER − strongest bank [95% CI], W/T/L, Holm p |
-|---|---:|---:|---:|---|
-| 0.25 s | 65.33 | 66.11 | 67.17 | −1.83 [−5.17, +2.06] 2/0/8, .28 |
-| 0.5 s | 84.28 | 84.11 | 87.56 | **−3.28** [−4.89, −1.83] 0/0/10, .006 |
-| 0.75 s | 88.00 | 89.00 | 91.72 | −3.72 [−6.44, −1.06] 2/2/6, .094 |
-| 1.0 s | 94.33 | 94.22 | 94.11 | +0.11 [−1.33, +1.56] 5/3/2 |
-
-READER is level with BiTE's SSVEP bank but Compact models retrained at each deadline beat it. On 2b READER trails
-BiTE's bank by a flat −1.50 / −1.62 / −1.44 / −1.59 at 1 / 2 / 3 / 4 s, which is BiTE's endpoint lead
-(`results/anytime_2b.md`). **One READER replacing the bank without losing accuracy is therefore a 2a result.**
-
-### Beyond accuracy: classes, confidence and whose errors (`results/ERROR_ANALYSIS.md`)
-
-Computed from the final-epoch test logits stored with every run, which reproduce each run's reported accuracy
-exactly — same runs, same epoch, no GPU.
-
-- **Per-class recall.** No arm has a collapsed class. READER's worst-to-best spread is 5.9 pp on 2a and 8.7 on
-  SD-SSVEP, against BiTE's 6.6 and 17.3; BiTE's twelfth SSVEP class falls to 81.3 where READER holds 90.7.
-- **Calibration.** Every arm is **under**-confident on every corpus (2a −15.4 pp, SD-SSVEP −33.2), the expected
-  direction for label smoothing 0.1 rather than a property of the architecture. A confidence threshold tuned on
-  one corpus will not transfer to another — which matters for any system that stops early when it is sure.
-- **READER and BiTE make different mistakes.** On 2a they disagree on 13.2% of trials (6.9 only READER, 6.3 only
-  BiTE) and both miss only 9.0%. The oracle over the two is +6.30 pp [+4.19, +8.55] above READER, 9/9 subjects;
-  averaging their softmax outputs is +1.79 [+0.95, +2.80]. That is reported as a diagnostic, not a system: it
-  needs both models at inference, which is the cost this paper set out to remove.
-- **Re-run noise.** READER's 2a accuracy moves 1.91 pp SD across seeds within a subject (max 5.54), against BiTE's
-  1.34. Every delta in this repository is a difference of numbers with that much spread underneath it.
-
-### Ablations (`results/ABLATION.md`)
-
-| variant (minus READER, subject-level) | 2a full | 2b full | SD-SSVEP full | 2a at 1 s | SD-SSVEP at 0.25 s |
-|---|---:|---:|---:|---:|---:|
-| − reversed branch (Compact) | −2.38 | −1.09 | −2.06 | −39.17 | −24.67 |
-| reversed → forward second branch (FF-Control, same size and init) | −1.63 | −1.26 | −2.00 | −39.85 | −23.72 |
-| second branch → running-mean readout (Compact-Mean) | −12.35 | −1.36 | −29.72 | −29.66 | −6.33 |
-| forward route only, g = 0 (inference, same weights) | −0.60 | −0.70 | −1.83 | −37.17 | −24.06 |
-| reversed route only, g = 1 (inference, same weights) | −2.12 | −0.77 | −8.83 | +1.38 | +4.89 |
-| equal average, g = 0.5 (inference, same weights) | −0.06 | +0.02 | +0.11 | +0.19 | +0.50 |
-| + prefix supervision (loss) | +0.13 | −0.67 | −1.83 | +6.73 | +30.72 |
-
-Early columns are the same checkpoints given only the first quarter of each trial. CIs, W/T/L and HGD are in
-`results/ABLATION.md`.
-
-**Same loss, different architecture.** Prefix supervision is a loss change, so Compact was retrained with the
-identical prefix loss. READER+PS minus Compact+PS on the same truncated inputs, subject-level [95% CI]:
-
-| | 2a 1 s | 2a 2 s | 2b 1 s | 2b 2 s | SD-SSVEP 0.25 s | SD-SSVEP 0.5 s |
-|---|---:|---:|---:|---:|---:|---:|
-| early decision | **+19.20** [+15.74, +23.30] 9/0/0 | **+10.12** [+6.31, +14.99] 9/0/0 | +3.89 [+0.08, +7.10] 7/0/2 | +1.42 [−2.11, +5.02] 5/0/4 | **+22.22** [+16.89, +28.11] 10/0/0 | **+13.11** [+6.78, +19.94] 9/0/1 |
-
-At the full trial the same comparison is 2a +2.74 [−0.08, +6.46], 2b −0.75 [−1.42, −0.17], SD-SSVEP +0.22
-[−1.67, +2.44]. The prefix-reversed branch, not the loss, carries the early-decision advantage of a single model;
-what it does not do is match specialists retrained for each deadline on 2b and SD-SSVEP (section above).
-
-### Efficiency (`results/EFFICIENCY.md`)
-
-One READER replaces a bank of four per-deadline BiTE specialists (e.g. 21.0K vs 65.2K parameters on 2a). A single
-READER has 1.3–2.2× BiTE's parameters, so no single-model efficiency claim is made. **CPU latency is provisional**:
-it was timed on a shared node and repeated measurements of the same configuration differed by up to 3×, so no
-latency comparison is claimed until it is re-measured on an idle node.
-
-### Scope of the anytime claim
-
-Three limits, all of them load-bearing:
-
-1. **It requires prefix supervision, which is a different arm.** The table above is the reader
-   trained with `--prefix-weight 0.3` (deep supervision over deadlines) — a *loss* change, not the
-   architecture. The endpoint-supervised reader from the within-subject table above *loses* **−4.55
-   at 1 s** against the strongest bank and is then within ±1.3 points of it (+0.59 / −1.22 / +0.63 at
-   2/3/4 s) — it does not carry the anytime-vs-bank claim on its own
-   (`results/anytime_2a_endpoint_supervised.md`). Prefix supervision is free on 2a
-   (+0.13 endpoint) and costs −1.83 on SD-SSVEP, so it is not a global default and the
-   within-subject table is not built on it. Which arm produced an anytime number is therefore part
-   of that number; `reader/anytime.py --reader` selects it and the generated tables name it.
-2. **It is a 2a claim.** On 2b the same comparison is **−1.50 / −1.62 / −1.44 / −1.59** at
-   1/2/3/4 s (`results/anytime_2b.md`) — a flat offset, statistically indistinguishable across
-   deadlines and equal to BiTE's standing 2b *endpoint* advantage. On SD-SSVEP, Compact specialists
-   retrained at each deadline beat the single READER at 0.5 s (−3.28, Holm p .006) and 0.75 s (−3.72)
-   (`results/anytime_sdssvep.md`).
-3. **No bank exists on HGD**, so no comparison is available there.
-
-### Ablation: does supervising the intermediate decisions help? (`results/ablation_prefix_supervision.md`)
-
-READER produces a decision at every deadline whether or not anything supervises it. This is the
-one focused ablation of that: endpoint-only loss vs **one predeclared** prefix weight of 0.3. No
-sweep — 0.3 is the only weight ever trained on this model, so nothing is selected on the test set.
-Same model, subjects, seeds, epochs and protocol; the loss is the only difference, and
-`reader/ablation.py` aborts if the two arms differ in anything else. Paired per (subject, seed).
-
-| corpus | early deadline | endpoint-only → prefix | paired Δ (se, W/L) | endpoint Δ (se, W/L) |
-|---|---|---:|---:|---:|
-| 2a | 1 s | 70.28 → 76.84 | **+6.56** (0.95, 24/3) | +0.13 (0.54, 9/15) |
-| 2b | 1 s | 70.79 → 75.92 | **+5.14** (1.81, 18/8) | −0.67 (0.42, 7/18) |
-| SD-SSVEP | 0.25 s | 34.61 → 65.33 | **+30.72** (2.00, 29/1) | −1.83 (0.48, 1/14) |
-| SD-SSVEP | 0.5 s | 62.00 → 84.28 | **+22.28** (2.43, 30/0) | — |
-
-**Deep supervision of the intermediate decisions buys early accuracy on every corpus tested, and
-the endpoint is preserved only on 2a.** On 2b it costs −0.67 and on SD-SSVEP −1.83, so it is a
-trade, not a free improvement, and the within-subject table above is deliberately *not* built on
-it. The effect is largest where the endpoint-only model is worst early: an SSVEP decoder trained
-only on the trial end is barely above chance at 250 ms (34.61 against a 12-class chance of 8.33)
-because nothing ever asked it for an early answer.
-
-SD-SSVEP matters here for a second reason: it is a **different paradigm** from the motor imagery of
-2a/2b, and its 1 s trial on a 15.625 ms grid is a different deadline regime. It carries no
-specialist bank, so it cannot enter the comparison above, but it can enter this one.
-
-## Is the prefix-reversed branch doing anything? (`results/gate_intervention.md`)
-
-The forward and prefix-reversed readings are fused by a convex per-feature gate
-`g = sigmoid(gamma)`, `gamma` initialised at 0 so both routes start live at 0.5. Pinning `g` at
-inference on already-trained weights separates two questions that are easy to conflate. Paired per
-cell against that cell's own learned-gate accuracy (se, cells made worse):
-
-| corpus | n | learned | g=0 forward only | g=1 reversed only | g=0.5 (init, unlearned) | learned gate |
-|---|---:|---:|---:|---:|---:|---:|
-| 2a | 27 | 84.71 | −0.60 (0.35, 19/27) | −2.12 (0.49, 21/27) | −0.06 (0.05, 8/27) | 0.4943 ± 0.0179 |
-| 2b | 27 | 86.41 | −0.70 (0.23, 16/27) | −0.77 (0.29, 15/27) | +0.02 (0.07, 4/27) | 0.4969 ± 0.0156 |
-| HGD | 42 | 96.30 | −0.44 (0.14, 22/42) | −0.30 (0.14, 17/42) | +0.00 (0.03, 2/42) | 0.5003 ± 0.0142 |
-| SD-SSVEP | 30 | 96.17 | −1.83 (0.57, 12/30) | −8.83 (1.61, 26/30) | +0.11 (0.11, 1/30) | 0.4484 ± 0.0378 |
-
-**The fusion is load-bearing: deleting either route costs accuracy on all four corpora**, so the
-prefix-reversed reading carries information the forward reading does not, and vice versa — the
-reversed branch is not decorative. On SD-SSVEP the forward reading is doing most of the work
-(−8.83 to drop it, −1.83 to drop the reversed one); on 2a it is the other way round.
-
-**The gate's *learning*, however, contributes nothing.** It sits within a few thousandths of its
-0.5 initialisation on every corpus, and pinning it exactly there is free (−0.06 to +0.11, all
-inside noise). We therefore describe the fusion as a **fixed equal-weight convex average**, not as
-a learned adaptive gate; `gamma` is kept only because it costs 64 parameters and leaves the door
-open on corpora we have not tried.
-
-## Does reverse reading improve the SAME checkpoint's intermediate predictions? (`results/subject_stats/`)
-
-The question that matters for the mechanism is not whether READER beats separately retrained models, but
-whether, with **no retraining**, it predicts better from partial input than its own forward-only parent.
-Each endpoint-trained checkpoint is given **only the first n samples** of every test trial: the last pooling
-window is partial and rescaled exactly as at deployment, and the prediction is that truncated input's
-endpoint — never a value read off the full-trial curve (`reader/exact_duration.py`, 420 checkpoints; every
-one reproduces its logged full-length accuracy exactly). Subject-level means (seeds averaged per subject):
-
-| corpus | observed | READER | Compact | FF-Control | Compact-Mean | BiTE (same ckpt) |
-|---|---|---:|---:|---:|---:|---:|
-| 2a | 1 s / 2 s / 3 s / 4 s | **70.1 / 82.1 / 82.0 / 84.7** | 30.9 / 45.1 / 50.4 / 82.3 | 30.2 / 50.8 / 58.4 / 83.1 | 40.4 / 65.2 / 71.1 / 72.4 | 59.9 / 76.9 / 70.4 / 84.1 |
-| 2b | 1 s / 2 s / 3 s / 4 s | **70.9 / 83.0 / 85.4 / 86.4** | 54.3 / 71.6 / 73.8 / 85.3 | 54.6 / 70.1 / 75.7 / 85.2 | 62.7 / 81.7 / 84.2 / 85.1 | 68.1 / 83.2 / 82.3 / 87.3 |
-| SD-SSVEP | .25 / .5 / .75 / 1 s | **34.6 / 62.0 / 69.9 / 96.2** | 9.9 / 13.8 / 14.1 / 94.1 | 10.9 / 16.7 / 16.1 / 94.2 | 28.3 / 48.6 / 60.9 / 66.4 | 18.8 / 29.4 / 32.9 / 94.2 |
-
-READER minus Compact on the same checkpoints, subject-level mean, 95% bootstrap CI, subjects W/T/L; exact
-sign-flip Wilcoxon, Holm-adjusted over the 12 pre-declared prefix tests:
-
-| corpus | 1/4 of the trial | 1/2 | 3/4 | full |
-|---|---|---|---|---|
-| 2a | +39.2 [+34.6, +44.4] 9/0/0, Holm p .043 | +37.0 9/0/0, .043 | +31.6 9/0/0, .043 | +2.4 [+0.2, +4.7] 6/0/3, .125 |
-| 2b | +16.5 [+9.5, +23.3] 8/0/1, .043 | +11.5 8/0/1, .047 | +11.6 9/0/0, .043 | +1.1 [+0.4, +1.8] 7/0/2, .094 |
-| SD-SSVEP | +24.7 [+14.6, +34.6] 9/0/1, .043 | +48.2 9/0/1, .043 | +55.8 10/0/0, .023 | +2.1 [+0.3, +4.4] 5/5/0, .125 |
-
-With 9 subjects the smallest attainable exact p is 0.0039, which bounds how small these can get after Holm.
-
-**Read this with its main caveat.** Compact classifies its *last* token, whose position moves with the
-deadline and whose classifier was only ever trained at the final position; READER's reversed branch ends at
-the trial's *first* token at every deadline. Part of the gap is therefore **anchoring**, not reversal as
-such. The gate interventions agree: reversed-only (g = 1) is *better* than the learned gate early (2a +1.4 at
-1 s, SD-SSVEP up to +11.7) and worse at the endpoint, and forward-only (g = 0) collapses like Compact.
-
-## Beyond a second branch, or a better readout? (FF-Control, Compact-Mean)
-
-Two controls, each trained from scratch with the identical recipe on all 28 subjects x 3 seeds:
-
-- **FF-Control** (`--model ff_control`): READER's second branch with the *same* constructor, forked seed,
-  gate, initialisation and objective, reading the prefix in **original** order. Parameter count and initial
-  weights are identical to READER's (tested).
-- **Compact-Mean** (`--model compact_mean`): the parent with its classifier on the causal running mean of the
-  forward TCN outputs, (1/t) sum f_i, **trained** with that readout. Parameters identical to Compact (tested).
-
-Endpoint, READER minus comparator, subject-level (95% bootstrap CI, W/T/L, Holm over 12 endpoint tests):
-
-| corpus | vs Compact | vs FF-Control | vs Compact-Mean | vs BiTE (this harness) |
-|---|---|---|---|---|
-| 2a | +2.38 [+0.23, +4.63] 6/0/3 | +1.63 [+0.27, +3.07] 6/0/3 | **+12.35** [+6.94, +18.58] 9/0/0, Holm .043 | +0.63 [−0.82, +1.98] |
-| 2b | +1.09 [+0.39, +1.79] 7/0/2 | +1.26 [+0.34, +2.19] 8/0/1 | +1.36 [−0.79, +3.57] 6/0/3 | −0.92 [−1.91, +0.06] |
-| SD-SSVEP | +2.06 [+0.33, +4.39] 5/5/0 | +2.00 [+0.50, +4.17] 6/4/0 | **+29.72** [+19.00, +41.06] 10/0/0, Holm .023 | +1.94 [+0.78, +3.44] |
-
-- **A second forward branch adds nothing measurable**: FF-Control minus Compact is +0.75 [−0.18, +1.79] (2a),
-  −0.16 [−0.82, +0.51] (2b), +0.06 [−0.72, +1.00] (SD-SSVEP). READER's endpoint gain over Compact is therefore
-  not explained by capacity or by ensembling two branches; READER minus FF-Control is about as large as READER
-  minus Compact on every corpus, with every interval above zero. None survives Holm at 12 comparisons.
-- **Compact-Mean is not a READER substitute at the endpoint** (72.4 / 85.1 / 66.4): uniform averaging gives
-  early, not-yet-informative tokens the same weight as late ones and generalises poorly (it still fits the
-  training set to 100%). Its position-free readout does recover much of Compact's prefix collapse (2a at 2 s
-  45.1 -> 65.2), which confirms that anchoring matters; READER still leads it at every duration on 2a and
-  SD-SSVEP, while on 2b beyond 1.5 s the lead (+1.2 to +2.2) has intervals that include zero.
-- FF-Control is end-anchored like Compact, so it does not separate *direction* from *start-anchoring*.
-
-Full tables, per-subject differences and the exact tests: `results/subject_stats/SUBJECT_STATS.md`.
-
-## Is it actually causal?
-
-Yes, and it is tested rather than asserted, on random **and trained** weights.
-
-**On trained checkpoints** (`reader/exact_duration.py`, `results/exact_duration.json`): for every READER,
-FF-Control and Compact-Mean checkpoint on 2a / 2b / SD-SSVEP (252 checkpoints, 10,782 pooling-boundary checks in
-total, all test trials), the maximum |logit| difference between the truncated input and the full-trial curve
-is **0.0**, and replacing every sample after a boundary with N(0, 1e3^2) noise changes the earlier decisions
-by **0.0**. All BatchNorm layers track running statistics, and eval-mode outputs do not depend on batch
-composition.
-
-**Why random-init tests are not enough** (`tests/test_controls_and_causality.py`). Every residual TCN block
-zero-initialises its second convolution, so at initialisation each TCN is exactly the identity and the
-reverse branch's last output is token 0 whatever it reads. A deliberately wrong implementation that reverses
-the **complete** trial at every deadline is therefore indistinguishable from READER at init — a test pins
-this. The causality tests run on an **activated** configuration instead (second convolutions, BatchNorm
-statistics and gate randomised), where that mutant is detected and all four causal arms pass:
-
-- **truncation equivalence** — feeding only the first *t* tokens reproduces entry *t* of the anytime
-  curve to <1e-4. This is the property deployment needs.
-- **no future leakage** — replacing everything after the deadline with 1e3-scale noise leaves early
-  deadlines bit-identical.
-- **deadline labels** — the reported token must *end at or after* the wall-clock deadline
-  (`reader.anytime.deadline_index` uses `ceil`; `round` put "3.0 s" on a token ending at 2944 ms).
-
-One caveat stated plainly: BatchNorm uses batch statistics during **training**, which pool over time
-and across the batch. At inference it uses fixed running statistics, so deployment is causal;
-training is not strictly online. The BiTE baseline is non-causal at *inference* by construction.
-
-## Quick start
-
-```bash
-pip install -r requirements.txt
-export READER_DATA=/path/to/prepared/data      # see docs/DATA.md
-export PYTHONPATH=$PWD
-python scripts/fetch_baseline.py               # BiTE, for the baseline arms and the LOSO gate
-pytest tests/ -q                               # 144 gates
-
-python reader/train.py --model reader --dataset 2b --subject 4 --seed 2025 --epochs 600 \
-       --out runs/demo/reader/2b_S4_seed2025
+# REACT-EEG
+
+**Reverse-Encoded Anytime Causal Temporal Modeling for EEG Decoding**
+
+REACT-EEG is an EEG classifier that can be queried at different observation times using the **same trained checkpoint**. A forward temporal reader summarizes the newest observed token, while an independently parameterized reverse reader processes the observed tokens from newest to oldest and finishes at the first token. A learned, feature-wise gate combines both representations before classification.
+
+The associated manuscript evaluates motor-imagery and steady-state visual evoked potential decoding on **BCICIV-2A, BCICIV-2B, and SD-SSVEP**, covering 28 subjects. Its main experiment trains at the complete-trial endpoint and evaluates the resulting checkpoints at earlier observation boundaries. A separate experiment retrains REACT and its forward-only control with matched random-duration exposure.
+
+> **Scope of this source snapshot.** This repository layout preserves the exported main experiment in `main_source/` and the later mechanism-control scripts in `anchor_source/`. It includes model, training, evaluation, statistical-analysis, and plotting code, but **does not include EEG datasets, trained checkpoints, or the complete per-run result records**. Some secondary workflows in the manuscript are not included, and several scripts retain machine-specific paths. See [Reproducibility status](#reproducibility-status) before attempting a complete paper reproduction.
+
+## Contents
+
+- [Method](#method)
+- [Datasets and input format](#datasets-and-input-format)
+- [Repository layout](#repository-layout)
+- [Installation and a data-free example](#installation-and-a-data-free-example)
+- [Training and evaluation](#training-and-evaluation)
+- [Mechanism controls](#mechanism-controls)
+- [Statistics and figures](#statistics-and-figures)
+- [Manuscript results](#manuscript-results)
+- [Reproducibility status](#reproducibility-status)
+- [Limitations and attribution](#limitations-and-attribution)
+
+## Method
+
+At a decision boundary containing `m` prepared EEG samples per channel, the input has shape `[batch, channels, m]`:
+
+```text
+Observed prepared EEG: [B, C, m]
+    |
+    | Three left-padded temporal convolutions: 16, 32, 64 taps
+    | 16 maps per branch -> concatenate -> BatchNorm
+    v
+Temporal features: [B, 48, C, m]
+    |
+    | Depthwise spatial convolution: two spatial filters per map
+    | BatchNorm -> LeakyReLU
+    v
+Spatial features: [B, 96, m]
+    |
+    | Non-overlapping means, including an observed-only partial window
+    | Dropout -> affine projection 96 -> 64 -> positional embeddings
+    v
+Positioned tokens: [B, 64, N], where N = ceil(m / pool)
+    |                                  |
+    | Original token order             | Reversed observed-token order
+    v                                  v
+Forward TCN                         Independent reverse TCN
+Newest-token state [B, 64]           Start-anchored state [B, 64]
+    |                                  |
+    +------------ feature-wise gate ---+
+                      |
+                      v
+               Linear classifier
+                      |
+                      v
+                 Logits [B, K]
 ```
 
-Full reproductions (SLURM; edit the partition in `scripts/slurm/pack.sbatch`):
+Each reader contains three residual blocks with dilations **1, 2, and 4**, two bias-free depthwise convolutions per block, and kernel size **6**. Its theoretical receptive field is **71 tokens**, covering all sequences evaluated in this study. The gate has 64 learned parameters, is initialized to equal weighting, and does not depend on the trial or observation duration:
 
-```bash
-./scripts/reproduce_within.sh     #   378 runs: READER, Compact, BiTE x 42 subjects x 3 seeds
-./scripts/reproduce_zoo.sh        # 1,230 runs: BiTE's 10 released baselines x 42 subjects x 3 seeds
-./scripts/reproduce_loso.sh       #   252 runs: cross-subject, 3 arms x 28 subjects x 3 seeds, no HGD row
-./scripts/reproduce_anytime.sh    # prefix-supervised READER + Compact, specialist banks on 2a / 2b / SD-SSVEP
-./scripts/reproduce_controls.sh   #   168 runs: FF-Control + Compact-Mean x 28 subjects x 3 seeds
-./scripts/rebuild_results.sh      # every file in results/ from runs/, CPU only
-python scripts/efficiency.py      # parameters + CPU latency (run on an idle CPU)
+$$
+\mathbf g=\sigma(\mathbf a),\qquad
+\mathbf h_m=(1-\mathbf g)\odot\mathbf f_m+\mathbf g\odot\mathbf b_m.
+$$
+
+The spatial-filter and classifier-row maximum norms are **1** and **0.25**, respectively. The implementation projects these weights at initialization in the experiment runner and after optimizer updates. Positional embeddings retain their original identities when the token sequence is reversed.
+
+**Causality is defined at the prepared model input.** Predictions at `m` use only prepared samples through `m`. Inference disables dropout and uses stored BatchNorm statistics. This is not a claim that upstream acquisition or preprocessing is causal, nor that the training-time BatchNorm graph is a strictly online computation. A direct call recomputes the readers on the supplied observation; this is not a constant-cost recurrent streaming implementation or an adaptive stopping policy.
+
+Source: [`models.py`](main_source/fresh/models.py), [`controls.py`](main_source/fresh/controls.py), and [`run.py`](main_source/fresh/run.py).
+
+### Names used in code
+
+Internal names are retained to preserve imports and checkpoint compatibility. **REACT-EEG is the proposed model**; the other names identify controls or the external baseline.
+
+| Manuscript name | Code identifier |
+|---|---|
+| REACT / REACT-EEG | `reader` |
+| No reverse | `compact` |
+| Two forward | `ff` |
+| Forward mean | `compact_mean` |
+| BiTE | `bite` |
+| Fixed anchor | `fixed_anchor` |
+| Endpoint-aligned position | `relative_position` |
+| Independently trained reverse-only | `reverse_only` output directory |
+| Random-duration REACT / No reverse | `react_rt` / `compact_rt` |
+
+The earlier `random_truncation` diagnostic is **not** the final paired `react_rt` versus `compact_rt` experiment.
+
+## Datasets and input format
+
+| Dataset | Code key | Subjects | Channels | Classes | Sampling rate | Input | Pool | Maximum tokens |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| BCICIV-2A | `2a` | 9 | 22 | 4 | 250 Hz | 1,000 samples / 4 s | 32 | 32 |
+| BCICIV-2B | `2b` | 9 | 3 | 2 | 250 Hz | 1,000 samples / 4 s | 32 | 32 |
+| SD-SSVEP | `ssvep` | 10 | 8 | 12 | 256 Hz | 256 samples / 1 s | 4 | 64 |
+
+The executable loader consumes **prepared NPZ files**, not raw GDF or MATLAB recordings. Each file must contain:
+
+```text
+ data:  numeric array [trials, channels, samples], containing finite values
+ label: integer array [trials], with zero-based class labels
 ```
 
-## Reproducing from scratch
+For motor imagery, the loader accepts stored trials of 1,000 or 1,001 samples and retains the first 1,000. SD-SSVEP requires exactly 256 samples. It does not infer labels or reconstruct a train/test split.
 
-What ships here is **code**, not cached results. `results/` holds our scored outputs so the numbers
-can be checked without a GPU; re-running `scripts/score.py` **overwrites them** from your own runs,
-so a regenerated table is your table, not ours.
+Supply one directory per dataset with the following filenames:
 
-Verified on a clean clone: `pytest` (the gates at the time: 77), a single `reader/train.py` run, the
-manifest -> `sbatch` -> `scripts/score.py` pipeline, and the BiTE baseline after
-`scripts/fetch_baseline.py`.
+```text
+2a_pre/
+    A01T.npz                 # Subject 1: training session
+    A01E.npz                 # Subject 1: evaluation session
+    ...                      # Subjects 01 through 09
 
-Requirements that are easy to miss:
+2b_pre/
+    B0101T.npz               # Subject 1: training session 1
+    B0102T.npz               # Subject 1: training session 2
+    B0103T.npz               # Subject 1: training session 3
+    B0104E.npz               # Subject 1: test session 4
+    B0105E.npz               # Subject 1: test session 5
+    ...                      # Subjects 01 through 09
 
-- **`READER_DATA` must point at a prepared corpus tree.** The EEG is not shipped (~2.7 GB, and
-  each corpus has its own terms), but the raw-download -> `.npz` conversion now is:
-  `scripts/prepare_data.py` drives **BiTE's own** `preprocess_*` functions with the settings from
-  their `config.yaml`, so both models see the authors' preprocessing rather than our reading of
-  their paper. It needs `scripts/fetch_baseline.py` first and `pip install -r
-  requirements-prepare.txt` (mne, scipy; braindecode for HGD only).
+sdssvep_pre/
+    S01_train.npz
+    S01_test.npz
+    ...                      # Subjects 01 through 10
+```
 
-  ```bash
-  python scripts/prepare_data.py --raw /path/to/downloads --out data --corpus 2a 2b sdssvep hgd
-  python scripts/prepare_data.py --verify --out data     # against results/data_checksums.json
-  ```
+For each subject, `StandardScaler` is fitted on training trials after flattening channel-by-sample coordinates. Its frozen mean and scale are applied to held-out trials and their shorter observations. There is no held-out-trial normalization fit. Exact duplicate prepared trials across the training/test roles are checked; that check does not establish the provenance or independence of the original raw trials.
 
-  `docs/DATA.md` gives the layout, the per-corpus preprocessing and where each raw download comes
-  from. Starting from an already-prepared tree, everything below runs unchanged.
-- **The clone must live on a filesystem the compute nodes can see.** A clone under node-local
-  `/tmp` fails immediately with no log, because SLURM cannot reach the working directory.
-- `scripts/fetch_baseline.py` needs network access, and is required for the `bite` arm and for the
-  LOSO alignment gate (which skips without it).
+SD-SSVEP observation time is measured from the beginning of the retained one-second segment. The manuscript describes a nominal 135-ms visual-response offset, but this loader receives already-cropped arrays and cannot verify the upstream crop index. The raw-to-NPZ conversion and original SD-SSVEP split construction are not supplied as an executable pipeline in this export.
 
-Measured cost of the full within-subject cohort (378 runs, 600 epochs each, H100/H200):
+Source: [`fresh/data.py`](main_source/fresh/data.py). Obtain the datasets separately; do not commit EEG recordings or per-trial data to this repository.
 
-| arm | 2a | 2b | HGD | SD-SSVEP |
+## Repository layout
+
+Place this README at the repository root, alongside the two exported source directories:
+
+```text
+README.md
+main_source/
+    fresh/
+        models.py                    # Tokenizer, readers, model factory
+        controls.py                  # Shared readout-control implementation
+        data.py                      # Prepared-data contract and observation grid
+        bite.py                      # Adapter for pinned upstream BiTE
+        setup.py                     # Freeze a new study and fetch BiTE
+        run.py                       # Endpoint training, inference, causality tests
+        smoke.py                     # Allocated-GPU, training-role preflight
+        report.py                    # Primary experiment collector
+        statistics_base.py           # Subject-first statistics
+    tests/                           # Synthetic software checks
+    scripts/                         # Original Slurm wrappers
+    docs/
+    paper/                           # Earlier manuscript/report template
+anchor_source/
+    fresh/anchor_models.py           # Anchor/position/earlier truncation controls
+    fresh/anchor_diag.py
+    fresh/anchor_report.py
+    train_reverse_only_final.py
+    train_paired_random_trunc_final.py
+    reviewer_eval_controls.py
+    bite_zerofill_final.py
+    summarize_reverse_only.py
+    summarize_paired_random_trunc_final.py
+    final_endpoint_stats.py
+    fresh_primary_nauc.py
+    check_fresh_causality.py
+    make_fresh_anytime_figure.py
+    make_final_figure2_publication.py
+main_evidence/                       # Selected exported provenance and analysis
+```
+
+`anchor_source/` also contains copies of the core `fresh/` modules. Those copies match `main_source/` in this export. Avoid adding both directories to `PYTHONPATH` at once: both provide a package named `fresh`. The commands below select the intended source explicitly. Earlier README files, report templates, and diagnostic documents describe their respective historical stages; they are not the final manuscript.
+
+## Installation and a data-free example
+
+Use a separate environment. Do not upgrade an environment used to produce archived results. The experiment runner uses POSIX file locking; Linux is the intended training platform, while the core model and CPU checks can also be explored on macOS.
+
+For a new environment with Python 3.11 or later:
+
+```bash
+# Run from the repository root.
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install a PyTorch build appropriate for the machine using the [official installation instructions](https://pytorch.org/get-started/locally/). The local CPU checks described below used **PyTorch 2.10.0+cpu**. Then install the remaining versions used for those checks:
+
+```bash
+python -m pip install \
+    numpy==2.3.5 scipy==1.17.0 scikit-learn==1.8.0 \
+    pandas==2.2.3 matplotlib==3.10.8 pytest==9.0.2
+```
+
+These versions document a **local software-test environment**, not a recovered lockfile for the paper's HPC runs. NumPy 2.3.5 supports both the `np.trapz` calls retained in some older scripts and the [`np.trapezoid`](https://numpy.org/doc/stable/reference/generated/numpy.trapezoid.html) calls used by newer scripts. The external BiTE implementation has separate dependencies; inspect the fetched revision's `requirements.txt` and run the GPU preflight before a full experiment.
+
+### Instantiate and query REACT
+
+This example uses random tensors only. It verifies shapes and parameter counts; it does not load a trained model or measure classification performance.
+
+```bash
+PYTHONPATH="$PWD/main_source" python - <<'PY'
+import torch
+from fresh.data import SPECS, grid
+from fresh.models import make_model
+
+torch.set_num_threads(1)
+expected = {"2a": 18916, "2b": 16962, "ssvep": 20140}
+
+for dataset, cfg in SPECS.items():
+    model = make_model(
+        channels=cfg["channels"], classes=cfg["classes"],
+        max_samples=cfg["samples"], pool=cfg["pool"],
+        kind="reader", seed=2025,
+    )
+    model.project_constraints()
+    model.eval()
+    count = sum(p.numel() for p in model.parameters())
+    assert count == expected[dataset]
+    x = torch.randn(2, cfg["channels"], cfg["samples"])
+    with torch.inference_mode():
+        for m in (grid(dataset)[0], cfg["samples"]):
+            logits = model(x[:, :, :m])
+            assert logits.shape == (2, cfg["classes"])
+    print(dataset, "parameters:", count, "shape checks passed")
+PY
+```
+
+A real inference call requires the **matching trained `state_dict` and training-fitted scaler**. Construct the same model configuration, load the checkpoint with `strict=True`, normalize with the saved scaler, call `eval()`, and supply only samples observed at the requested boundary. Exported core checkpoints store weights under `checkpoint["state_dict"]`; they are not bare state dictionaries.
+
+### Software tests
+
+Run tests in a working copy, not in a frozen study's `code/` directory: some tests write software-validation records.
+
+```bash
+(
+    cd main_source
+    PYTHONPATH=. OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 MPLBACKEND=Agg \
+        python -m pytest tests -q -k 'not full_reporting_layout'
+)
+```
+
+This selection passed **41 tests** in a local CPU check using Python 3.13.5 and the versions above. It covers model dimensions, parameter pairing, partial pooling, frozen normalization, checkpoint/resume behavior, nondegenerate causality tests, synthetic integration, reporting rejection checks, and mocked scheduler commands. The excluded legacy layout test writes to a fixed `/mnt/data` location. No EEG benchmark, real GPU training, or upstream BiTE execution was part of this test result.
+
+## Training and evaluation
+
+### Training recipe
+
+| Setting | Core-model value |
+|---|---|
+| Epochs / checkpoint | 600 / final epoch |
+| Seeds | 2025, 2026, 2027 |
+| Batch size | 64 |
+| Optimizer | Adam |
+| Learning rate / weight decay | 0.002 / 0.002 |
+| Adam betas / epsilon | (0.9, 0.999) / 1e-8 |
+| Schedule | Cosine decay to zero |
+| Label smoothing | 0.1 |
+| Gradient-norm clipping | 5 |
+| Dropout / LeakyReLU slope | 0.3 / 0.2 |
+| Main training objective | Complete-trial endpoint cross-entropy |
+
+Shared components are initialized identically across matched core models. The second reader uses a fixed constructor seed of **918273**, shared by REACT and Two forward; it is not independently reinitialized by each outer training seed. Each direct endpoint-training forward pass constructs only the supplied full-window representation, not a loop over all shorter reverse observations.
+
+**BiTE discrepancy:** the supplied `fresh.run.train_one()` applies the same clipping operation to every model passed to it, including BiTE. The manuscript says clipping is disabled for BiTE. This source snapshot does not implement that exception. Resolve the discrepancy against the final run provenance rather than assuming a code change reproduces existing numbers.
+
+<details>
+<summary><strong>Reproduction commands: create a study, train, and collect results</strong></summary>
+
+### Create a new study
+
+Do not execute the exported `launch.sh` files unchanged on another cluster: they contain original interpreter, account, storage, and scheduler settings. A new study can instead be configured through the existing Python setup function.
+
+Set three prepared-data roots and a **new output directory outside the repository**:
+
+```bash
+export REACT_DATA_2A="/absolute/path/to/2a_pre"
+export REACT_DATA_2B="/absolute/path/to/2b_pre"
+export REACT_DATA_SSVEP="/absolute/path/to/sdssvep_pre"
+export REACT_STUDY="/absolute/path/to/new_react_study"
+```
+
+From the repository root, review and run:
+
+```bash
+python - <<'PY'
+import os
+import shutil
+import sys
+from pathlib import Path
+
+repo = Path.cwd().resolve()
+study = Path(os.environ["REACT_STUDY"]).expanduser().resolve()
+roots = {
+    "2a": str(Path(os.environ["REACT_DATA_2A"]).expanduser().resolve()),
+    "2b": str(Path(os.environ["REACT_DATA_2B"]).expanduser().resolve()),
+    "ssvep": str(Path(os.environ["REACT_DATA_SSVEP"]).expanduser().resolve()),
+}
+if not (repo / "main_source/fresh/models.py").is_file():
+    raise SystemExit("Run from the repository root.")
+if study.exists() or study == repo or repo in study.parents:
+    raise SystemExit("Choose a new study directory outside the repository.")
+if not all(Path(p).is_dir() for p in roots.values()):
+    raise SystemExit("A prepared-data directory does not exist.")
+
+study.mkdir(parents=True)
+shutil.copytree(
+    repo / "main_source", study / "code",
+    ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache"),
+)
+sys.path.insert(0, str(study / "code"))
+from fresh import setup
+setup.DEFAULT_ROOTS.update(roots)
+setup.freeze(study)
+PY
+```
+
+This records the study plan and source hashes, checks the required filenames, and obtains BiTE at commit `924eb32241ba1a7c80dbc4ba097f8c979da17578`. Network access to the [upstream repository](https://github.com/cindy-hong/BiteEEG) is needed unless that exact revision is available through the original local cache. This setup step does not submit training jobs. A failed setup can leave a partial study directory; preserve its diagnostics and choose a new directory for a corrected attempt rather than overwriting an existing experiment.
+
+### Run an allocated-GPU preflight and one task
+
+Run computation on an allocated compute node, **not an HPC login node**. Configure scheduler resources according to the local cluster's policies.
+
+```bash
+# In an allocated GPU session; REACT_STUDY is the study created above.
+(
+    cd "$REACT_STUDY/code"
+    python -m fresh.smoke --study "$REACT_STUDY" && \
+    python -m fresh.run --study "$REACT_STUDY" --index 0 --device cuda
+)
+```
+
+Task `0` is BCICIV-2A, subject 1, seed 2025. The frozen plan has **84 subject/seed tasks**: indices 0–26 for 2A, 27–53 for 2B, and 54–83 for SSVEP. Within each dataset the order is subject first, then seed. Each main task trains `compact`, `reader`, `ff`, `compact_mean`, and `bite` sequentially: **420 model fits** for the full primary cohort. Held-out data are opened after all five models in that task have been trained. Core models are evaluated on the observation grid; this primary runner evaluates BiTE at the endpoint only.
+
+Run each index once through a reviewed scheduler array or equivalent allocation. The main trainer supports signature-checked resume from `last.pt`; do not change a frozen plan or source tree to bypass an identity mismatch.
+
+### Generated study files
+
+```text
+study/
+    study.json
+    code_hashes.json
+    bite_provenance.json
+    third_party/BiteEEG/
+    runs/2a_S01_seed2025/
+        scaler.npz
+        training_data.json
+        held_data.json
+        pairing.json
+        reader/
+            final.pt
+            last.pt
+            result.json
+            predictions.npz
+            causality.json
+            training_history.json
+        compact/ ...
+```
+
+`predictions.npz` stores logits shaped `[test trials, observation boundaries, classes]`, labels `y`, prepared-row IDs `ids`, and sample counts `lengths`. Accuracies are calculated separately for each seed, then averaged; the three checkpoints are **not a prediction ensemble**.
+
+After the full primary cohort completes, its collector is:
+
+```bash
+(cd "$REACT_STUDY/code" && python -m fresh.report --study "$REACT_STUDY")
+```
+
+It validates result completeness and stored identities and produces primary analyses. It refuses to overwrite an existing `analysis/` directory. Its generated `paper/` uses an **earlier manuscript template**, not the final paper pasted with this release; do not treat that generated draft as a camera-ready manuscript. The supplied export also omits the original figure artwork needed for a complete PDF build.
+
+</details>
+
+## Mechanism controls
+
+<details>
+<summary><strong>Commands and prerequisites for the control experiments</strong></summary>
+
+The following commands use an existing completed primary study with its `study.json`, frozen `code/`, saved scalers, checkpoints, prepared data, and result records. They are **not runnable from the source archive alone**. Run from the repository root, with `REACT_STUDY` set to that study and `REACT_CONTROLS` set to a new output directory outside the repository:
+
+```bash
+export REACT_CONTROLS="/absolute/path/to/new_control_outputs"
+```
+
+### Independently trained reverse-only control
+
+```bash
+python anchor_source/train_reverse_only_final.py \
+    --study "$REACT_STUDY" --out "$REACT_CONTROLS/reverse_only" \
+    --task-index 0 --device cuda
+```
+
+This copies the tokenizer, reverse-reader, and classifier **initializations** from a newly constructed REACT model, omits the forward reader and gate, and trains independently. It is not a post-hoc route ablation of a trained fused checkpoint. Repeat task indices 0–83 for the full cohort.
+
+### Paired random-duration training
+
+```bash
+python anchor_source/train_paired_random_trunc_final.py \
+    --study "$REACT_STUDY" --out "$REACT_CONTROLS/random_duration" \
+    --task-index 0 --device cuda
+```
+
+Both `compact_rt` and `react_rt` receive the same minibatch order and the same duration schedule. One boundary is sampled uniformly from `fresh.data.grid(dataset)` for each minibatch using a separate random-number generator. Each update uses one label-smoothed cross-entropy loss, without an extra endpoint term. Both arms are trained before opening held-out data. This script saves completed checkpoints but does **not** provide the main trainer's mid-training `last.pt` resume mechanism; always use fresh output paths for new experiment settings.
+
+### Fixed-anchor and endpoint-aligned-position controls
+
+```bash
+PYTHONPATH="$PWD/anchor_source" python -m fresh.anchor_diag \
+    --orig-study "$REACT_STUDY" --out "$REACT_CONTROLS/anchor" \
+    --index 0 --device cuda
+```
+
+This diagnostic also trains an earlier forward-only `random_truncation` control and computes additional probes. That earlier experiment must not be substituted for the final paired random-duration comparison. Its collector is:
+
+```bash
+PYTHONPATH="$PWD/anchor_source" python -m fresh.anchor_report \
+    --orig-study "$REACT_STUDY" --diag-study "$REACT_CONTROLS/anchor"
+```
+
+### Mean-imputation and route interventions
+
+```bash
+python anchor_source/reviewer_eval_controls.py \
+    --study "$REACT_STUDY" --out "$REACT_CONTROLS/mean_imputation" \
+    --dataset all --device cuda
+
+python anchor_source/bite_zerofill_final.py \
+    --study "$REACT_STUDY" --out "$REACT_CONTROLS/bite_mean_imputation" \
+    --device cuda
+```
+
+Mean-imputed controls preserve the trained input length and replace samples after the boundary with zero **in standardized space**, corresponding to the training-set mean. The BiTE adapter then performs its ordinary processing on that completed waveform. Route interventions in `reviewer_eval_controls.py` reuse a jointly trained classifier and are distinct from independently trained reverse-only results.
+
+</details>
+
+## Statistics and figures
+
+BCICIV-2A/2B evaluation covers **1–4 s at 28 boundaries**; SD-SSVEP covers **0.25–1 s of the retained segment at 49 boundaries**. The grids include partial pooling windows where required.
+
+Seeds are averaged within each subject before dataset aggregation or paired comparison. The normalized area under the accuracy–time curve is trapezoidal area divided by the evaluated interval length. It is an **accuracy–time summary**, not ROC AUC. Since accuracy is in percent, model differences in nAUC are reported in percentage points.
+
+The manuscript uses 10,000 paired subject-bootstrap resamples and two separate nine-test Holm families: endpoint comparisons against No reverse, Two forward, and BiTE; and REACT–reverse-only comparisons of earliest accuracy, nAUC, and endpoint accuracy. The default primary collector does not by itself perform all of these later tests.
+
+These scripts accept study paths directly:
+
+```bash
+python anchor_source/fresh_primary_nauc.py "$REACT_STUDY"
+python anchor_source/check_fresh_causality.py "$REACT_STUDY"
+mkdir -p "$REACT_CONTROLS/figures"
+MPLBACKEND=Agg python anchor_source/make_fresh_anytime_figure.py \
+    "$REACT_STUDY" "$REACT_CONTROLS/figures/fig2.pdf"
+```
+
+`make_fresh_anytime_figure.py` plots REACT, No reverse, Two forward, and Forward mean. Its shading is **mean ±1 sample SD across subjects (`ddof=1`) after averaging seeds within subject**. Dotted lines mark chance accuracy. The `make_final_figure2*.py` scripts plot different later comparisons and are not interchangeable with this four-model figure.
+
+The following scripts require manual path configuration before use; they do not accept generic `--study` arguments:
+
+| Script | Path constants to review |
+|---|---|
+| `anchor_source/final_endpoint_stats.py` | `ORIG`, `OUT` |
+| `anchor_source/summarize_reverse_only.py` | `ORIG`, `REV` |
+| `anchor_source/summarize_paired_random_trunc_final.py` | `ORIG`, `RT`, `REV` |
+| `anchor_source/make_final_figure2_publication.py` | `REV`, `CTRL`, output paths |
+
+Update paths only in a working release copy and preserve the archived originals. The paired-duration summary also reads the independently trained reverse-only results; those result files are required even when the main comparison of interest is `react_rt` versus `compact_rt`.
+
+## Manuscript results
+
+**These are results reported in the supplied manuscript, not scores recomputed from the source export.** All accuracies are percentages. “Earliest” means 1 s for 2A/2B and 0.25 s for SD-SSVEP.
+
+### Endpoint-trained REACT
+
+| Dataset | Earliest accuracy | nAUC | Endpoint accuracy | Trainable parameters |
 |---|---:|---:|---:|---:|
-| BiTE | 9.3 h | 5.4 h | 22.0 h | 2.2 h |
-| compact | 5.9 h | 3.6 h | 25.1 h | 1.9 h |
-| READER | 9.1 h | 6.1 h | 42.9 h | 3.3 h |
+| BCICIV-2A | 69.32 | 80.12 | 85.06 | 18,916 |
+| BCICIV-2B | 74.31 | 83.59 | 86.20 | 16,962 |
+| SD-SSVEP | 34.89 | 64.15 | 96.50 | 20,140 |
 
-**~137 GPU-hours total**, about 12 wall-clock hours on 12 GPUs packed 4 runs per GPU. READER's HGD
-cost is the quadratic prefix recomputation: the anytime curve is O(T^2) in the token count. Add
-~20 GPU-hours for the cross-subject cohort, and **42.9** measured for everything
-`reproduce_anytime.sh` launches: the specialist banks (2a 24.2 h over 162 runs, 2b 4.5 h over 81)
-plus the prefix-supervised reader (2a 10.8 h, 2b 3.4 h). The two controls took 20.3 summed run-hours
-(FF-Control 2a 6.7 / 2b 3.0 / SD 1.0; Compact-Mean 6.4 / 2.4 / 0.7) with 8 runs sharing each H200.
+REACT adds **3,136 parameters** relative to either single-reader control: 3,072 for the second reader and 64 for the gate.
 
-**Hardware reproducibility.** A run repeated on an H100 80GB and on an H200 NVL is bit-identical (45/45
-READER runs). MIG-partitioned slices (H100 NVL MIG 3g.47gb) are not: 11/12 READER reruns differed from the
-full-GPU run, by up to 5.56 pp on one 2a run. Keep paired arms off MIG partitions.
+### Matched random-duration training: REACT minus No reverse
 
-## Layout
+| Metric | BCICIV-2A | BCICIV-2B | SD-SSVEP |
+|---|---:|---:|---:|
+| Earliest accuracy | +15.34 [10.13, 21.94] | +3.47 [0.31, 6.59] | +29.83 [23.11, 36.06] |
+| nAUC | +10.42 [6.44, 15.21] | +0.22 [-1.17, 1.61] | +24.96 [19.17, 30.93] |
+| Endpoint accuracy | +5.95 [3.60, 8.45] | -0.86 [-2.07, 0.14] | +18.56 [11.28, 26.50] |
 
-```
-reader/          data roles, model, trainer, diagnostics, anytime scoring
-  data.py        SPECS, official within-subject roles, BiTE-matched LOSO roles + alignment
-  models/
-    compact.py   the forward-only parent decoder
-    reader.py    READER: prefix-bidirectional reading  <- the contribution
-    baseline.py  BiTE adapter + its exact STFT input (fetched, not vendored)
-  train.py       one run: Adam 2e-3/2e-3, cosine, LS .1, batch 64, clip 5, 600 epochs, final epoch
-  diagnostics.py per-layer/per-epoch instrument: weight & gradient norms, activation
-                 distributions, effective rank, train->test probes, calibration
-  anytime.py     one model vs the per-deadline specialist bank (strongest bank is the comparison of record)
-  exact_duration.py  same checkpoint on truncated input + gate interventions + causality on trained weights
-  subject_stats.py   subject-level paired CIs, exact sign-flip Wilcoxon, Holm over declared families
-  ablation.py    prefix supervision vs endpoint-only loss, with a matched-arms guard
-  gate_intervention.py  pin the fusion gate at 0 / 1 / 0.5 on trained weights
-  zoo_report.py  BiTE's baselines re-run here: per-subject tables, READER minus each model
-  models/zoo.py  BiTE's 10 released baselines through BiTE's own get_model, code unchanged
-scripts/
-  reproduce_*.sh         SLURM launchers for every cohort in the paper
-  rebuild_results.sh     all of results/ from runs/, in dependency order
-  link_record_runs.py    runs of record from the development harness (MIG -> full-GPU re-run rule)
-  export_runs.py         results/raw/*.csv: every run, flat, with kappa
-  paper_tables.py        MAIN_TABLE, CROSS_SUBJECT, DEVELOPMENT_DISCLOSURE, REPRODUCIBILITY
-  ablation_table.py      ABLATION: architecture, inference interventions, loss, matched loss
-  efficiency.py          EFFICIENCY: parameters and single-thread CPU latency per decision
-  make_figures.py        results/figures/*.pdf, *.png
-analysis/        model-free input probes (not reported in the paper)
-results/         every paper table and figure, checkable without a GPU (index: results/README.md)
-docs/            DATA.md, CONTROLS.md, REVIEWER_QUESTIONS.md
-tests/           causality (activated + leaky mutant), controls, compact parity, LOSO roles, zoo, results pipeline
-```
+Values are paired differences in percentage points with 95% bootstrap intervals. These comparisons use separately retrained random-duration models, not the endpoint-trained checkpoints in the first table.
 
-## Model-free probes (development evidence, not reported in the paper)
+The manuscript's mechanism analyses show that preserving input geometry through training-mean imputation substantially reduces the large direct-truncation deficit. Independently trained reverse-only models match or exceed fused REACT over much of the early trajectory, particularly for SD-SSVEP, while REACT has higher mean endpoint accuracy on 2A and SD-SSVEP. Endpoint differences are descriptive: none of the declared nine endpoint comparisons remains significant after Holm correction. The reported LOSO analysis does not establish improved subject-independent generalization.
 
-`analysis/` reproduces the input-level measurements that rule out three families before any
-training, each with the same ridge protocol (fit on the training role, score the test role):
+## Reproducibility status
 
-- `field_information_probe.py` — inter-electrode differential-field features carry **no** class
-  information beyond the channels: the edge residual after regressing channels out is at chance on
-  2a and HGD, and adding edges makes those probes *worse*.
-- `spectral_headroom_probe.py` — time-resolved spectral structure adds nothing on 2b
-  (band power .7609 vs windowed spectrum .6822), so the 2b deficit is not an input-information gap.
-- `reference_admittance_oracle.py` — the best amount of common-mode removal is neither CAR nor raw:
-  SD-SSVEP's optimum is 0.25, beating CAR by +1.66.
+The core model's dimensions, parameter counts, direct observed-input inference, and synthetic software checks are supported by this export. Complete scientific reproduction needs additional artifacts and reconciliation:
 
-## Honest limitations
+| Item | Status in this snapshot |
+|---|---|
+| Core model and four matched readout configurations | Included |
+| Primary training and prepared-data loader | Included; original machine paths require configuration |
+| Reverse-only, paired-duration, anchor, and mean-imputation scripts | Included; original run artifacts are external prerequisites |
+| Full checkpoints, scalers, per-trial predictions, and final per-run results | Not included |
+| Executable raw-data preprocessing and SD-SSVEP split construction | Not included |
+| LOSO training/evaluation workflow | Not included in the exported experiment code |
+| Training workflow for the additional ten endpoint baselines | Not included in the exported primary runner |
+| BiTE clipping exception described in the manuscript | Not implemented by the exported main trainer |
+| Final figures and final manuscript source | Not included as a complete publication package |
+| Locked final HPC environment | Not supplied; `validation/environment.json` describes earlier local software tests |
 
-- 2a (−0.63) and 2b (−1.96) remain below the published bars; only HGD and SD-SSVEP clear them. Against BiTE
-  re-run with 3 seeds READER is at parity on motor imagery (2b leans to BiTE, −0.92 [−1.88, +0.08]).
-- DeepConvNet re-run on SD-SSVEP (96.50) is level with READER (96.17): −0.33 [−1.56, +0.67].
-- The advantage of one READER over retrained per-deadline banks holds on 2a only: 2b is a flat −1.5 (the endpoint
-  gap) and on SD-SSVEP retrained Compact specialists win at 0.5 s and 0.75 s. It needs prefix supervision, which costs
-  −0.67 (2b) and −1.83 (SD-SSVEP) at the endpoint; with 9 subjects the 2a 1 s and 2 s intervals exclude zero but do
-  not survive Holm correction.
-- The fusion gate does not learn (it stays at 0.5 and pinning it is free); the fusion is a fixed average.
-- Cross-subject is parity rather than a win outside SD-SSVEP; seeds 2026-2027 are still training.
-- READER is 1.3–2.2× BiTE's parameter count, so no efficiency claim is made.
-- **Development was test-informed.** Architecture screens scored the official test session, and READER was
-  chosen among eight arms that way. What bounds the bias: on the 34 subjects the screen never used, READER
-  minus Compact is +1.43 corpus-balanced, against +1.92 on the screen subjects. No claim is made that design
-  choices were independent of test data.
-- The prefix gain over Compact is partly start-anchoring (see above); FF-Control does not separate direction
-  from anchoring.
-- Every model loses accuracy from its own test-curve peak to the reported final epoch (READER 1.89, BiTE 2.06,
-  zoo baselines 2.20–4.54 pp; `results/REPRODUCIBILITY.md`). This is BiTE's recipe (600 epochs, no validation
-  set, final-epoch reporting), matched deliberately; it does not favour READER over BiTE, and it costs the zoo
-  baselines somewhat more.
-- Zoo baselines are trained with this repository's recipe (float32, clip 5), not BiTE's trainer (AMP, no clip);
-  their seed-2025 re-runs track BiTE's published table within about 1 pp on average.
-- 147 runs of comparisons of record first ran on MIG-partitioned GPU slices, which do not reproduce full-GPU runs
-  bit-for-bit; they are being re-run on H200 and replace the originals (`results/REPRODUCIBILITY.md`).
-- HGD has endpoint and gate-intervention results only: no FF-Control, Compact-Mean, exact-duration or anytime runs.
-- CPU latency in `results/EFFICIENCY.md` is provisional: shared-node timings of the same configuration varied up to 3×.
-- The BiTE repository ships no license. It is fetched, never redistributed here.
+Selected textual summaries are present, but they are not substitutes for complete per-subject, per-seed records. In particular, `anchor_source/fresh_causality_maxima.txt` separates each model's discrepancies from the maximum over all four core models. Those cohort-wide maxima must not be relabeled as REACT-only maxima. Keep native script outputs and result provenance when reconciling the manuscript.
+
+The source plan also records prior inspection of the benchmark results. A new fit does not make the benchmark a previously untouched test set. This repository does not claim that full benchmark reproduction was completed merely because the CPU tests pass.
+
+## Limitations and attribution
+
+The evaluated cohorts contain nine or ten subjects per dataset. Causality is limited to the prepared-input boundary; acquisition-to-output timing and controlled hardware latency were not established in the manuscript. Longer token sequences require appropriate positional capacity and reader receptive fields. Random-duration training was compared for REACT and No reverse, not independently trained reverse-only. Research outputs here are not a validated clinical or assistive-device deployment.
+
+BiTE is an external baseline from [cindy-hong/BiteEEG](https://github.com/cindy-hong/BiteEEG). The adapter records commit **`924eb32241ba1a7c80dbc4ba097f8c979da17578`** in [`fresh/bite.py`](main_source/fresh/bite.py) and retrieves that revision separately; it does not vendor BiTE source in this export. Cite the original BiTE work and the original datasets when using those components.
+
+Associated manuscript: **REACT-EEG: Reverse-Encoded Anytime Causal Temporal Modeling for EEG Decoding.** This snapshot does not provide finalized author/venue/DOI metadata, so no publication citation is fabricated here.
+
+No project-wide `LICENSE` file is included in this export. Preserve the existing notices and third-party attribution; select and add the appropriate project license before advertising a licensed release. Review the original source paths, scheduler accounts, logs, and metadata for identifying or sensitive information before making the repository public.
